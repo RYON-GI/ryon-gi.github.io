@@ -108,11 +108,23 @@ async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) 
   if (video.readyState >= 2) {
     const vw = video.videoWidth, vh = video.videoHeight;
     const ratio = vw / vh;
-    const modeKey = ratio > 1.9 ? 'WIDE' : 'DEFAULT';
+    let modeKey;
+     if (ratio >= 2.2) modeKey = 'WIDE';      // 21:9
+     else if (ratio >= 1.7) modeKey = 'DEFAULT'; // 16:9
+     else modeKey = 'TALL';                   // 16:10
+
 
     const badge = document.getElementById('screen-mode-badge');
-    badge.textContent = modeKey === 'WIDE' ? 'WIDE 모드' : '표준 모드';
-    badge.style.background = modeKey === 'WIDE' ? '#a335ee' : '#28a745';
+    badge.textContent =
+       modeKey === 'WIDE' ? 'WIDE 모드' :
+       modeKey === 'TALL' ? '16:10 모드' :
+       '표준 모드';
+
+     badge.style.background =
+       modeKey === 'WIDE' ? '#a335ee' :
+       modeKey === 'TALL' ? '#1f7ae0' :
+       '#28a745';
+
 
     const config = CONFIGS[modeKey][STATE.currentSubTabs.search];
     const sx = vw * config.roi.x, sy = vh * config.roi.y, sw = vw * config.roi.w, sh = vh * config.roi.h;
