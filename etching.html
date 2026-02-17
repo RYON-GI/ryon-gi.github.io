@@ -243,7 +243,7 @@
 
           .left-ad { left: 20px; }
           .right-ad { right: 20px; }
-          .tab { display:inline-block; text-decoration:none; color:inherit; }
+          .tab, .sub-tab { text-decoration:none; color:inherit; display:inline-block; }
 
   </style>
 </head>
@@ -428,8 +428,8 @@
 
     <div id="area-farming" class="content-area">
         <div class="sub-tab-bar">
-            <div id="sub-tab-region" class="sub-tab active" onclick="switchSubTab('farming', 'region')">지역별 파밍지</div>
-            <div id="sub-tab-weapon" class="sub-tab" onclick="switchSubTab('farming', 'weapon')">무기별 파밍지</div>
+          <a id="sub-tab-warehouse" class="sub-tab" href="./warehouse.html">귀중품 창고</a>
+          <a id="sub-tab-etching" class="sub-tab active" href="./etching.html">기질 식각</a>
         </div>
         <div id="sub-content-region" class="sub-content">
             <div class="area-grid-layout">
@@ -525,7 +525,8 @@
 <script src="./farming.js"></script>
 <script src="./scanner.js"></script>
 <script>
-  window.__INITIAL_MAIN_TAB = "guide";
+  window.__INITIAL_MAIN_TAB = "search";
+  window.__INITIAL_SEARCH_SUBTAB = "etching";
 </script>
 <script src="./app.js"></script>
   

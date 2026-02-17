@@ -14,8 +14,12 @@
     regionBases: new Set(),
     regionExtra: null,
 
-    currentMainTab: 'guide',
-    currentSubTabs: { farming: 'region', search: 'warehouse' },
+    currentMainTab: window.__INITIAL_MAIN_TAB || 'guide',
+currentSubTabs: {
+  farming: window.__INITIAL_FARMING_SUBTAB || 'region',
+  search: window.__INITIAL_SEARCH_SUBTAB || 'warehouse',
+},
+
 
     lastRecognizedOptions: ['-', '-', '-'],
     lastProcessedOptions: '',
@@ -212,5 +216,13 @@
   };
 
 
-  init();
+  init().then(() => {
+  switchTab(STATE.currentMainTab);
+  if (STATE.currentMainTab === 'farming') {
+    switchSubTab('farming', STATE.currentSubTabs.farming);
+  }
+  if (STATE.currentMainTab === 'search') {
+    switchSubTab('search', STATE.currentSubTabs.search);
+  }
+});
 })();
