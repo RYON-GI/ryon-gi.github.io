@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>엔드필드 통합 스캐너 (WIDE 대응판 + 보유관리)</title>
+  <title>엔드필드 통합 스캐너</title>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <style>
 
@@ -268,210 +268,14 @@
 </div>
 
 <div class="main-wrapper">
-    <div id="area-guide" class="content-area active">
-
-  <div style="display:flex; gap:20px;">
-
-    <!-- 사이드 탭 -->
-    <div style="width:220px; border-right:1px solid #333; padding-right:10px;">
-      <div class="guide-side-tab active" onclick="switchGuide('collection', this)">종결 보유 현황</div>
-      <div class="guide-side-tab" onclick="switchGuide('region', this)">지역별 파밍지</div>
-      <div class="guide-side-tab" onclick="switchGuide('weapon', this)">무기별 파밍지</div>
-      <div class="guide-side-tab" onclick="switchGuide('warehouse', this)">창고 검색</div>
-      <div class="guide-side-tab" onclick="switchGuide('etching', this)">식각 검색</div>
-      <div class="guide-side-tab" onclick="openInquiry()">문의하기</div>
-    </div>
-
-    <!-- 내용 영역 -->
-    <div style="flex:1;">
-
-      <!-- 종결 보유 현황 -->
-      <div id="guide-collection" class="guide-content active">
-        <img src="보유 현황 가이드.png" style="width:100%; margin-bottom:20px;">
-        <ul>
-          <li>본인이 이미 기질을 획득한 장비를 선택하는 장소 입니다.</li>
-          <li>① 종결 보유 현황 가이드 주의점 입니다.</li>
-          <li>② 종결 기질 보유 무기 선택 박스 입니다.</li>
-        </ul>
-      </div>
-
-      <!-- 지역별 -->
-      <div id="guide-region" class="guide-content">
-        <img src="지역별 파밍지 가이드.png" style="width:100%; margin-bottom:20px;">
-        <ul>
-          <li>① 자신이 원하는 파밍 지역을 고릅니다.</li>
-          <li>② 해당 지역의 내용이 나오며, 보유 현황과 연동되어 해당 지역에서 구할수 있는 총 종결 기질과 속성 추천, 추천 속성으로 선택시 나오는 기질의 갯수를 알려 줍니다.</li>
-              <li><span style="color:red;">⚠5성 숨김 활성화시 5성 기질은 제외되어 출력 됩니다.</span></li>
-          <li>③ 5성 무기와 종결 획득 무기를 출력 유무를 결정하는 버튼 입니다.</li>
-          <li>④ 기초 속성을 최대 3개 선택 할 수 있는 박스 입니다.</li>
-          <li>⑤ 심화 속성을 최대 1개 선택 할 수 있는 박스 입니다.</li>
-          <li>⑥ 획득 가능한 무기와 그 무기의 속성을 보여주는 박스 입니다.</li>
-        </ul>
-      </div>
-
-      <!-- 무기별 -->
-      <div id="guide-weapon" class="guide-content">
-        <img src="무기별 파밍지 가이드.png" style="width:100%; margin-bottom:20px;">
-        <ul>
-          <li>① 무기의 카테고리로 분류가 되는 버튼 입니다.</li>
-          <li>② 5성 무기와 종결 획득 무기를 출력 유무를 결정하는 버튼 입니다.</li>
-          <li>③ 기질을 획득하고 싶은 무기를 선택하는 박스 입니다.</li>
-          <li>④ 해당 무기가 뜨는 지역과 추천 셋팅을 알려주는 박스 입니다.</li>
-          <li>무기를 하나만 선택하실 경우 같이 파밍 가능한 무기가 표시되도록 하였습니다.</li>
-        </ul>
-      </div>
-
-      <!-- 창고 검색 -->
-      <div id="guide-warehouse" class="guide-content">
-      <div class="guide-warning">
-          ⚠ 반드시 게임을 전체화면으로 실행하세요
-      </div>
-
-      <!-- 공유창 설정 -->
-      <div class="guide-card">
-        <div class="guide-card-title">① 공유창 설정</div>
-        <img src="공유창 설정 가이드.png">
-        <ul class="guide-list">
-            <li>① 공유할 타입을 고르는 박스 입니다. -창(window)을(를) 선택해 줍니다.</li>
-            <li>② 공유할 창을 선택 합니다. -Endfield(엔드필드)를 선택해 줍니다.</li>
-            <li>③ 공유를 눌러 공유를 시작 합니다.</li>
-        </ul>
-      </div>
-
-    <!-- 창고 이미지 -->
-    <div class="guide-card">
-      <div class="guide-card-title">② 식각 이미지</div>
-      <img src="창고 이미지 가이드.png">
-      <ul class="guide-list">
-        <li>① 귀중품 창고를 열어 기질탭을 선택 합니다.</li>
-        <li>② 사이트가 인식하는 영역입니다.</li>
-        <li><span class="text-danger">마우스로 가리지 마세요</span></li>
-      </ul>
-    </div>
-
-    <!-- 창고 스캔 -->
-    <div class="guide-card">
-      <div class="guide-card-title">③ 식각 스캔</div>
-      <img src="창고 스캔 가이드.png">
-      <ul class="guide-list">
-            <li>① 스캔을 하기 위해 화면 공유를 시작하는 버튼 입니다.</li>
-            <li>② 현재 자신의 화면 비율을 알려주는 박스 입니다.</li>
-            <li>③ 5성 무기와 2유효 옵션의 출력 유무를 결정하는 버튼 입니다.</li>
-            <li>④ 게임의 화면을 출력해주는 창 입니다.</li>
-            <li>⑤ 사이트가 화면을 보고 읽어 들인 속성을 출력해주는 박스 입니다.</li>
-            <li>⑥ 해당 기질의 옵션을 보유한 무기가 출력되는 박스 입니다.</li>
-      </ul>
-    </div>
-    </div>
-      <!-- 식각 검색 -->
-      <div id="guide-etching" class="guide-content">
-      <div class="guide-warning">
-          ⚠ 반드시 게임을 전체화면으로 실행하세요
-      </div>
-
-      <!-- 공유창 설정 -->
-      <div class="guide-card">
-        <div class="guide-card-title">① 공유창 설정</div>
-        <img src="공유창 설정 가이드.png">
-        <ul class="guide-list">
-          <li>① 공유할 타입을 고르는 박스 입니다. -창(window)을(를) 선택해 줍니다.</li>
-          <li>② 공유할 창을 선택 합니다. -Endfield(엔드필드)를 선택해 줍니다.</li>
-          <li>③ 공유를 눌러 공유를 시작 합니다.</li>
-        </ul>
-      </div>
-
-    <!-- 식각 이미지 -->
-    <div class="guide-card">
-      <div class="guide-card-title">② 식각 이미지</div>
-      <img src="식각 이미지 가이드.png">
-      <ul class="guide-list">
-        <li>① 사이트가 인식하는 영역입니다.</li>
-        <li><span class="text-danger">마우스로 가리지 마세요</span></li>
-      </ul>
-    </div>
-
-    <!-- 식각 스캔 -->
-    <div class="guide-card">
-      <div class="guide-card-title">③ 식각 스캔</div>
-      <img src="식각 스캔 가이드.png">
-      <ul class="guide-list">
-        <li>① 스캔을 하기 위해 화면 공유를 시작하는 버튼 입니다.</li>
-        <li>② 현재 자신의 화면 비율을 알려주는 박스 입니다.</li>
-        <li>③ 5성 무기와 2유효 옵션의 출력 유무를 결정하는 버튼 입니다.</li>
-        <li>④ 게임의 화면을 출력해주는 창 입니다.</li>
-        <li>⑤ 사이트가 화면을 보고 읽어 들인 속성을 출력해주는 박스 입니다.</li>
-        <li>⑥ 해당 기질의 옵션을 보유한 무기가 출력되는 박스 입니다.</li>
-      </ul>
-    </div>
-    </div>
-    </div>
-  </div>
+        <div id="area-search" class="content-area active">
+        <div class="sub-tab-bar">
+          <a id="sub-tab-warehouse" class="sub-tab active" href="./warehouse.html">귀중품 창고</a>
+          <a id="sub-tab-etching" class="sub-tab" href="./etching.html">기질 식각</a>
+        </div>
+<div style="margin:10px 0 12px 0; color:#aaa; font-size:0.9em;">
+  ① 화면 공유 시작 → ② 게임 창에서 장비/창고 화면 열기 → ③ 옵션 자동 인식 확인
 </div>
-
-
-    <div id="area-collection" class="content-area">
-        <div style="margin-bottom: 20px; background: rgba(40, 167, 69, 0.1); padding: 15px; border-radius: 8px; border: 1px solid var(--green);">
-            <strong style="color: var(--green);">✅ 보유 현황 체크리스트</strong>
-            <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #ccc;">
-                이미 3유효 옵션을 획득하여 종결한 무기를 선택하세요.<br>
-                체크된 무기는 <strong>추천 파밍지</strong>와 <strong>기질 검색(스캐너)</strong> 결과에서 <span style="color:var(--green); font-weight:bold;">초록색</span>으로 표시됩니다.<br>
-                <span style="color:var(--red); font-weight:bold;">인터넷 캐쉬</span>를 삭제하면 해당 기능은 <span style="color:var(--red); font-weight:bold;">초기화</span> 됩니다.
-            </p>
-        </div>
-        <div class="weapon-scroll-area">
-            <h3 style="color:var(--gold); border-bottom: 1px solid #333; padding-bottom: 8px;">6성 무기</h3>
-            <div id="collection-6star" class="weapon-grid"></div>
-            <h3 style="color:var(--purple); border-bottom: 1px solid #333; padding-bottom: 8px;">5성 무기</h3>
-            <div id="collection-5star" class="weapon-grid"></div>
-        </div>
-    </div>
-
-    <div id="area-farming" class="content-area">
-        <div class="sub-tab-bar">
-          <a id="sub-tab-warehouse" class="sub-tab active" href="./warehouse.html">귀중품 창고</a>
-          <a id="sub-tab-etching" class="sub-tab" href="./etching.html">기질 식각</a>
-        </div>
-
-        <div id="sub-content-region" class="sub-content">
-            <div class="area-grid-layout">
-                <div>
-                    <div class="region-select-box" id="region-btns"></div>
-                    <div id="region-option-area" style="display:none;"></div>
-                </div>
-                <div class="report-panel">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                        <h3 style="margin:0;">📋 지역 파밍 리포트</h3>
-                        <button onclick="resetRegionFilters()" style="padding:4px 10px; font-size:0.8em; background:#444;">초기화</button>
-                    </div>
-                    <div id="region-results">지역을 먼저 선택해 주세요.</div>
-                </div>
-            </div>
-        </div>
-        <div id="sub-content-weapon" class="sub-content" style="display:none;">
-            <div class="weapon-farming-layout">
-                <div class="weapon-scroll-area">
-                    <h3 style="color:var(--gold); border-bottom: 1px solid #333; padding-bottom: 8px;">6성 무기</h3>
-                    <div id="grid-6star" class="weapon-grid"></div>
-                    <h3 style="color:var(--purple); border-bottom: 1px solid #333; padding-bottom: 8px;">5성 무기</h3>
-                    <div id="grid-5star" class="weapon-grid"></div>
-                </div>
-                <div class="report-panel">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                        <h3 style="margin:0;">💡 추천 파밍지</h3>
-                        <button onclick="resetWeaponSelection()" style="padding:4px 10px; font-size:0.8em; background:#444;">초기화</button>
-                    </div>
-                                        <div id="farming-results-container"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="area-search" class="content-area">
-        <div class="sub-tab-bar">
-          <a id="sub-tab-warehouse" class="sub-tab active" href="./warehouse.html">귀중품 창고</a>
-          <a id="sub-tab-etching" class="sub-tab" href="./etching.html">기질 식각</a>
-        </div>
-
         <div class="control-bar">
             <div style="display:flex; gap:10px; align-items:center;">
                 <button id="start-btn" disabled>엔진 로딩 중...</button>
