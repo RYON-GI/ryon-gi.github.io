@@ -242,6 +242,11 @@
 
           .left-ad { left: 20px; }
           .right-ad { right: 20px; }
+          /* 창이 좁아지면 사이드 광고가 본문을 덮지 않게 숨김 */
+          @media (max-width: 1500px) {
+            .side-ad { display: none !important; }
+          }
+
           .tab { display:inline-block; text-decoration:none; color:inherit; }
 
   </style>
