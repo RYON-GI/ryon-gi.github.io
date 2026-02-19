@@ -97,6 +97,33 @@ function recognizeLoopFactory(deps) {
   };
 }
 
+function pickPresetKey(vw, vh) {
+  // 창모드 캡처 해상도는 거의 고정이므로
+  // 축별로 작은 오차만 허용해서 정확히 매칭
+
+  const presets = [
+    { key: "P_1920_1080", vw: 1924, vh: 1126 },
+    { key: "P_2560_1440", vw: 2564, vh: 1486 },
+    { key: "P_2560_1600", vw: 2564, vh: 1646 },
+    { key: "P_3440_1440", vw: 3444, vh: 1486 },
+  ];
+
+  const TOL_W = 8; // 필요하면 6~12 사이 조절
+  const TOL_H = 8;
+
+  for (const p of presets) {
+    if (
+      Math.abs(vw - p.vw) <= TOL_W &&
+      Math.abs(vh - p.vh) <= TOL_H
+    ) {
+      return p.key;
+    }
+  }
+
+  // 정확히 창모드가 아니면 무조건 전체화면(BASE)
+  return "BASE";
+}
+
 // 내부 루프 (requestAnimationFrame 기반)
 async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) {
   if (!STATE.isRunning || STATE.currentMainTab === 'guide') {
@@ -113,20 +140,30 @@ async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) 
      else if (ratio >= 1.7) modeKey = 'DEFAULT'; // 16:9
      else modeKey = 'TALL';                   // 16:10
 
-
-    const badge = document.getElementById('screen-mode-badge');
-    badge.textContent =
-       modeKey === 'WIDE' ? 'WIDE 모드' :
-       modeKey === 'TALL' ? '16:10 모드' :
-       '표준 모드';
+const badge = document.getElementById('screen-mode-badge');
 
      badge.style.background =
        modeKey === 'WIDE' ? '#a335ee' :
        modeKey === 'TALL' ? '#1f7ae0' :
        '#28a745';
 
+    const presetKey = pickPresetKey(vw, vh);
+    const isWindowMode = (presetKey !== "BASE");
 
-    const config = CONFIGS[modeKey][STATE.currentSubTabs.search];
+badge.textContent =
+  (modeKey === 'WIDE' ? 'WIDE 모드' :
+   modeKey === 'TALL' ? '16:10 모드' :
+   '표준 모드')
+  + (isWindowMode ? ' (창모드)' : '');
+
+let config = CONFIGS?.[modeKey]?.[presetKey]?.[STATE.currentSubTabs.search];
+
+// 폴백: presetKey가 없거나 아직 ROI 안 넣었으면 BASE 사용
+if (!config) config = CONFIGS?.[modeKey]?.BASE?.[STATE.currentSubTabs.search];
+
+// 최후 폴백(예전 구조 호환)
+if (!config) config = CONFIGS?.[modeKey]?.[STATE.currentSubTabs.search];
+
     const sx = vw * config.roi.x, sy = vh * config.roi.y, sw = vw * config.roi.w, sh = vh * config.roi.h;
 
     // 시각화 캔버스
@@ -134,6 +171,7 @@ async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) 
     STATE.viewCanvas.height = sh;
     STATE.viewCtx.drawImage(video, sx, sy, sw, sh, 0, 0, sw, sh);
 
+    //true false
     if (false) {
     // ===== ROI DEBUG (반투명 박스) =====
     const colors = [
