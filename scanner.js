@@ -97,33 +97,6 @@ function recognizeLoopFactory(deps) {
   };
 }
 
-function pickPresetKey(vw, vh) {
-  // 네가 관측한 "캡처 해상도" 기준(게임 프리셋별로 거의 고정)
-  // 2560x1440 -> 2564x1486
-  // 2560x1600 -> 2564x1646
-  // 3440x1440 -> 3444x1486
-
-  const presets = [
-    { key: "P_2560_1440", vw: 2564, vh: 1486 },
-    { key: "P_2560_1600", vw: 2564, vh: 1646 },
-    { key: "P_3440_1440", vw: 3444, vh: 1486 },
-  ];
-
-  // 가장 가까운 것 선택(오차 허용)
-  let best = presets[0];
-  let bestScore = Infinity;
-
-  for (const p of presets) {
-    const score = Math.abs(vw - p.vw) + Math.abs(vh - p.vh);
-    if (score < bestScore) { best = p; bestScore = score; }
-  }
-
-  // 너무 멀면(예: 다른 창 캡처) BASE로 폴백
-  // 80~120 정도면 충분히 안전
-  if (bestScore > 120) return "BASE";
-  return best.key;
-}
-
 // 내부 루프 (requestAnimationFrame 기반)
 async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) {
   if (!STATE.isRunning || STATE.currentMainTab === 'guide') {
@@ -140,29 +113,20 @@ async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) 
      else if (ratio >= 1.7) modeKey = 'DEFAULT'; // 16:9
      else modeKey = 'TALL';                   // 16:10
 
-const badge = document.getElementById('screen-mode-badge');
+
+    const badge = document.getElementById('screen-mode-badge');
+    badge.textContent =
+       modeKey === 'WIDE' ? 'WIDE 모드' :
+       modeKey === 'TALL' ? '16:10 모드' :
+       '표준 모드';
 
      badge.style.background =
        modeKey === 'WIDE' ? '#a335ee' :
        modeKey === 'TALL' ? '#1f7ae0' :
        '#28a745';
 
-    const presetKey = pickPresetKey(vw, vh);
 
-badge.textContent =
-  (modeKey === 'WIDE' ? 'WIDE 모드' :
-   modeKey === 'TALL' ? '16:10 모드' :
-   '표준 모드')
-  + ` (창모드)`;
-
-let config = CONFIGS?.[modeKey]?.[presetKey]?.[STATE.currentSubTabs.search];
-
-// 폴백: presetKey가 없거나 아직 ROI 안 넣었으면 BASE 사용
-if (!config) config = CONFIGS?.[modeKey]?.BASE?.[STATE.currentSubTabs.search];
-
-// 최후 폴백(예전 구조 호환)
-if (!config) config = CONFIGS?.[modeKey]?.[STATE.currentSubTabs.search];
-
+    const config = CONFIGS[modeKey][STATE.currentSubTabs.search];
     const sx = vw * config.roi.x, sy = vh * config.roi.y, sw = vw * config.roi.w, sh = vh * config.roi.h;
 
     // 시각화 캔버스
