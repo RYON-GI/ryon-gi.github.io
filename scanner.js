@@ -48,6 +48,9 @@ function initScanner({
   const startBtn = document.getElementById('start-btn');
   const stopBtn = document.getElementById('stop-btn');
 
+   // 스캐너 UI가 없는 페이지면 초기화 스킵
+   if (!startBtn || !stopBtn) return;
+
   startBtn.onclick = async () => {
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
@@ -83,6 +86,8 @@ function initScanner({
 }
 
 async function createWorkerAndStart({ STATE }) {
+  if (!window.Tesseract) return;
+
   STATE.worker = await Tesseract.createWorker('kor');
   await STATE.worker.setParameters({ tessedit_pageseg_mode: '7' });
 

@@ -47,10 +47,12 @@ currentSubTabs: {
     parent.querySelectorAll('.sub-tab').forEach(t => t.classList.toggle('active', t.id === `sub-tab-${subId}`));
 
     if (mainId === 'farming') {
-      document.getElementById('sub-content-region').style.display = subId === 'region' ? 'block' : 'none';
-      document.getElementById('sub-content-weapon').style.display = subId === 'weapon' ? 'block' : 'none';
-    }
-  }
+  const region = document.getElementById('sub-content-region');
+  const weapon = document.getElementById('sub-content-weapon');
+  if (region) region.style.display = subId === 'region' ? 'block' : 'none';
+  if (weapon) weapon.style.display = subId === 'weapon' ? 'block' : 'none';
+}
+}
 
   // ---- 콜백들(초기화 후 연결) ----
   let updateRegionResultsFn = () => {};
@@ -182,17 +184,22 @@ currentSubTabs: {
       stopSharing: () => stopSharing(),
     });
 
-    document.getElementById('start-btn').onclick = startSharing;
-    document.getElementById('stop-btn').onclick = stopSharing;
+    const startBtn = document.getElementById('start-btn');
+const stopBtn  = document.getElementById('stop-btn');
 
-    // 6) 워커 로딩
-    try {
-      await Endfield.createWorkerAndStart({ STATE });
-    } catch (e) {
-      console.error(e);
-    }
+if (startBtn) startBtn.onclick = startSharing;
+if (stopBtn)  stopBtn.onclick = stopSharing;
+
+
+    // 6) 워커 로딩 (Tesseract 로드된 페이지에서만)
+try {
+  if (window.Tesseract) {
+    await Endfield.createWorkerAndStart({ STATE });
   }
-
+} catch (e) {
+  console.error(e);
+}
+}
   // HTML onclick에서 호출
   window.switchTab = switchTab;
   window.switchSubTab = switchSubTab;
