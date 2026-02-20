@@ -1,3 +1,70 @@
+// =============================================
+// 게임 테두리 자동 감지 함수 (타이틀바 + 외부 여백 제거)
+// =============================================
+let _borderCache = { top: 0, left: 0, right: 0 };
+let _borderFrameCount = 0;
+
+function detectGameBorder(video, threshold = 45) {
+  const vw = video.videoWidth;
+  const vh = video.videoHeight;
+
+  const tmpCanvas = document.createElement('canvas');
+  tmpCanvas.width = vw;
+  tmpCanvas.height = vh;
+  const tmpCtx = tmpCanvas.getContext('2d');
+  tmpCtx.drawImage(video, 0, 0);
+  const imgData = tmpCtx.getImageData(0, 0, vw, vh).data;
+
+  // 상단: 25%, 50%, 75% 세 지점에서 타이틀바 높이 감지
+  const scanX = [
+    Math.floor(vw * 0.25),
+    Math.floor(vw * 0.5),
+    Math.floor(vw * 0.75)
+  ];
+  const detectedTops = [];
+
+  for (const x of scanX) {
+    for (let y = 0; y < vh / 3; y++) {
+      const i = (y * vw + x) * 4;
+      const brightness = (imgData[i] + imgData[i+1] + imgData[i+2]) / 3;
+      if (brightness < threshold) {
+        // 연속성 체크: 아래로 5픽셀도 어두워야 진짜 게임 화면
+        let consistent = true;
+        for (let dy = 1; dy <= 5; dy++) {
+          const ni = ((y + dy) * vw + x) * 4;
+          if ((imgData[ni] + imgData[ni+1] + imgData[ni+2]) / 3 > threshold + 10) {
+            consistent = false;
+            break;
+          }
+        }
+        if (consistent) { detectedTops.push(y); break; }
+      }
+    }
+  }
+
+  const top = detectedTops.length > 0 ? Math.min(...detectedTops) : 0;
+
+  // 좌측 테두리 감지
+  let left = 0;
+  for (let x = 0; x < vw / 5; x++) {
+    const i = (Math.floor(vh / 2) * vw + x) * 4;
+    if ((imgData[i] + imgData[i+1] + imgData[i+2]) / 3 < threshold) { left = x; break; }
+  }
+
+  // 우측 테두리 감지
+  let right = 0;
+  for (let x = vw - 1; x > vw * 0.8; x--) {
+    const i = (Math.floor(vh / 2) * vw + x) * 4;
+    if ((imgData[i] + imgData[i+1] + imgData[i+2]) / 3 < threshold) { right = vw - x - 1; break; }
+  }
+
+  return { top, left, right };
+}
+
+// =============================================
+// 이하 기존 코드 (border 감지 로직만 추가됨)
+// =============================================
+
 function initScanner({
   CONFIGS,
   STATE,
@@ -96,38 +163,23 @@ async function createWorkerAndStart({ STATE }) {
   startBtn.textContent = '화면 공유 시작';
 }
 
-function recognizeLoopFactory(deps) {
-  return function recognizeLoopRunner() {
-    return recognizeLoop(deps);
-  };
-}
 
 function pickPresetKey(vw, vh) {
-  // 창모드 캡처 해상도는 거의 고정이므로
-  // 축별로 작은 오차만 허용해서 정확히 매칭
-
-  const presets = [
-    { key: "P_1600_900", vw: 1604, vh: 946 },
-    { key: "P_1920_1080", vw: 1924, vh: 1126 },
-    { key: "P_2560_1440", vw: 2564, vh: 1486 },
-    { key: "P_2560_1600", vw: 2564, vh: 1646 },
-    { key: "P_3440_1440", vw: 3444, vh: 1486 },
+  // ROI는 항상 BASE를 사용하므로 프리셋 구분 불필요
+  // 창모드 여부만 판단 (vw, vh 둘 다 체크해서 전체화면과 혼동 방지)
+  const knownWindows = [
+    { vw: 1604, vh: 946  },
+    { vw: 1924, vh: 1126 },
+    { vw: 2564, vh: 1486 },
+    { vw: 2564, vh: 1646 },
+    { vw: 3444, vh: 1486 },
   ];
+  const TOL = 8;
 
-  const TOL_W = 8; // 필요하면 6~12 사이 조절
-  const TOL_H = 8;
-
-  for (const p of presets) {
-    if (
-      Math.abs(vw - p.vw) <= TOL_W &&
-      Math.abs(vh - p.vh) <= TOL_H
-    ) {
-      return p.key;
-    }
-  }
-
-  // 정확히 창모드가 아니면 무조건 전체화면(BASE)
-  return "BASE";
+  const isWindow = knownWindows.some(p =>
+    Math.abs(vw - p.vw) <= TOL && Math.abs(vh - p.vh) <= TOL
+  );
+  return isWindow ? "WINDOW" : "BASE";
 }
 
 // 내부 루프 (requestAnimationFrame 기반)
@@ -145,18 +197,14 @@ async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) 
 const presetKey = pickPresetKey(vw, vh);
 const isWindowMode = (presetKey !== "BASE");
 
-// 2) modeKey는 "표시/CONFIG 선택용"으로 preset을 우선한다
+// 2) modeKey: 화면 비율로 결정 (창모드/전체화면 공통)
+// 창모드는 타이틀바 때문에 vh가 커져서 ratio가 살짝 낮아짐 (예: 1600x900 창모드 = 1.695)
+// 그래서 16:9 기준을 1.7 → 1.6으로 낮춤
+const ratio = vw / vh;
 let modeKey;
-if (presetKey === "P_3440_1440") modeKey = "WIDE";        // 21:9 창모드
-else if (presetKey === "P_2560_1600") modeKey = "TALL";   // 16:10 창모드
-else if (presetKey !== "BASE") modeKey = "DEFAULT";       // 나머지 창모드(1600/1920/2560 16:9)
-else {
-  // 전체화면(BASE)일 때만 ratio로 추정
-  const ratio = vw / vh;
-  if (ratio >= 2.2) modeKey = 'WIDE';        // 21:9
-  else if (ratio >= 1.7) modeKey = 'DEFAULT'; // 16:9
-  else modeKey = 'TALL';                     // 16:10
-}
+if (ratio >= 2.2) modeKey = 'WIDE';         // 21:9
+else if (ratio >= 1.6) modeKey = 'DEFAULT'; // 16:9
+else modeKey = 'TALL';                      // 16:10
 
 const badge = document.getElementById('screen-mode-badge');
 
@@ -171,15 +219,38 @@ badge.textContent =
    '표준 모드')
   + (isWindowMode ? ' (창모드)' : '');
 
-let config = CONFIGS?.[modeKey]?.[presetKey]?.[STATE.currentSubTabs.search];
-
-// 폴백: presetKey가 없거나 아직 ROI 안 넣었으면 BASE 사용
-if (!config) config = CONFIGS?.[modeKey]?.BASE?.[STATE.currentSubTabs.search];
+// 창모드는 테두리를 잘라낸 뒤 게임 화면만 남으므로
+// 전체화면(BASE)과 동일한 ROI를 사용
+let config = CONFIGS?.[modeKey]?.BASE?.[STATE.currentSubTabs.search];
 
 // 최후 폴백(예전 구조 호환)
 if (!config) config = CONFIGS?.[modeKey]?.[STATE.currentSubTabs.search];
 
-    const sx = vw * config.roi.x, sy = vh * config.roi.y, sw = vw * config.roi.w, sh = vh * config.roi.h;
+    // =============================================
+    // [변경] 창모드일 때 테두리 자동 감지로 ROI 보정
+    // 20프레임마다 한 번씩 감지 (성능 최적화)
+    // =============================================
+    if (isWindowMode) {
+      if (_borderFrameCount++ % 20 === 0) {
+        _borderCache = detectGameBorder(video, 45);
+      }
+    } else {
+      // 전체화면은 테두리 없음
+      _borderCache = { top: 0, left: 0, right: 0 };
+      _borderFrameCount = 0;
+    }
+    const border = _borderCache;
+
+    const gameX = border.left;
+    const gameY = border.top;
+    const gameW = vw - border.left - border.right;
+    const gameH = vh - border.top;
+
+    const sx = gameX + gameW * config.roi.x;
+    const sy = gameY + gameH * config.roi.y;
+    const sw = gameW * config.roi.w;
+    const sh = gameH * config.roi.h;
+    // =============================================
 
     // 시각화 캔버스
     STATE.viewCanvas.width = sw;

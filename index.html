@@ -2,254 +2,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>엔드필드 통합 스캐너</title>
-  <style>
-
-        :root { --primary: #4db8ff; --bg: #121212; --panel: #1e1e1e; --gold: #ffcc00; --purple: #a335ee; --green: #28a745; --red: #ff4d4d; }
-        body { background: var(--bg); color: #e0e0e0; font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        
-        /* 메인 탭 */
-        .tab-container { display: flex; gap: 5px; width: 100%; max-width: 1100px; margin-bottom: -1px; }
-        .tab { padding: 12px 25px; background: #2a2a2a; border: 1px solid #333; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: bold; color: #888; transition: 0.2s; }
-        .tab.active { background: var(--panel); color: var(--primary); border-top: 3px solid var(--primary); z-index: 2; }
-        
-        .main-wrapper { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; width: 100%; background: var(--panel); padding: 25px; border-radius: 0 12px 12px 12px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.6); min-height: 700px; }
-        
-        .content-area { display: none; }
-        .content-area.active { display: block; }
-
-        /* 서브 탭 */
-        .sub-tab-bar { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .sub-tab { padding: 8px 18px; background: #333; border-radius: 4px; cursor: pointer; font-size: 0.9em; transition: 0.2s; color: #aaa; }
-        .sub-tab.active { background: var(--primary); color: #000; font-weight: bold; }
-
-        /* 레이아웃 공통 */
-        .area-grid-layout, .weapon-farming-layout { display: grid; grid-template-columns: 1fr 380px; gap: 20px; }
-        .region-select-box { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .region-btn { padding: 10px; background: #2a2a2a; border: 1px solid #444; border-radius: 6px; cursor: pointer; color: #ccc; flex: 1; text-align: center; min-width: 120px; }
-        .region-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(77, 184, 255, 0.1); }
-        
-        .option-filter-group { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .opt-btn-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .opt-select-btn { padding: 6px 12px; background: #333; border: 1px solid #444; border-radius: 4px; font-size: 0.85em; cursor: pointer; }
-        .opt-select-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
-
-        .weapon-scroll-area { max-height: 800px; overflow-y: auto; padding-right: 10px; }
-        .weapon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-bottom: 30px; }
-        
-        /* 무기 카드 스타일 (공통) */
-        .weapon-card { 
-            cursor: pointer; border: 1px solid #333; border-radius: 6px; background: #252525; 
-            transition: 0.2s; padding: 8px; text-align: center; position: relative;
-        }
-        /* 무기 카드 이미지 컨테이너 (레이어 겹치기) */
-        .weapon-img-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1; /* 240x240 비율 대응 (1:1) */
-            overflow: hidden;
-            border-radius: 4px;
-            background: #000;
-        }
-
-        /* 모든 레이어 공통 설정 */
-        .layer {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            display: block;
-            pointer-events: none; /* 클릭 이벤트 방해 방지 */
-        }
-
-        /* 1층: 배경 (240x240 전체) */
-        .bg-layer {
-            top: 0;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* 2층: 무기 (240x240 전체, 이미지 비율 유지) */
-        .weapon-layer {
-            top: 0;
-            height: 100%;
-            z-index: 2;
-            object-fit: contain; 
-            transition: 0.2s;
-        }
-
-        /* 3층: 하단 (240x80 비율 = 높이 33.33%) */
-        .bottom-layer {
-            bottom: 0;
-            height: 33.33%;
-            z-index: 3;
-        }
-
-        /* 보유 및 선택 시 효과 */
-        .weapon-card.selected .weapon-layer,
-        .weapon-card.owned .weapon-layer {
-            filter: brightness(1.2);
-        }
-        .weapon-card div { margin-top: 5px; font-size: 0.9em; color: #ccc; }
-        
-        /* 선택된 상태 (파밍지 탭) */
-        .weapon-card.selected { border-color: var(--gold); background: #2d2a20; }
-        .weapon-card.selected img { filter: brightness(1); }
-        
-        /* 보유중 상태 (NEW: 초록색 강조) */
-        .weapon-card.owned { border-color: var(--green); background: rgba(40, 167, 69, 0.15); }
-        .weapon-card.owned img { filter: brightness(1); }
-        .weapon-card.owned::after {
-            content: "✔"; position: absolute; top: 5px; right: 5px; 
-            background: var(--green); color: white; font-size: 0.8em; 
-            padding: 2px 6px; border-radius: 4px; font-weight: bold; 
-            z-index: 9999; pointer-events: none;
-        }
-
-        .report-panel { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 20px; border: 1px solid #333; }
-        .target-opt-box { background: #2a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .opt-tag-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .opt-tag { padding: 4px 10px; background: #3d3d3d; border-radius: 4px; font-size: 0.85em; color: #ddd; border: 1px solid #444; }
-
-        /* 스캐너 UI */
-        .scanner-main-layout { display: grid; grid-template-columns: 450px 1fr; gap: 20px; }
-        .control-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        #view-canvas { border: 2px solid #444; border-radius: 10px; width: 100%; background: #000; margin-bottom: 10px; }
-        
-        .opt-box { background: #252525; padding: 10px; border-radius: 8px; border-left: 5px solid var(--primary); margin-top: 8px; }
-        .opt-name { font-size: 1.2em; font-weight: bold; color: var(--gold); }
-        .raw-text { font-family: monospace; font-size: 0.8em; color: var(--green); margin-top: 4px; }
-        
-        .section-box { background: rgba(255,255,255,0.03); border: 1px solid #333; border-radius: 10px; padding: 15px; min-height: 200px; margin-bottom: 10px; }
-        .badge { padding: 4px 10px; border-radius: 4px; font-size: 0.8em; background: #444; color: #fff; margin-left: 10px; }
-
-        button { padding: 10px 20px; cursor: pointer; font-weight: bold; background: #007bff; color: white; border: none; border-radius: 8px; }
-        #stop-btn { background: var(--red); }
-        .result-region-card { display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid transparent; }
-        .result-region-card.best { border-color: rgba(255, 204, 0, 0.4); background: rgba(255, 204, 0, 0.05); }
-
-        /* 스캐너 결과 그리드 (NEW) */
-        .scanner-result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
-        .match-badge {
-            margin-top: 4px; display: inline-block; padding: 2px 6px; border-radius: 4px; 
-            font-size: 0.8em; background: rgba(0,0,0,0.5); color: #fff;
-        }
-
-        /*가이드 설명 탭*/
-        .guide-side-tab {
-            padding:10px;
-            cursor:pointer;
-            color:#aaa;
-            border-radius:6px;
-            margin-bottom:6px;
-        }
-        .guide-side-tab.active {
-            background:#4db8ff;
-            color:#000;
-            font-weight:bold;
-        }
-        .guide-content {
-            display:none;
-        }
-        .guide-content.active {
-            display:block;
-        }
-        /* 가이드 카드 */
-        .guide-card {
-            border: 1px solid #333;
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 22px;
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-        }
-        /* 카드 제목 */
-        .guide-card-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-        /* 카드 이미지 */
-        .guide-card img {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #444;
-            margin-bottom: 12px;
-        }
-        /* 설명 리스트 */
-        .guide-list {
-            line-height: 1.8;
-            color: #ddd;
-            padding-left: 20px;
-        }
-        .guide-list li {
-            margin-bottom: 6px;
-        }
-        /* 빨간 강조 */
-        .text-danger {
-            color: var(--red);
-            font-weight: 700;
-        }
-        /* 경고 박스 */
-        .guide-warning {
-            border: 1px solid rgba(255,77,77,0.4);
-            background: rgba(255,77,77,0.08);
-            border-radius: 10px;
-            padding: 12px 14px;
-            margin-bottom: 20px;
-            color: #ff6b6b;
-            font-weight: 600;
-         }
-        /* 오른쪽 패널에서 카드가 1~2px 잘리는 현상 방지 */
-         .result-region-card { box-sizing: border-box; width: 100%; }
-         #farming-results-container { padding-right: 6px; box-sizing: border-box; }
-
-         #farming-results-container {
-           padding-right: 10px;
-           overflow-x: visible !important;
-           box-sizing: border-box;
-          }
-
-          .result-region-card,
-          .result-region-card.best {
-            width: calc(100% - 2px) !important;
-            box-sizing: border-box;
-            overflow: visible !important;
-            min-width: 0;
-           }
-
-          .result-region-card {
-            box-sizing: border-box;
-            width: 100%;
-           }
-
-          #farming-results-container {
-            padding-right: 6px;
-            box-sizing: border-box;
-           }
-
-          /* ⭐ 핵심 추가 */
-          .result-region-card > div {
-            box-sizing: border-box;
-            max-width: 100%;
-          }
-          .side-ad {
-            position: fixed;
-            top: 120px;
-            width: 160px;
-            min-height: 600px;
-            }
-
-          .left-ad { left: 20px; }
-          .right-ad { right: 20px; }
-          /* 창이 좁아지면 사이드 광고가 본문을 덮지 않게 숨김 */
-          @media (max-width: 1500px) {
-            .side-ad { display: none !important; }
-          }
-
-          .tab { display:inline-block; text-decoration:none; color:inherit; }
-
-  </style>
+  <meta name="description" content="아크나이츠 엔드필드 기질 스캐너 - 창고/식각 기질 자동 인식, 무기별·지역별 파밍지 추천, 종결 보유 현황 관리 통합 도구">
+  <title>엔드필드 통합 스캐너 - 기질 검색 & 파밍지 추천</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RJ6G5RLWV"></script>
@@ -257,7 +12,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-8RJ6G5RLWV');
 </script>
   <!-- Google adsense -->
@@ -265,144 +19,284 @@
      crossorigin="anonymous"></script>
 <body>
 <div class="tab-container">
-  <a id="tab-guide" class="tab" href="./index.html">가이드</a>
+  <a id="tab-guide" class="tab active" href="./index.html">가이드</a>
   <a id="tab-collection" class="tab" href="./collection.html">종결 보유 현황</a>
   <a id="tab-farming" class="tab" href="./regionfarming.html">추천 파밍지</a>
   <a id="tab-search" class="tab" href="./warehouse.html">기질 검색</a>
 </div>
 
 <div class="main-wrapper">
-    <div id="area-guide" class="content-area active">
+  <div id="area-guide" class="content-area active">
 
-  <div style="display:flex; gap:20px;">
-
-    <!-- 사이드 탭 -->
-    <div style="width:220px; border-right:1px solid #333; padding-right:10px;">
-      <div class="guide-side-tab active" onclick="switchGuide('collection', this)">종결 보유 현황</div>
-      <div class="guide-side-tab" onclick="switchGuide('region', this)">지역별 파밍지</div>
-      <div class="guide-side-tab" onclick="switchGuide('weapon', this)">무기별 파밍지</div>
-      <div class="guide-side-tab" onclick="switchGuide('warehouse', this)">창고 검색</div>
-      <div class="guide-side-tab" onclick="switchGuide('etching', this)">식각 검색</div>
-      <div class="guide-side-tab" onclick="openInquiry()">문의하기</div>
+    <!-- 사이트 소개 -->
+    <div class="intro-box">
+      <h2>🎮 엔드필드 통합 스캐너란?</h2>
+      <p>
+        <strong>아크나이츠 엔드필드</strong>의 기질 시스템을 보다 효율적으로 활용할 수 있도록 도와주는 무료 통합 도구입니다.
+        창고 및 식각 화면을 자동으로 인식하여 보유 중인 기질 옵션을 스캔하고, 원하는 무기의 기질을 획득할 수 있는 최적의 파밍 지역을 추천해 드립니다.
+      </p>
+      <p>
+        별도의 설치 없이 브라우저에서 바로 사용할 수 있으며, 회원가입이나 로그인도 필요하지 않습니다.
+        보유 현황은 브라우저에 자동 저장되어 다음 방문 시에도 유지됩니다.
+      </p>
     </div>
 
-    <!-- 내용 영역 -->
-    <div style="flex:1;">
+    <div style="display:flex; gap:20px;">
 
-      <!-- 종결 보유 현황 -->
-      <div id="guide-collection" class="guide-content active">
-        <img src="보유 현황 가이드.png" style="width:100%; margin-bottom:20px;">
-        <ul>
-          <li>본인이 이미 기질을 획득한 장비를 선택하는 장소 입니다.</li>
-          <li>① 종결 보유 현황 가이드 주의점 입니다.</li>
-          <li>② 종결 기질 보유 무기 선택 박스 입니다.</li>
-        </ul>
+      <!-- 사이드 탭 -->
+      <div style="width:220px; border-right:1px solid #333; padding-right:10px; flex-shrink:0;">
+        <div class="guide-side-tab active" onclick="switchGuide('collection', this)">종결 보유 현황</div>
+        <div class="guide-side-tab" onclick="switchGuide('region', this)">지역별 파밍지</div>
+        <div class="guide-side-tab" onclick="switchGuide('weapon', this)">무기별 파밍지</div>
+        <div class="guide-side-tab" onclick="switchGuide('warehouse', this)">창고 검색</div>
+        <div class="guide-side-tab" onclick="switchGuide('etching', this)">식각 검색</div>
+        <a class="guide-side-tab" href="./update.html">📋 업데이트 내역</a>
+        <div class="guide-side-tab" onclick="switchGuide('faq', this)">자주 묻는 질문</div>
+        <div class="guide-side-tab" onclick="openInquiry()">문의하기</div>
       </div>
 
-      <!-- 지역별 -->
-      <div id="guide-region" class="guide-content">
-        <img src="지역별 파밍지 가이드.png" style="width:100%; margin-bottom:20px;">
-        <ul>
-          <li>① 자신이 원하는 파밍 지역을 고릅니다.</li>
-          <li>② 해당 지역의 내용이 나오며, 보유 현황과 연동되어 해당 지역에서 구할수 있는 총 종결 기질과 속성 추천, 추천 속성으로 선택시 나오는 기질의 갯수를 알려 줍니다.</li>
-              <li><span style="color:red;">⚠5성 숨김 활성화시 5성 기질은 제외되어 출력 됩니다.</span></li>
-          <li>③ 5성 무기와 종결 획득 무기를 출력 유무를 결정하는 버튼 입니다.</li>
-          <li>④ 기초 속성을 최대 3개 선택 할 수 있는 박스 입니다.</li>
-          <li>⑤ 심화 속성을 최대 1개 선택 할 수 있는 박스 입니다.</li>
-          <li>⑥ 획득 가능한 무기와 그 무기의 속성을 보여주는 박스 입니다.</li>
-        </ul>
+      <!-- 내용 영역 -->
+      <div style="flex:1; min-width:0;">
+
+        <!-- 종결 보유 현황 -->
+        <div id="guide-collection" class="guide-content active">
+          <div class="guide-card">
+            <div class="guide-card-title">📦 종결 보유 현황이란?</div>
+            <p style="color:#ccc; line-height:1.8; margin-bottom:14px;">
+              이미 3유효 기질을 획득하여 종결한 무기를 체크해두는 기능입니다.
+              체크된 무기는 <strong style="color:var(--green);">초록색</strong>으로 표시되며,
+              추천 파밍지와 기질 검색(스캐너) 결과에도 연동되어 이미 종결한 무기를 한눈에 구분할 수 있습니다.
+            </p>
+            <img src="기본 이미지/보유 현황 가이드.png" alt="종결 보유 현황 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 종결 보유 현황 주의사항 안내 영역입니다. 인터넷 캐시를 삭제하면 초기화되므로 주의하세요.</li>
+              <li>② 종결 기질을 보유한 무기를 선택하는 카드 목록입니다. 클릭하면 <strong style="color:var(--green);">초록색 체크(✔)</strong>로 표시됩니다.</li>
+              <li>선택한 보유 현황은 브라우저에 자동 저장되어 다음 방문 시에도 유지됩니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 지역별 -->
+        <div id="guide-region" class="guide-content">
+          <div class="guide-card">
+            <div class="guide-card-title">🗺️ 지역별 파밍지란?</div>
+            <p style="color:#ccc; line-height:1.8; margin-bottom:14px;">
+              엔드필드의 각 파밍 지역별로 획득 가능한 기질 옵션과 무기 목록을 확인할 수 있습니다.
+              원하는 기초 속성(최대 3개)과 심화 속성(최대 1개)을 선택하면 해당 조건에 맞는 무기를 필터링해 보여줍니다.
+              종결 보유 현황과 연동되어, 이미 종결한 무기는 초록색으로 구분됩니다.
+            </p>
+            <img src="기본 이미지/지역별 파밍지 가이드.png" alt="지역별 파밍지 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 파밍하고 싶은 지역을 선택합니다. 현재 거점 지역, 오리지늄 연구 구역, 광맥 구역, 에너지 공급 고지, 무릉성 5개 지역이 있습니다.</li>
+              <li>② 선택한 지역에서 획득 가능한 기질 정보와 종결 현황이 표시됩니다.</li>
+              <li>③ 5성 무기 및 종결 완료 무기의 표시 여부를 결정하는 버튼입니다.</li>
+              <li>④ 기초 속성을 최대 3개까지 선택할 수 있는 필터 영역입니다.</li>
+              <li>⑤ 심화 속성을 최대 1개 선택할 수 있는 필터 영역입니다.</li>
+              <li>⑥ 조건에 맞는 무기와 해당 무기의 기질 옵션을 보여주는 결과 영역입니다.</li>
+              <li><span class="text-danger">⚠ 5성 숨김 활성화 시 5성 무기 기질은 결과에서 제외됩니다.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 무기별 -->
+        <div id="guide-weapon" class="guide-content">
+          <div class="guide-card">
+            <div class="guide-card-title">⚔️ 무기별 파밍지란?</div>
+            <p style="color:#ccc; line-height:1.8; margin-bottom:14px;">
+              획득하고 싶은 무기를 직접 선택하면, 해당 무기의 기질을 파밍할 수 있는 최적의 지역과 추천 속성 세팅을 알려줍니다.
+              여러 무기를 동시에 선택하면 함께 파밍 가능한 지역을 우선 추천해 드립니다.
+            </p>
+            <img src="기본 이미지/무기별 파밍지 가이드.png" alt="무기별 파밍지 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 무기 카테고리 필터 버튼입니다. 6성/5성으로 분류하거나 종결 완료 무기를 숨길 수 있습니다.</li>
+              <li>② 5성 무기 및 종결 완료 무기의 표시 여부를 결정하는 버튼입니다.</li>
+              <li>③ 기질을 획득하고 싶은 무기를 선택하는 카드 목록입니다. 여러 개 동시 선택이 가능합니다.</li>
+              <li>④ 선택한 무기의 기질을 파밍할 수 있는 지역과 추천 속성 세팅이 표시됩니다.</li>
+              <li>무기를 하나만 선택하면 같은 지역에서 함께 파밍 가능한 다른 무기도 함께 표시됩니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 창고 검색 -->
+        <div id="guide-warehouse" class="guide-content">
+          <div class="guide-card">
+            <div class="guide-card-title">🏪 창고 검색이란?</div>
+            <p style="color:#ccc; line-height:1.8; margin-bottom:14px;">
+              게임 내 귀중품 창고 화면을 실시간으로 화면 공유하면, 사이트가 기질 옵션을 자동으로 인식합니다.
+              인식된 옵션을 보유한 무기 목록을 즉시 보여주어, 현재 기질이 어떤 무기에 활용 가능한지 빠르게 파악할 수 있습니다.
+            </p>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-card-title">① 공유창 설정</div>
+            <img src="기본 이미지/공유창 설정 가이드.png" alt="공유창 설정 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 공유할 타입을 고르는 박스입니다. <strong>창(Window)</strong>을 선택해 주세요.</li>
+              <li>② 공유할 창을 선택합니다. <strong>Endfield(엔드필드)</strong>를 선택해 주세요.</li>
+              <li>③ 공유 버튼을 눌러 화면 공유를 시작합니다.</li>
+            </ul>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-card-title">② 창고 화면 안내</div>
+            <img src="기본 이미지/창고 이미지 가이드.png" alt="창고 이미지 가이드">
+            <ul class="guide-list">
+              <li>① 게임에서 귀중품 창고를 열어 기질 탭을 선택합니다.</li>
+              <li>② 사이트가 자동으로 인식하는 영역입니다. 해당 영역이 화면에 잘 보이도록 유지해 주세요.</li>
+              <li><span class="text-danger">⚠ 인식 영역을 마우스나 다른 창으로 가리지 마세요.</span></li>
+            </ul>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-card-title">③ 스캔 화면 안내</div>
+            <img src="기본 이미지/창고 스캔 가이드.png" alt="창고 스캔 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 화면 공유를 시작하는 버튼입니다.</li>
+              <li>② 현재 화면 비율 및 창모드 여부를 표시하는 배지입니다.</li>
+              <li>③ 5성 무기 표시 및 2유효 옵션 포함 여부를 결정하는 버튼입니다.</li>
+              <li>④ 게임 화면을 실시간으로 출력하는 미리보기 창입니다.</li>
+              <li>⑤ 사이트가 인식한 기질 옵션을 출력하는 영역입니다.</li>
+              <li>⑥ 인식된 기질 옵션을 보유한 무기 목록이 출력되는 영역입니다.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 식각 검색 -->
+        <div id="guide-etching" class="guide-content">
+          <div class="guide-card">
+            <div class="guide-card-title">🔬 식각 검색이란?</div>
+            <p style="color:#ccc; line-height:1.8; margin-bottom:14px;">
+              게임 내 식각 화면을 실시간으로 화면 공유하면, 현재 선택된 기질 옵션을 자동으로 인식합니다.
+              창고 검색과 동일한 방식으로 동작하며, 식각 화면에 최적화된 인식 영역을 사용합니다.
+            </p>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-card-title">① 공유창 설정</div>
+            <img src="기본 이미지/공유창 설정 가이드.png" alt="공유창 설정 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 공유할 타입을 고르는 박스입니다. <strong>창(Window)</strong>을 선택해 주세요.</li>
+              <li>② 공유할 창을 선택합니다. <strong>Endfield(엔드필드)</strong>를 선택해 주세요.</li>
+              <li>③ 공유 버튼을 눌러 화면 공유를 시작합니다.</li>
+            </ul>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-card-title">② 식각 화면 안내</div>
+            <img src="기본 이미지/식각 이미지 가이드.png" alt="식각 이미지 가이드">
+            <ul class="guide-list">
+              <li>① 사이트가 자동으로 인식하는 영역입니다. 해당 영역이 화면에 잘 보이도록 유지해 주세요.</li>
+              <li><span class="text-danger">⚠ 인식 영역을 마우스나 다른 창으로 가리지 마세요.</span></li>
+            </ul>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-card-title">③ 스캔 화면 안내</div>
+            <img src="기본 이미지/식각 스캔 가이드.png" alt="식각 스캔 가이드 이미지">
+            <ul class="guide-list">
+              <li>① 화면 공유를 시작하는 버튼입니다.</li>
+              <li>② 현재 화면 비율 및 창모드 여부를 표시하는 배지입니다.</li>
+              <li>③ 5성 무기 표시 및 2유효 옵션 포함 여부를 결정하는 버튼입니다.</li>
+              <li>④ 게임 화면을 실시간으로 출력하는 미리보기 창입니다.</li>
+              <li>⑤ 사이트가 인식한 기질 옵션을 출력하는 영역입니다.</li>
+              <li>⑥ 인식된 기질 옵션을 보유한 무기 목록이 출력되는 영역입니다.</li>
+            </ul>
+          </div>
+        </div>
+            <div class="faq-item">
+              <div class="faq-q">v5.0 · 2026-02-21</div>
+              <div class="faq-a">
+                <ul class="guide-list" style="margin:0;">
+                  <li>창모드 인식 개선 — 게임 창 테두리와 상단 타이틀바를 자동으로 감지하여 다양한 환경에서도 기질 스캔이 정확하게 동작합니다</li>
+                  <li>가이드 페이지 내용 보강 및 자주 묻는 질문 섹션 추가</li>
+                  <li>개인정보처리방침 내용 보완</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">v4.0 · 2026-02-20</div>
+              <div class="faq-a">
+                <ul class="guide-list" style="margin:0;">
+                  <li>창모드 지원 해상도 확대 (1600×900, 1920×1080, 2560×1440, 2560×1600, 3440×1440)</li>
+                  <li>현재 화면 비율을 알려주는 표시 배지 추가 (표준/WIDE/16:10 모드)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">v3.0 · 2026-02-16</div>
+              <div class="faq-a">
+                <ul class="guide-list" style="margin:0;">
+                  <li>종결 보유 현황 기능 추가 — 이미 획득한 무기를 체크하면 브라우저에 자동 저장됩니다</li>
+                  <li>보유 현황이 파밍지 추천과 기질 스캔 결과에 연동되어 표시</li>
+                  <li>개인정보처리방침 페이지 추가</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">v2.0 · 2026-02-14</div>
+              <div class="faq-a">
+                <ul class="guide-list" style="margin:0;">
+                  <li>지역별 파밍지 탭 추가 — 원하는 속성을 선택하면 해당 지역에서 얻을 수 있는 무기를 필터링해서 보여줍니다</li>
+                  <li>무기별 파밍지 탭 추가 — 원하는 무기를 선택하면 어느 지역에서 파밍할 수 있는지 추천해 줍니다</li>
+                  <li>가이드 이미지 및 설명 추가</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">v1.0 · 2026-02-11</div>
+              <div class="faq-a">
+                <ul class="guide-list" style="margin:0;">
+                  <li>최초 출시 — 창고/식각 화면에서 기질 옵션을 자동으로 스캔하는 기능</li>
+                  <li>6성·5성 무기 기질 옵션 매칭 및 결과 표시</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <div id="guide-faq" class="guide-content">
+          <div class="guide-card">
+            <div class="guide-card-title">❓ 자주 묻는 질문</div>
+
+            <div class="faq-item">
+              <div class="faq-q">Q. 보유 현황이 초기화됐어요.</div>
+              <div class="faq-a">보유 현황은 브라우저의 로컬 스토리지에 저장됩니다. 브라우저 캐시나 인터넷 사용 기록을 삭제하면 초기화될 수 있습니다. 중요한 데이터는 별도로 메모해 두시길 권장합니다.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">Q. 기질 스캔이 잘 안 돼요.</div>
+              <div class="faq-a">화면 공유 시 게임 창을 선택할 때 <strong>창(Window)</strong> 탭에서 엔드필드를 선택해야 합니다. 브라우저 탭이나 전체 화면을 선택하면 인식이 제대로 되지 않을 수 있습니다. 또한 인식 영역을 마우스나 다른 창으로 가리지 않도록 주의해 주세요.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">Q. 창모드에서 인식이 안 돼요.</div>
+              <div class="faq-a">창모드로 플레이 중이라면 화면 공유 후 상단에 표시되는 배지에 <strong>(창모드)</strong>가 표시되는지 확인해 주세요. 창모드는 자동으로 타이틀바와 테두리를 제거하고 인식합니다.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">Q. 지원하는 해상도가 궁금해요.</div>
+              <div class="faq-a">전체화면 기준 16:9, 21:9(울트라와이드), 16:10 해상도를 지원합니다. 창모드의 경우 1600×900, 1920×1080, 2560×1440, 2560×1600, 3440×1440을 지원합니다.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q">Q. 버그나 오류를 발견했어요.</div>
+              <div class="faq-a">하단의 문의하기 또는 카카오 오픈채팅을 통해 제보해 주시면 빠르게 확인하겠습니다. 오인식되는 기질 옵션도 제보해 주시면 개선에 큰 도움이 됩니다.</div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-
-      <!-- 무기별 -->
-      <div id="guide-weapon" class="guide-content">
-        <img src="무기별 파밍지 가이드.png" style="width:100%; margin-bottom:20px;">
-        <ul>
-          <li>① 무기의 카테고리로 분류가 되는 버튼 입니다.</li>
-          <li>② 5성 무기와 종결 획득 무기를 출력 유무를 결정하는 버튼 입니다.</li>
-          <li>③ 기질을 획득하고 싶은 무기를 선택하는 박스 입니다.</li>
-          <li>④ 해당 무기가 뜨는 지역과 추천 셋팅을 알려주는 박스 입니다.</li>
-          <li>무기를 하나만 선택하실 경우 같이 파밍 가능한 무기가 표시되도록 하였습니다.</li>
-        </ul>
-      </div>
-
-      <!-- 창고 검색 -->
-      <div id="guide-warehouse" class="guide-content">
-      <!-- 공유창 설정 -->
-      <div class="guide-card">
-        <div class="guide-card-title">① 공유창 설정</div>
-        <img src="공유창 설정 가이드.png">
-        <ul class="guide-list">
-            <li>① 공유할 타입을 고르는 박스 입니다. -창(window)을(를) 선택해 줍니다.</li>
-            <li>② 공유할 창을 선택 합니다. -Endfield(엔드필드)를 선택해 줍니다.</li>
-            <li>③ 공유를 눌러 공유를 시작 합니다.</li>
-        </ul>
-      </div>
-
-    <!-- 창고 이미지 -->
-    <div class="guide-card">
-      <div class="guide-card-title">② 식각 이미지</div>
-      <img src="창고 이미지 가이드.png">
-      <ul class="guide-list">
-        <li>① 귀중품 창고를 열어 기질탭을 선택 합니다.</li>
-        <li>② 사이트가 인식하는 영역입니다.</li>
-        <li><span class="text-danger">마우스로 가리지 마세요</span></li>
-      </ul>
-    </div>
-
-    <!-- 창고 스캔 -->
-    <div class="guide-card">
-      <div class="guide-card-title">③ 식각 스캔</div>
-      <img src="창고 스캔 가이드.png">
-      <ul class="guide-list">
-            <li>① 스캔을 하기 위해 화면 공유를 시작하는 버튼 입니다.</li>
-            <li>② 현재 자신의 화면 비율을 알려주는 박스 입니다.</li>
-            <li>③ 5성 무기와 2유효 옵션의 출력 유무를 결정하는 버튼 입니다.</li>
-            <li>④ 게임의 화면을 출력해주는 창 입니다.</li>
-            <li>⑤ 사이트가 화면을 보고 읽어 들인 속성을 출력해주는 박스 입니다.</li>
-            <li>⑥ 해당 기질의 옵션을 보유한 무기가 출력되는 박스 입니다.</li>
-      </ul>
-    </div>
-    </div>
-      <!-- 식각 검색 -->
-      <div id="guide-etching" class="guide-content">
-      <!-- 공유창 설정 -->
-      <div class="guide-card">
-        <div class="guide-card-title">① 공유창 설정</div>
-        <img src="공유창 설정 가이드.png">
-        <ul class="guide-list">
-          <li>① 공유할 타입을 고르는 박스 입니다. -창(window)을(를) 선택해 줍니다.</li>
-          <li>② 공유할 창을 선택 합니다. -Endfield(엔드필드)를 선택해 줍니다.</li>
-          <li>③ 공유를 눌러 공유를 시작 합니다.</li>
-        </ul>
-      </div>
-
-    <!-- 식각 이미지 -->
-    <div class="guide-card">
-      <div class="guide-card-title">② 식각 이미지</div>
-      <img src="식각 이미지 가이드.png">
-      <ul class="guide-list">
-        <li>① 사이트가 인식하는 영역입니다.</li>
-        <li><span class="text-danger">마우스로 가리지 마세요</span></li>
-      </ul>
-    </div>
-
-    <!-- 식각 스캔 -->
-    <div class="guide-card">
-      <div class="guide-card-title">③ 식각 스캔</div>
-      <img src="식각 스캔 가이드.png">
-      <ul class="guide-list">
-        <li>① 스캔을 하기 위해 화면 공유를 시작하는 버튼 입니다.</li>
-        <li>② 현재 자신의 화면 비율을 알려주는 박스 입니다.</li>
-        <li>③ 5성 무기와 2유효 옵션의 출력 유무를 결정하는 버튼 입니다.</li>
-        <li>④ 게임의 화면을 출력해주는 창 입니다.</li>
-        <li>⑤ 사이트가 화면을 보고 읽어 들인 속성을 출력해주는 박스 입니다.</li>
-        <li>⑥ 해당 기질의 옵션을 보유한 무기가 출력되는 박스 입니다.</li>
-      </ul>
-    </div>
-    </div>
     </div>
   </div>
 </div>
+
   <div class="side-ad left-ad"></div>
   <div class="side-ad right-ad"></div>
 
@@ -416,8 +310,7 @@
 </script>
 <script src="./app.js"></script>
   
-  <!-- 개인정보처리방침 -->
-<footer style="margin-top:40px; font-size:0.8em; color:#666; text-align:center;">
+<footer>
 © 2026 Endfield Tool |
 <a href="./privacy.html" style="color:#888;">개인정보처리방침</a> |
 <a href="https://open.kakao.com/o/sgkYrigi" style="color:#888;">문의하기</a>

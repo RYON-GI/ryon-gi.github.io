@@ -166,6 +166,12 @@ currentSubTabs: {
     selectRegionFn = selectRegion;
 
     Endfield.initRegionUI({ PLACES: window.PLACES, selectRegion });
+
+    // 초기 진입 시 첫 번째 지역(거점 지역) 자동 선택
+    if (window.PLACES && window.PLACES.length > 0) {
+      selectRegion(window.PLACES[0]);
+    }
+
     updateRegionResultsFn();
 
     // 5) 스캐너 매칭

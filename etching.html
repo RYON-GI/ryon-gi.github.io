@@ -2,333 +2,91 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>엔드필드 통합 스캐너</title>
+  <meta name="description" content="아크나이츠 엔드필드 식각 기질 스캐너 - 기질 식각 화면을 화면 공유하면 옵션을 자동으로 인식하고 보유 무기를 매칭합니다">
+  <title>기질 식각 스캔 - 엔드필드 통합 스캐너</title>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <style>
-
-        :root { --primary: #4db8ff; --bg: #121212; --panel: #1e1e1e; --gold: #ffcc00; --purple: #a335ee; --green: #28a745; --red: #ff4d4d; }
-        body { background: var(--bg); color: #e0e0e0; font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
-        
-        /* 메인 탭 */
-        .tab-container { display: flex; gap: 5px; width: 100%; max-width: 1100px; margin-bottom: -1px; }
-        .tab { padding: 12px 25px; background: #2a2a2a; border: 1px solid #333; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: bold; color: #888; transition: 0.2s; }
-        .tab.active { background: var(--panel); color: var(--primary); border-top: 3px solid var(--primary); z-index: 2; }
-        
-        .main-wrapper { display: flex; flex-direction: column; gap: 20px; max-width: 1100px; width: 100%; background: var(--panel); padding: 25px; border-radius: 0 12px 12px 12px; border: 1px solid #333; box-shadow: 0 10px 40px rgba(0,0,0,0.6); min-height: 700px; }
-        
-        .content-area { display: none; }
-        .content-area.active { display: block; }
-
-        /* 서브 탭 */
-        .sub-tab-bar { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .sub-tab { padding: 8px 18px; background: #333; border-radius: 4px; cursor: pointer; font-size: 0.9em; transition: 0.2s; color: #aaa; }
-        .sub-tab.active { background: var(--primary); color: #000; font-weight: bold; }
-
-        /* 레이아웃 공통 */
-        .area-grid-layout, .weapon-farming-layout { display: grid; grid-template-columns: 1fr 380px; gap: 20px; }
-        .region-select-box { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .region-btn { padding: 10px; background: #2a2a2a; border: 1px solid #444; border-radius: 6px; cursor: pointer; color: #ccc; flex: 1; text-align: center; min-width: 120px; }
-        .region-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(77, 184, 255, 0.1); }
-        
-        .option-filter-group { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .opt-btn-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .opt-select-btn { padding: 6px 12px; background: #333; border: 1px solid #444; border-radius: 4px; font-size: 0.85em; cursor: pointer; }
-        .opt-select-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
-
-        .weapon-scroll-area { max-height: 800px; overflow-y: auto; padding-right: 10px; }
-        .weapon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-bottom: 30px; }
-        
-        /* 무기 카드 스타일 (공통) */
-        .weapon-card { 
-            cursor: pointer; border: 1px solid #333; border-radius: 6px; background: #252525; 
-            transition: 0.2s; padding: 8px; text-align: center; position: relative;
-        }
-        /* 무기 카드 이미지 컨테이너 (레이어 겹치기) */
-        .weapon-img-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1; /* 240x240 비율 대응 (1:1) */
-            overflow: hidden;
-            border-radius: 4px;
-            background: #000;
-        }
-
-        /* 모든 레이어 공통 설정 */
-        .layer {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            display: block;
-            pointer-events: none; /* 클릭 이벤트 방해 방지 */
-        }
-
-        /* 1층: 배경 (240x240 전체) */
-        .bg-layer {
-            top: 0;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* 2층: 무기 (240x240 전체, 이미지 비율 유지) */
-        .weapon-layer {
-            top: 0;
-            height: 100%;
-            z-index: 2;
-            object-fit: contain; 
-            transition: 0.2s;
-        }
-
-        /* 3층: 하단 (240x80 비율 = 높이 33.33%) */
-        .bottom-layer {
-            bottom: 0;
-            height: 33.33%;
-            z-index: 3;
-        }
-
-        /* 보유 및 선택 시 효과 */
-        .weapon-card.selected .weapon-layer,
-        .weapon-card.owned .weapon-layer {
-            filter: brightness(1.2);
-        }
-        .weapon-card div { margin-top: 5px; font-size: 0.9em; color: #ccc; }
-        
-        /* 선택된 상태 (파밍지 탭) */
-        .weapon-card.selected { border-color: var(--gold); background: #2d2a20; }
-        .weapon-card.selected img { filter: brightness(1); }
-        
-        /* 보유중 상태 (NEW: 초록색 강조) */
-        .weapon-card.owned { border-color: var(--green); background: rgba(40, 167, 69, 0.15); }
-        .weapon-card.owned img { filter: brightness(1); }
-        .weapon-card.owned::after {
-            content: "✔"; position: absolute; top: 5px; right: 5px; 
-            background: var(--green); color: white; font-size: 0.8em; 
-            padding: 2px 6px; border-radius: 4px; font-weight: bold; 
-            z-index: 9999; pointer-events: none;
-        }
-
-        .report-panel { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 20px; border: 1px solid #333; }
-        .target-opt-box { background: #2a2a2a; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .opt-tag-container { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-        .opt-tag { padding: 4px 10px; background: #3d3d3d; border-radius: 4px; font-size: 0.85em; color: #ddd; border: 1px solid #444; }
-
-        /* 스캐너 UI */
-        .scanner-main-layout { display: grid; grid-template-columns: 450px 1fr; gap: 20px; }
-        .control-bar { display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        #view-canvas { border: 2px solid #444; border-radius: 10px; width: 100%; background: #000; margin-bottom: 10px; }
-        
-        .opt-box { background: #252525; padding: 10px; border-radius: 8px; border-left: 5px solid var(--primary); margin-top: 8px; }
-        .opt-name { font-size: 1.2em; font-weight: bold; color: var(--gold); }
-        .raw-text { font-family: monospace; font-size: 0.8em; color: var(--green); margin-top: 4px; }
-        
-        .section-box { background: rgba(255,255,255,0.03); border: 1px solid #333; border-radius: 10px; padding: 15px; min-height: 200px; margin-bottom: 10px; }
-        .badge { padding: 4px 10px; border-radius: 4px; font-size: 0.8em; background: #444; color: #fff; margin-left: 10px; }
-
-        button { padding: 10px 20px; cursor: pointer; font-weight: bold; background: #007bff; color: white; border: none; border-radius: 8px; }
-        #stop-btn { background: var(--red); }
-        .result-region-card { display: flex; align-items: center; gap: 12px; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid transparent; }
-        .result-region-card.best { border-color: rgba(255, 204, 0, 0.4); background: rgba(255, 204, 0, 0.05); }
-
-        /* 스캐너 결과 그리드 (NEW) */
-        .scanner-result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
-        .match-badge {
-            margin-top: 4px; display: inline-block; padding: 2px 6px; border-radius: 4px; 
-            font-size: 0.8em; background: rgba(0,0,0,0.5); color: #fff;
-        }
-
-        /*가이드 설명 탭*/
-        .guide-side-tab {
-            padding:10px;
-            cursor:pointer;
-            color:#aaa;
-            border-radius:6px;
-            margin-bottom:6px;
-        }
-        .guide-side-tab.active {
-            background:#4db8ff;
-            color:#000;
-            font-weight:bold;
-        }
-        .guide-content {
-            display:none;
-        }
-        .guide-content.active {
-            display:block;
-        }
-        /* 가이드 카드 */
-        .guide-card {
-            border: 1px solid #333;
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 22px;
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-        }
-        /* 카드 제목 */
-        .guide-card-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-        /* 카드 이미지 */
-        .guide-card img {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #444;
-            margin-bottom: 12px;
-        }
-        /* 설명 리스트 */
-        .guide-list {
-            line-height: 1.8;
-            color: #ddd;
-            padding-left: 20px;
-        }
-        .guide-list li {
-            margin-bottom: 6px;
-        }
-        /* 빨간 강조 */
-        .text-danger {
-            color: var(--red);
-            font-weight: 700;
-        }
-        /* 경고 박스 */
-        .guide-warning {
-            border: 1px solid rgba(255,77,77,0.4);
-            background: rgba(255,77,77,0.08);
-            border-radius: 10px;
-            padding: 12px 14px;
-            margin-bottom: 20px;
-            color: #ff6b6b;
-            font-weight: 600;
-         }
-        /* 오른쪽 패널에서 카드가 1~2px 잘리는 현상 방지 */
-         .result-region-card { box-sizing: border-box; width: 100%; }
-         #farming-results-container { padding-right: 6px; box-sizing: border-box; }
-
-         #farming-results-container {
-           padding-right: 10px;
-           overflow-x: visible !important;
-           box-sizing: border-box;
-          }
-
-          .result-region-card,
-          .result-region-card.best {
-            width: calc(100% - 2px) !important;
-            box-sizing: border-box;
-            overflow: visible !important;
-            min-width: 0;
-           }
-
-          .result-region-card {
-            box-sizing: border-box;
-            width: 100%;
-           }
-
-          #farming-results-container {
-            padding-right: 6px;
-            box-sizing: border-box;
-           }
-
-          /* ⭐ 핵심 추가 */
-          .result-region-card > div {
-            box-sizing: border-box;
-            max-width: 100%;
-          }
-          .side-ad {
-            position: fixed;
-            top: 120px;
-            width: 160px;
-            min-height: 600px;
-            }
-
-          .left-ad { left: 20px; }
-          .right-ad { right: 20px; }
-          /* 창이 좁아지면 사이드 광고가 본문을 덮지 않게 숨김 */
-          @media (max-width: 1500px) {
-            .side-ad { display: none !important; }
-          }
-
-          .tab, .sub-tab { text-decoration:none; color:inherit; display:inline-block; }
-
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
-  <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8RJ6G5RLWV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-8RJ6G5RLWV');
 </script>
-  <!-- Google adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8422493237743797"
-     crossorigin="anonymous"></script>
+<!-- Google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8422493237743797"
+   crossorigin="anonymous"></script>
 <body>
+
 <div class="tab-container">
-  <a id="tab-guide" class="tab" href="./index.html">가이드</a>
-  <a id="tab-collection" class="tab" href="./collection.html">종결 보유 현황</a>
-  <a id="tab-farming" class="tab" href="./regionfarming.html">추천 파밍지</a>
-  <a id="tab-search" class="tab" href="./warehouse.html">기질 검색</a>
+  <a class="tab" href="./index.html">가이드</a>
+  <a class="tab" href="./collection.html">종결 보유 현황</a>
+  <a class="tab" href="./regionfarming.html">추천 파밍지</a>
+  <a class="tab active" href="./warehouse.html">기질 검색</a>
 </div>
 
 <div class="main-wrapper">
-        <div id="area-search" class="content-area active">
-        <div class="sub-tab-bar">
-          <a id="sub-tab-warehouse" class="sub-tab" href="./warehouse.html">귀중품 창고</a>
-          <a id="sub-tab-etching" class="sub-tab active" href="./etching.html">기질 식각</a>
-        </div>
+  <div id="area-search" class="content-area active">
 
-<div style="margin:10px 0 12px 0; color:#aaa; font-size:0.9em;">
-  ① 화면 공유 시작 → ② 게임 창에서 장비/창고 화면 열기 → ③ 옵션 자동 인식 확인
-</div>
-        <div class="control-bar">
-            <div style="display:flex; gap:10px; align-items:center;">
-                <button id="start-btn" disabled>엔진 로딩 중...</button>
-                <button id="stop-btn" style="display:none;">공유 중지</button>
-                <span id="screen-mode-badge" class="badge" style="background:#555;">대기 중</span>
-            </div>
-            <div style="display:flex; gap:10px; align-items:center; justify-content:flex-end;">
-  <button id="btn-scan-5" class="filter-toggle-btn" style="background:var(--red);">5성 숨김</button>
-  <button id="btn-scan-2" class="filter-toggle-btn" style="background:var(--red);">2개 일치 숨김</button>
-</div>
-        </div>
-
-        <div class="scanner-main-layout">
-            <div class="video-panel">
-                <div style="margin-bottom:8px; font-weight:bold; color:var(--primary);">실시간 인식 화면</div>
-                <canvas id="view-canvas"></canvas>
-                
-                <div id="detected-options">
-                    <div class="opt-box">
-                        <div style="font-size:0.8em; color:#aaa;">옵션 1</div>
-                        <div id="opt-1" class="opt-name">-</div>
-                    </div>
-                    <div class="opt-box">
-                        <div style="font-size:0.8em; color:#aaa;">옵션 2</div>
-                        <div id="opt-2" class="opt-name">-</div>
-                    </div>
-                    <div class="opt-box">
-                        <div style="font-size:0.8em; color:#aaa;">옵션 3</div>
-                        <div id="opt-3" class="opt-name">-</div>
-                    </div>
-                </div>
-            </div>
-            <div class="result-panel">
-                <div class="section-box">
-                    <div style="color:var(--gold); font-weight:bold; border-bottom:1px solid #444; margin-bottom:10px; padding-bottom:5px;">6성 무기 매칭(이미지 클릭시 보유 현황 등록)</div>
-                    <div id="list-6star" class="scanner-result-grid"></div>
-                </div>
-                <div id="section-5star" class="section-box" style="display: none;">
-                    <div style="color:var(--purple); font-weight:bold; border-bottom:1px solid #444; margin-bottom:10px; padding-bottom:5px;">5성 무기 매칭(이미지 클릭시 보유 현황 등록)</div>
-                    <div id="list-5star" class="scanner-result-grid"></div>
-                </div>
-            </div>
-        </div>
+    <div class="sub-tab-bar">
+      <a id="sub-tab-warehouse" class="sub-tab" href="./warehouse.html">귀중품 창고</a>
+      <a id="sub-tab-etching" class="sub-tab active" href="./etching.html">기질 식각</a>
     </div>
+
+    <div class="info-banner" style="margin-bottom:16px;">
+      <p style="margin:0;">① 화면 공유 시작 → ② 게임에서 <strong>기질 식각 화면</strong> 열기 → ③ 옵션 자동 인식 확인</p>
+    </div>
+
+    <div class="control-bar">
+      <div style="display:flex; gap:10px; align-items:center;">
+        <button id="start-btn" disabled><span class="loading-spinner"></span>엔진 로딩 중...</button>
+        <button id="stop-btn" style="display:none;">공유 중지</button>
+        <span id="screen-mode-badge" class="badge">대기 중</span>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center;">
+        <button id="btn-scan-5" class="filter-toggle-btn" style="background:var(--red); color:#fff;">5성 숨김</button>
+        <button id="btn-scan-2" class="filter-toggle-btn" style="background:var(--red); color:#fff;">2개 일치 숨김</button>
+      </div>
+    </div>
+
+    <div class="scanner-main-layout">
+      <div class="video-panel">
+        <div class="section-title">실시간 인식 화면</div>
+        <canvas id="view-canvas"></canvas>
+        <div id="detected-options">
+          <div class="opt-box">
+            <div style="font-size:0.78em; color:var(--text-muted);">옵션 1</div>
+            <div id="opt-1" class="opt-name">-</div>
+          </div>
+          <div class="opt-box">
+            <div style="font-size:0.78em; color:var(--text-muted);">옵션 2</div>
+            <div id="opt-2" class="opt-name">-</div>
+          </div>
+          <div class="opt-box">
+            <div style="font-size:0.78em; color:var(--text-muted);">옵션 3</div>
+            <div id="opt-3" class="opt-name">-</div>
+          </div>
+        </div>
+      </div>
+      <div class="result-panel">
+        <div class="section-box">
+          <div class="section-title" style="color:var(--gold);">6성 무기 매칭 <span style="font-weight:normal; font-size:0.85em;">(클릭 시 보유 현황 등록)</span></div>
+          <div id="list-6star" class="scanner-result-grid"></div>
+        </div>
+        <div id="section-5star" class="section-box" style="display:none;">
+          <div class="section-title" style="color:var(--purple);">5성 무기 매칭 <span style="font-weight:normal; font-size:0.85em;">(클릭 시 보유 현황 등록)</span></div>
+          <div id="list-5star" class="scanner-result-grid"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
-  <div class="side-ad left-ad"></div>
-  <div class="side-ad right-ad"></div>
+
+<div class="side-ad left-ad"></div>
+<div class="side-ad right-ad"></div>
 
 <script src="./db.js"></script>
 <script src="./ocr.js"></script>
@@ -340,13 +98,12 @@
   window.__INITIAL_SEARCH_SUBTAB = "etching";
 </script>
 <script src="./app.js"></script>
-  
-  <!-- 개인정보처리방침 -->
-<footer style="margin-top:40px; font-size:0.8em; color:#666; text-align:center;">
-© 2026 Endfield Tool |
-<a href="./privacy.html" style="color:#888;">개인정보처리방침</a> |
-<a href="https://open.kakao.com/o/sgkYrigi" style="color:#888;">문의하기</a>
+
+<footer>
+  © 2026 Endfield Tool |
+  <a href="./privacy.html">개인정보처리방침</a> |
+  <a href="https://open.kakao.com/o/sgkYrigi">문의하기</a>
 </footer>
-  
+
 </body>
 </html>

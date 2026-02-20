@@ -43,18 +43,18 @@ function initFarmingUI({ WEAPONS_6, WEAPONS_5, STATE, updateFarmingResults }) {
 
   // ---- 상단 컨트롤 바(카테고리 + 토글들) ----
   const topBar = document.createElement('div');
-  topBar.style.display = 'flex';
-  topBar.style.width = '100%';
-  topBar.style.justifyContent = 'space-between';
-  topBar.style.alignItems = 'center';
-  topBar.style.gap = '10px';
-  topBar.style.marginBottom = '12px';
+  topBar.className = 'farm-top-bar';
+  
+  
+  
+  
+  
 
   // 1) 카테고리 버튼 바
   const catBar = document.createElement('div');
-  catBar.style.display = 'flex';
-  catBar.style.flexWrap = 'wrap';
-  catBar.style.gap = '6px';
+  catBar.className = 'farm-cat-bar';
+  
+  
 
   const setBtnColor = (btn, on) => {
     btn.style.background = on ? 'var(--green)' : 'var(--red)';
@@ -161,9 +161,9 @@ function initFarmingUI({ WEAPONS_6, WEAPONS_5, STATE, updateFarmingResults }) {
 
   // 2열 배치: 왼쪽(카테고리) / 오른쪽(5성, 종결)
   const rightBar = document.createElement('div');
-  rightBar.style.display = 'flex';
-  rightBar.style.gap = '8px';
-  rightBar.style.alignItems = 'center';
+  rightBar.className = 'farm-right-bar';
+  
+  
 
   topBar.appendChild(catBar);
   rightBar.appendChild(toggle5);
@@ -321,7 +321,7 @@ function updateFarmingResults({ PLACES, STATE }) {
   }
 
   if (!STATE.selectedWeapons || STATE.selectedWeapons.size === 0) {
-    resultContainer.innerHTML = `<div style="text-align:center; padding: 40px; color:#666;">선택된 무기가 없습니다.</div>`;
+    resultContainer.innerHTML = `<div class="farm-empty">선택된 무기가 없습니다.</div>`;
     return;
   }
 
@@ -452,28 +452,28 @@ function updateFarmingResults({ PLACES, STATE }) {
       : `<span style="color:#555; font-size:0.85em;">-</span>`;
 
     return `
-      <div class="result-region-card ${canFarm ? 'best' : ''}" style="flex-direction: column; align-items: flex-start; gap: 10px; padding: 15px; width:100%; box-sizing:border-box;">
-        <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+      <div class="result-region-card farm-card-col ${canFarm ? 'best' : ''}">
+        <div class="farm-card-header">
           <strong style="font-size:1.1em; color:${canFarm ? 'var(--primary)' : '#888'}">${r.name}</strong>
           <span style="background:var(--gold); color:#000; padding:2px 8px; border-radius:10px; font-size:0.75em; font-weight:bold;">${r.matchedCount}개 종결 가능</span>
         </div>
 
-        <div style="width:100%; background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border: 1px solid #333; box-sizing:border-box; max-width:100%;">
-          <div style="font-size:0.75em; color:#aaa; margin-bottom:8px; font-weight:bold;">🎯 추천속성</div>
-          <div style="display:flex; flex-wrap:wrap; gap:5px;">
+        <div class="farm-inner-box">
+          <div class="farm-inner-title">🎯 추천속성</div>
+          <div class="farm-pill-row">
             ${optPills}
           </div>
         </div>
 
         <div style="width:100%; background:rgba(255,255,255,0.03); padding:10px; border-radius:6px; border: 1px solid #333; box-sizing:border-box; max-width:100%;">
-          <div style="font-size:0.75em; color:#aaa; margin-bottom:6px; font-weight:bold;">
+          <div class="farm-inner-title">
             📦 이 지역에서 획득 가능 무기 (무기명 + 속성)
             <br>
             <span style="color:#666; font-weight:normal;"> — 겹치는 옵션은 초록색</span>
             <br>
             ${singlePick ? `<span style="color:#666; font-weight:normal;"> — 단일 선택이라 같이 파밍 가능한 무기까지 표시</span>` : ``}
           </div>
-          <div style="font-size:0.9em; color:#ccc; line-height:1.45;">
+          <div class="farm-weapon-list">
             ${weaponLines || `<span style="color:#555;">표시할 무기가 없습니다.</span>`}
           </div>
         </div>
@@ -546,21 +546,21 @@ function renderRegionSummary({ place, PRIMARY_STATS, WEAPONS_6, WEAPONS_5, STATE
 
   // 버튼 텍스트/색상은 selectRegionFactory에서 이벤트 바인딩하며 갱신
   return `
-    <div style="margin-top:12px; padding:12px; background:rgba(255,255,255,0.05); border-radius:8px; border:1px solid #333;">
-      <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
-        <div style="font-weight:bold; color:var(--primary);">📊 ${place.name} 요약</div>
-        <div style="display:flex; gap:8px;">
+    <div class="region-summary-box">
+      <div class="region-summary-header">
+        <div class="region-summary-title">📊 ${place.name} 요약</div>
+        <div class="region-summary-btns">
           <button class="toggle-btn region-toggle-5star"></button>
           <button class="toggle-btn region-toggle-owned"></button>
         </div>
       </div>
 
-      <div style="margin-top:6px;">
+      <div class="region-summary-stat">
         미종결 <span style="color:var(--red); font-weight:bold;">${unfinished.length}</span>개 /
         추천 속성 종결 기질 <span style="color:var(--green); font-weight:bold;">${recFinishable.length}</span>개
       </div>
 
-      <div style="margin-top:6px; font-size:0.9em;">
+      <div class="region-summary-rec">
         추천 속성 (기본 <span style="color:var(--gold);">${baseTxt}</span> / 심화 <span style="color:var(--purple);">${extraTxt}</span>)
       </div>
     </div>
@@ -647,12 +647,12 @@ function selectRegionFactory(deps) {
     optionArea.style.display = 'block';
     optionArea.innerHTML = `
       <div class="option-filter-group">
-        <div style="font-weight:bold; color:var(--primary);">기초 속성 (최대 3개)</div>
+        <div class="filter-group-title primary">기초 속성 (최대 3개)</div>
         <div id="base-opt-grid" class="opt-btn-grid"></div>
       </div>
       <div class="option-filter-group">
-        <div style="font-weight:bold; color:var(--gold);">심화 속성 (추가/스킬 중 택 1)</div>
-        <div style="font-size:0.8em; color:#888; margin-top:10px;">■ 추가 속성</div>
+        <div class="filter-group-title gold">심화 속성 (추가/스킬 중 택 1)</div>
+        <div class="filter-sub-label">■ 추가 속성</div>
         <div id="extra-opt-grid" class="opt-btn-grid"></div>
         <div style="font-size:0.8em; color:#888; margin-top:10px;">■ 스킬 속성</div>
         <div id="skill-opt-grid" class="opt-btn-grid"></div>
@@ -731,17 +731,17 @@ function updateRegionResultsFactory(deps) {
       return `
         <div class="result-region-card ${m.matchCount === 3 ? 'best' : ''}" style="position:relative;">
           ${m.isOwned ? `<div class="owned-overlay"></div>` : ''}
-          <div class="weapon-img-container" style="width:60px; height:60px; flex-shrink:0;">
+          <div class="weapon-img-container" class="weapon-img-container region-weapon-thumb">
             <img src="배경.png" class="layer bg-layer">
             <img src="${m.path}/${m.name.replace(/:/g,'')}.png" class="layer weapon-layer">
             <img src="${m.path}/${starPrefix} 하단.png" class="layer bottom-layer">
           </div>
-          <div style="flex-grow:1; margin-left:12px;">
-            <div style="display:flex; justify-content:space-between;">
+          <div class="region-card-info">
+            <div class="region-card-name-row">
               <span style="font-weight:bold; color:${m.color};">${m.name}</span>
               <span class="badge ${m.isOwned ? 'badge-complete' : ''}">${m.isOwned ? '종결' : `${m.matchCount}개 일치`}</span>
             </div>
-            <div style="font-size:0.85em; color:#aaa; margin-top:4px;">
+            <div class="region-card-opts">
               ${m.opts.map(o => `<span style="${filter.includes(o) ? 'color:var(--primary); font-weight:bold;' : ''}">${o}</span>`).join(', ')}
             </div>
           </div>
@@ -752,7 +752,12 @@ function updateRegionResultsFactory(deps) {
 }
 
 function resetRegionFilters({ STATE }, selectRegionFn) {
-  if (STATE.selectedRegion) selectRegionFn(STATE.selectedRegion);
+  // 초기화 시 항상 첫 번째 지역(거점 지역)으로 돌아감
+  if (window.PLACES && window.PLACES.length > 0) {
+    STATE.regionBases = new Set();
+    STATE.regionExtra = null;
+    selectRegionFn(window.PLACES[0]);
+  }
 }
 
 window.Endfield = window.Endfield || {};
