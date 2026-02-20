@@ -107,6 +107,7 @@ function pickPresetKey(vw, vh) {
   // 축별로 작은 오차만 허용해서 정확히 매칭
 
   const presets = [
+    { key: "P_1600_900", vw: 1604, vh: 946 },
     { key: "P_1920_1080", vw: 1924, vh: 1126 },
     { key: "P_2560_1440", vw: 2564, vh: 1486 },
     { key: "P_2560_1600", vw: 2564, vh: 1646 },
@@ -139,21 +140,30 @@ async function recognizeLoop({ CONFIGS, STATE, normalize, updateScannerMatch }) 
   const video = STATE.video;
   if (video.readyState >= 2) {
     const vw = video.videoWidth, vh = video.videoHeight;
-    const ratio = vw / vh;
-    let modeKey;
-     if (ratio >= 2.2) modeKey = 'WIDE';      // 21:9
-     else if (ratio >= 1.7) modeKey = 'DEFAULT'; // 16:9
-     else modeKey = 'TALL';                   // 16:10
+
+// 1) 프리셋(창모드 캡처 해상도) 먼저 결정
+const presetKey = pickPresetKey(vw, vh);
+const isWindowMode = (presetKey !== "BASE");
+
+// 2) modeKey는 "표시/CONFIG 선택용"으로 preset을 우선한다
+let modeKey;
+if (presetKey === "P_3440_1440") modeKey = "WIDE";        // 21:9 창모드
+else if (presetKey === "P_2560_1600") modeKey = "TALL";   // 16:10 창모드
+else if (presetKey !== "BASE") modeKey = "DEFAULT";       // 나머지 창모드(1600/1920/2560 16:9)
+else {
+  // 전체화면(BASE)일 때만 ratio로 추정
+  const ratio = vw / vh;
+  if (ratio >= 2.2) modeKey = 'WIDE';        // 21:9
+  else if (ratio >= 1.7) modeKey = 'DEFAULT'; // 16:9
+  else modeKey = 'TALL';                     // 16:10
+}
 
 const badge = document.getElementById('screen-mode-badge');
 
-     badge.style.background =
-       modeKey === 'WIDE' ? '#a335ee' :
-       modeKey === 'TALL' ? '#1f7ae0' :
-       '#28a745';
-
-    const presetKey = pickPresetKey(vw, vh);
-    const isWindowMode = (presetKey !== "BASE");
+badge.style.background =
+  modeKey === 'WIDE' ? '#a335ee' :
+  modeKey === 'TALL' ? '#1f7ae0' :
+  '#28a745';
 
 badge.textContent =
   (modeKey === 'WIDE' ? 'WIDE 모드' :
