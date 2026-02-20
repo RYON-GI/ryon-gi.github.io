@@ -228,6 +228,14 @@ try {
     window.open('https://open.kakao.com/o/sgkYrigi', '_blank');
   };
 
+  // update.html 등 외부에서 해시로 진입 시 해당 탭 자동 오픈
+  // 예: ./index.html#region → 지역별 파밍지 탭 열림
+  const hash = window.location.hash.replace('#', '');
+  if (hash && typeof window.switchGuide === 'function') {
+    const tabEl = document.querySelector(`.guide-side-tab[onclick*="${hash}"]`);
+    window.switchGuide(hash, tabEl || null);
+  }
+
 
   init().then(() => {
   switchTab(STATE.currentMainTab);
