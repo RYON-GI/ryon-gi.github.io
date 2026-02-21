@@ -731,7 +731,7 @@ function updateRegionResultsFactory(deps) {
       return `
         <div class="result-region-card ${m.matchCount === 3 ? 'best' : ''}" style="position:relative;">
           ${m.isOwned ? `<div class="owned-overlay"></div>` : ''}
-          <div class="weapon-img-container" class="weapon-img-container region-weapon-thumb">
+          <div class="weapon-img-container region-weapon-thumb">
             <img src="배경.png" class="layer bg-layer">
             <img src="${m.path}/${m.name.replace(/:/g,'')}.png" class="layer weapon-layer">
             <img src="${m.path}/${starPrefix} 하단.png" class="layer bottom-layer">
