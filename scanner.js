@@ -170,6 +170,7 @@ function pickPresetKey(vw, vh) {
   const knownWindows = [
     { vw: 1604, vh: 946  },
     { vw: 1924, vh: 1126 },
+    { vw: 1924, vh: 1246 }, // 1920×1200 창모드
     { vw: 2564, vh: 1486 },
     { vw: 2564, vh: 1646 },
     { vw: 3444, vh: 1486 },
