@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>기록 상세 - 엔드필드 통합 스캐너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./timeattack.css">
+</head>
+<body>
+
+<div class="tab-container">
+  <a class="tab" href="./index.html">가이드</a>
+  <a class="tab" href="./collection.html">종결 보유 현황</a>
+  <a class="tab" href="./regionfarming.html">추천 파밍지</a>
+  <a class="tab" href="./warehouse.html">기질 검색</a>
+  <a class="tab active" href="./timeattack.html">⚔ 보스 타임어택</a>
+</div>
+
+<div class="main-wrapper">
+  <div style="max-width:800px; margin:0 auto;">
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+    <a href="./timeattack.html" style="color:#60607a; font-size:13px; text-decoration:none; transition:color 0.2s;"
+       onmouseover="this.style.color='#4ade80'" onmouseout="this.style.color='#60607a'">← 목록으로</a>
+    <h2 style="font-family:'Rajdhani',sans-serif; font-size:20px; letter-spacing:1px; color:var(--primary); margin:0;">기록 상세</h2>
+  </div>
+  <div id="detail" class="ta-detail-record"></div>
+  </div>
+</div>
+
+<div class="side-ad left-ad"></div>
+<div class="side-ad right-ad"></div>
+
+<footer>
+© 2026 Endfield Tool |
+<a href="./privacy.html" style="color:#888;">개인정보처리방침</a> |
+<a href="https://open.kakao.com/o/sgkYrigi" style="color:#888;">문의하기</a>
+</footer>
+
+<script type="module" src="./run.js"></script>
+</body>
+</html>

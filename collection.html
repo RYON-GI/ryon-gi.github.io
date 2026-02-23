@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="description" content="아크나이츠 엔드필드 종결 보유 현황 - 3유효 기질을 획득한 무기를 체크하고 파밍지 추천에 연동하세요">
   <title>종결 보유 현황 - 엔드필드 통합 스캐너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
 </head>
 <!-- Google tag (gtag.js) -->
@@ -24,6 +27,7 @@
   <a class="tab active" href="./collection.html">종결 보유 현황</a>
   <a class="tab" href="./regionfarming.html">추천 파밍지</a>
   <a class="tab" href="./warehouse.html">기질 검색</a>
+  <a id="tab-timeattack" class="tab" href="./timeattack.html">⚔ 보스 타임어택</a>
 </div>
 
 <div class="main-wrapper">
@@ -32,7 +36,20 @@
     <div class="info-banner">
       <div class="info-banner-title">✅ 종결 보유 현황 체크리스트</div>
       <p>이미 3유효 옵션을 획득하여 종결한 무기를 선택하세요. 체크된 무기는 <strong>추천 파밍지</strong>와 <strong>기질 검색(스캐너)</strong> 결과에서 <span class="text-green">초록색(✔)</span>으로 표시됩니다.</p>
-      <p class="text-danger" style="margin:0;">⚠ 브라우저 캐시를 삭제하면 보유 현황이 초기화됩니다. 주의하세요.</p>
+      <p style="margin:0; color:#aaa;">브라우저 캐시 삭제 시 초기화될 수 있으니, 아래 버튼으로 백업해두세요.</p>
+      <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+        <button id="btn-export-collection" style="
+          background:var(--primary); color:#000; border:none;
+          padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700;
+          font-family:'Noto Sans KR',sans-serif; cursor:pointer; display:flex; align-items:center; gap:6px;
+        ">⬇ JSON으로 저장</button>
+        <button id="btn-import-collection" style="
+          background:var(--panel2); color:var(--text); border:1px solid var(--border2);
+          padding:9px 18px; border-radius:6px; font-size:13px; font-weight:700;
+          font-family:'Noto Sans KR',sans-serif; cursor:pointer; display:flex; align-items:center; gap:6px;
+        ">⬆ JSON 불러오기</button>
+        <input type="file" id="import-collection-file" accept=".json" style="display:none;">
+      </div>
     </div>
 
     <div class="weapon-scroll-area">

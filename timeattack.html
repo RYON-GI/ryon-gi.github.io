@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="아크나이츠 엔드필드 보스 타임어택 랭킹 - 보스별 클리어 기록과 파티 구성을 공유하세요">
+  <title>보스 타임어택 - 엔드필드 통합 스캐너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./timeattack.css">
+</head>
+<body>
+
+<div class="tab-container">
+  <a class="tab" href="./index.html">가이드</a>
+  <a class="tab" href="./collection.html">종결 보유 현황</a>
+  <a class="tab" href="./regionfarming.html">추천 파밍지</a>
+  <a class="tab" href="./warehouse.html">기질 검색</a>
+  <a class="tab active" href="./timeattack.html">⚔ 보스 타임어택</a>
+</div>
+
+<div class="main-wrapper" style="min-height:700px;">
+
+  <!-- 헤더 -->
+  <div class="ta-header">
+    <div class="ta-header-left">
+      <span class="ta-icon">⚔</span>
+      <div>
+        <h2 class="ta-title">BOSS TIME ATTACK</h2>
+        <p class="ta-subtitle">보스 클리어 기록을 공유하고 최강 파티를 확인하세요</p>
+      </div>
+    </div>
+    <button id="btn-open-form" class="ta-submit-btn">+ 기록 제출</button>
+  </div>
+
+  <!-- 검색바 -->
+  <div class="ta-search-wrap">
+    <span class="ta-search-icon">🔍</span>
+    <input id="search-input" type="text" placeholder="캐릭터, 제목, 보스 이름으로 검색..." />
+    <button id="search-clear" class="ta-search-clear hidden">✕</button>
+  </div>
+
+  <!-- 보스 필터 + 정렬 -->
+  <div class="ta-filter-bar">
+    <div class="ta-boss-tabs">
+      <button class="ta-boss-tab active" data-boss="">전체</button>
+      <button class="ta-boss-tab" data-boss="로댄">로댄</button>
+      <button class="ta-boss-tab" data-boss="트라이겔로스">트라이겔로스</button>
+      <button class="ta-boss-tab" data-boss="마블 아겔로미레">마블 아겔로미레</button>
+    </div>
+    <button id="btn-sort" class="sub-tab" data-mode="time">⏱ 기록순</button>
+  </div>
+
+  <!-- 인증 탭 -->
+  <div class="sub-tab-bar" style="margin-bottom:16px;">
+    <button class="sub-tab active" id="ta-tab-verified" onclick="taShowTab('ta-verified')">✅ 영상 인증</button>
+    <button class="sub-tab" id="ta-tab-unverified" onclick="taShowTab('ta-unverified')">📝 미인증</button>
+    <span id="ta-tab-count" style="margin-left:auto; font-size:12px; color:#60607a; align-self:center;"></span>
+  </div>
+
+  <!-- 기록 목록 -->
+  <div id="ta-verified" class="ta-list"></div>
+  <div id="ta-unverified" class="ta-list hidden"></div>
+
+</div>
+
+<!-- 토스트 -->
+<div id="ta-toast" class="ta-toast hidden"></div>
+
+<div class="side-ad left-ad"></div>
+<div class="side-ad right-ad"></div>
+
+<footer>
+© 2026 Endfield Tool |
+<a href="./privacy.html" style="color:#888;">개인정보처리방침</a> |
+<a href="https://open.kakao.com/o/sgkYrigi" style="color:#888;">문의하기</a>
+</footer>
+
+<script type="module" src="./timeattack.js"></script>
+</body>
+</html>

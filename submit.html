@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>기록 제출 - 엔드필드 통합 스캐너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./timeattack.css">
+</head>
+<body>
+
+<div class="tab-container">
+  <a class="tab" href="./index.html">가이드</a>
+  <a class="tab" href="./collection.html">종결 보유 현황</a>
+  <a class="tab" href="./regionfarming.html">추천 파밍지</a>
+  <a class="tab" href="./warehouse.html">기질 검색</a>
+  <a class="tab active" href="./timeattack.html">⚔ 보스 타임어택</a>
+</div>
+
+<div class="main-wrapper">
+
+  <div style="max-width:640px; margin:0 auto;">
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+    <a href="./timeattack.html" style="color:#60607a; font-size:13px; text-decoration:none; transition:color 0.2s;"
+       onmouseover="this.style.color='#4ade80'" onmouseout="this.style.color='#60607a'">← 목록으로</a>
+    <h2 style="font-family:'Rajdhani',sans-serif; font-size:20px; letter-spacing:1px; color:var(--primary); margin:0;">기록 제출</h2>
+  </div>
+
+  <div class="ta-form">
+
+    <!-- 필수 항목 -->
+    <label class="ta-label">제목 <span class="ta-req">*</span></label>
+    <input class="ta-input" id="f-title" placeholder="예) 로댄 60초 컷" />
+
+    <label class="ta-label">보스 <span class="ta-req">*</span></label>
+    <select class="ta-input" id="f-boss" required></select>
+
+    <label class="ta-label">클리어 시간 <span class="ta-req">*</span></label>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <input class="ta-input" id="f-time-min" type="number" min="0" max="59" placeholder="0" style="text-align:center;" />
+        <span style="color:#60607a; font-size:11px;">분 (선택)</span>
+      </div>
+      <span style="font-size:20px; color:#404055; padding-bottom:18px;">:</span>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <input class="ta-input" id="f-time-sec" type="number" min="0" max="59.99" step="0.01" placeholder="예) 45.32" style="text-align:center;" />
+        <span style="color:#60607a; font-size:11px;">초 (필수)</span>
+      </div>
+    </div>
+
+    <label class="ta-label">파티 <span class="ta-req">*</span></label>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <input class="ta-input" id="f-party1" list="partyOptions" placeholder="파티 1" />
+      <input class="ta-input" id="f-party2" list="partyOptions" placeholder="파티 2" />
+      <input class="ta-input" id="f-party3" list="partyOptions" placeholder="파티 3" />
+      <input class="ta-input" id="f-party4" list="partyOptions" placeholder="파티 4" />
+    </div>
+    <datalist id="partyOptions"></datalist>
+
+    <label class="ta-label">삭제 비밀번호 <span class="ta-req">*</span></label>
+    <input class="ta-input" id="f-pass" type="password" placeholder="나중에 삭제할 때 필요" />
+
+    <!-- 선택 항목 토글 -->
+    <div class="ta-optional-header" id="optional-toggle">
+      <span style="font-size:13px; color:#9090a8; font-weight:700;">선택 항목</span>
+      <span id="optional-arrow" style="color:#60607a; font-size:12px; transition:transform 0.2s;">▼</span>
+    </div>
+
+    <div class="ta-optional-body" id="optional-body">
+
+      <label class="ta-label">영상 링크</label>
+      <input class="ta-input" id="f-video" placeholder="https://..." />
+      <p style="color:#60607a; font-size:12px; margin:4px 0 0;">※ http/https 링크 입력 시 자동으로 영상 인증으로 등록됩니다.</p>
+
+      <label class="ta-label">특이사항</label>
+      <textarea class="ta-input" id="f-notes" rows="3" placeholder="예) 도핑/특이조건 등" style="resize:vertical;"></textarea>
+
+      <label class="ta-label">장비</label>
+      <div class="ta-equip-section">
+        <div class="ta-equip-slot-labels">
+          <span>글러브</span>
+          <span>방어구</span>
+          <span>부품 1</span>
+          <span>부품 2</span>
+        </div>
+        <div id="equip-grid" class="ta-equip-grid"></div>
+      </div>
+
+    </div>
+
+    <button id="btn-submit" class="ta-submit-btn" style="width:100%; margin-top:8px; padding:12px; font-size:14px; letter-spacing:0.5px;">저장</button>
+    <div id="submit-msg" style="margin-top:10px; color:#60607a; font-size:13px;"></div>
+
+  </div>
+  </div>
+</div>
+
+<div class="side-ad left-ad"></div>
+<div class="side-ad right-ad"></div>
+
+<footer>
+© 2026 Endfield Tool |
+<a href="./privacy.html" style="color:#888;">개인정보처리방침</a> |
+<a href="https://open.kakao.com/o/sgkYrigi" style="color:#888;">문의하기</a>
+</footer>
+
+<script type="module" src="./submit.js"></script>
+</body>
+</html>

@@ -508,6 +508,7 @@ function renderRegionSummary({ place, PRIMARY_STATS, WEAPONS_6, WEAPONS_5, STATE
   // ---- 기본 상태(없으면 생성) ----
   if (typeof STATE.regionShow5Star !== 'boolean') STATE.regionShow5Star = false;  // 5성 표시(기본: 숨김)
   if (typeof STATE.regionHideOwned !== 'boolean') STATE.regionHideOwned = true;   // 종결(보유) 숨김(기본: 숨김 ON)
+  if (typeof STATE.regionHide1Opt !== 'boolean') STATE.regionHide1Opt = false;    // 1옵 일치 숨기기(기본: 표시)
 
   // 5성 표시 여부에 따라 후보 무기 구성
   const candidates = STATE.regionShow5Star ? [...WEAPONS_6, ...WEAPONS_5] : [...WEAPONS_6];
@@ -552,6 +553,7 @@ function renderRegionSummary({ place, PRIMARY_STATS, WEAPONS_6, WEAPONS_5, STATE
         <div class="region-summary-btns">
           <button class="toggle-btn region-toggle-5star"></button>
           <button class="toggle-btn region-toggle-owned"></button>
+          <button class="toggle-btn region-toggle-1opt"></button>
         </div>
       </div>
 
@@ -593,8 +595,9 @@ function selectRegionFactory(deps) {
       const box = document.getElementById('region-summary-box');
       if (!box) return;
 
-      const btn5 = box.querySelector('.region-toggle-5star');
+      const btn5     = box.querySelector('.region-toggle-5star');
       const btnOwned = box.querySelector('.region-toggle-owned');
+      const btn1Opt  = box.querySelector('.region-toggle-1opt');
 
       const applyBtnState = () => {
         if (btn5) {
@@ -604,6 +607,11 @@ function selectRegionFactory(deps) {
         if (btnOwned) {
           btnOwned.textContent = STATE.regionHideOwned ? '종결 숨김' : '종결 표시';
           btnOwned.style.background = STATE.regionHideOwned ? 'var(--red)' : 'var(--green)';
+        }
+        if (btn1Opt) {
+          btn1Opt.textContent = STATE.regionHide1Opt ? '1옵 숨김' : '1옵 포함';
+          btn1Opt.style.background = STATE.regionHide1Opt ? 'var(--red)' : 'var(--green)';
+          btn1Opt.style.color = '#000';
         }
       };
 
@@ -616,6 +624,12 @@ function selectRegionFactory(deps) {
       if (btnOwned) {
         btnOwned.onclick = () => {
           STATE.regionHideOwned = !STATE.regionHideOwned;
+          refreshRegionUI();
+        };
+      }
+      if (btn1Opt) {
+        btn1Opt.onclick = () => {
+          STATE.regionHide1Opt = !STATE.regionHide1Opt;
           refreshRegionUI();
         };
       }
@@ -716,6 +730,7 @@ function updateRegionResultsFactory(deps) {
         };
       })
       .filter(m => !STATE.regionHideOwned || !m.isOwned)
+      .filter(m => !STATE.regionHide1Opt || m.matchCount >= 2)
       .sort((a,b) => {
         if (a.isOwned !== b.isOwned) return a.isOwned ? 1 : -1;
         return b.matchCount - a.matchCount;
