@@ -140,13 +140,13 @@ function renderCard(run, rank, isFirst) {
     : `<span class="ta-novideo">영상 없음</span>`;
 
   const rankBadge = isFirst
-    ? `<span class="ta-rank rank-1">👑 1위</span>`
+    ? `<span class="ta-rank gold">👑 1위</span>`
     : `<span class="ta-rank">${rank}위</span>`;
 
   const bossBadge = `<span class="ta-boss-badge boss-${run.boss}">${run.boss || '-'}</span>`;
 
   return `
-    <div class="ta-record ${isFirst ? 'record-first' : ''}" data-id="${run.id}">
+    <div class="ta-record ${isFirst ? 'is-first' : ''}" data-id="${run.id}">
       <div class="ta-record-top">
         <div class="ta-record-left">
           ${rankBadge}

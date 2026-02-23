@@ -197,13 +197,13 @@
 /* 순위 */
 .ta-rank {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #60607a;
-  min-width: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #a0a0b8;
+  min-width: 34px;
   letter-spacing: 0.5px;
 }
-.ta-rank.gold { color: var(--gold); font-size: 13px; }
+.ta-rank.gold { color: var(--gold); font-size: 16px; }
 
 /* 시간 */
 .ta-time {
@@ -254,7 +254,7 @@
   gap: 6px;
   margin-top: 10px;
 }
-.ta-record-title { margin-top: 6px; font-size: 12px; color: #60607a; }
+.ta-record-title { margin-top: 6px; font-size: 13px; color: #a0a0b8; font-weight: 500; }
 
 /* ---- 캐릭터 아이콘 ---- */
 .char-icon {
@@ -473,7 +473,14 @@ select.ta-input option { background: var(--panel2); }
 }
 .eq-table { display: flex; flex-direction: column; gap: 8px; }
 .eq-row { display: grid; grid-template-columns: 70px repeat(4, 1fr); gap: 8px; align-items: center; }
-.eq-member-label { font-size: 12px; color: #60607a; text-align: right; padding-right: 6px; }
+.eq-member-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: right;
+  padding-right: 8px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
 .eq-cell {
   display: flex; flex-direction: column; align-items: center; gap: 6px;
   background: rgba(0,0,0,0.2);

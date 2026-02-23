@@ -57,7 +57,7 @@ function renderPartyCards(partyStr) {
 
 // 장비 섹션 렌더
 // equipment: JSON 문자열 또는 배열 [{glove,armor,part1,part2}, ...]
-function buildEquipHTML(equipRaw) {
+function buildEquipHTML(equipRaw, partyStr) {
   if (!equipRaw) return '';
   let equip;
   try {
@@ -68,16 +68,21 @@ function buildEquipHTML(equipRaw) {
   const hasAny = equip.some(e => e && Object.values(e).some(v => v));
   if (!hasAny) return '';
 
+  // 파티 문자열("이본 / 질베르타 / 자이히 / 펠리카") → 이름 배열
+  const memberNames = (partyStr || '')
+    .split('/')
+    .map(s => s.trim())
+    .filter(Boolean);
+
   const slotKeys   = ['glove', 'armor', 'part1', 'part2'];
   const slotLabels = ['글러브', '방어구', '부품 1', '부품 2'];
 
-  // 헤더: 빈 라벨칸 + 4슬롯 이름
   const headerCols = slotLabels.map(l =>
     `<div class="eq-slot-title">${l}</div>`
   ).join('');
 
-  // 파티별 행
   const rows = equip.map((memberEquip, idx) => {
+    const label = memberNames[idx] || `파티 ${idx + 1}`;
     const cells = slotKeys.map(key => {
       const itemName = (memberEquip && memberEquip[key]) ? memberEquip[key] : '';
       if (!itemName) {
@@ -91,7 +96,7 @@ function buildEquipHTML(equipRaw) {
     }).join('');
 
     return `<div class="eq-row">
-      <div class="eq-member-label">파티 ${idx + 1}</div>
+      <div class="eq-member-label">${esc(label)}</div>
       ${cells}
     </div>`;
   }).join('');
@@ -127,7 +132,7 @@ async function loadDetail() {
       ? `<p><a class="video" href="${esc(current.video_url)}" target="_blank" rel="noopener">영상 보기</a></p>`
       : `<p class="novideo">영상 없음</p>`;
 
-    const equipHTML = buildEquipHTML(current.equipment);
+    const equipHTML = buildEquipHTML(current.equipment, current.party);
 
     detailEl.innerHTML = `
       <div class="ta-detail-actions">
