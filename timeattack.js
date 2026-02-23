@@ -36,7 +36,7 @@ const CATEGORY_MAP = {
   '보스': [
     { label: '전체', value: '' },
     { label: '로댄', value: '로댄' },
-    { label: '트라이겔로스', value: '트라이겔로스' },
+    { label: '트리아겔로스', value: '트리아겔로스' },
     { label: '마블 아겔로미레', value: '마블 아겔로미레' },
   ],
   '그림자 이정표': [
