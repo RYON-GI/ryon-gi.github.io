@@ -52,7 +52,7 @@
   background-clip: text;
   margin: 0;
 }
-.ta-subtitle { font-size: 12px; color: #60607a; margin: 2px 0 0; }
+.ta-subtitle { font-size: 12px; color: #8080a0; margin: 2px 0 0; }
 
 .ta-submit-btn {
   background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -100,13 +100,13 @@
   font-family: 'Noto Sans KR', sans-serif;
   padding: 10px 0;
 }
-.ta-search-wrap input::placeholder { color: #404055; }
+.ta-search-wrap input::placeholder { color: #606080; }
 .ta-search-clear {
   background: none;
   border: none;
-  color: #60607a;
+  color: #a0a0b8;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   padding: 2px 4px;
   transition: color 0.15s;
   transform: none;
@@ -129,15 +129,15 @@
   background: var(--panel2);
   border: 1px solid var(--border);
   border-radius: 20px;
-  color: #60607a;
+  color: #a0a0b8;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 700;
   transition: all 0.15s;
   transform: none;
 }
-.ta-boss-tab:hover { color: #a0a0b8; border-color: var(--border2); filter: none; transform: none; }
+.ta-boss-tab:hover { color: #d0d0e0; border-color: var(--border2); filter: none; transform: none; }
 .ta-boss-tab.active {
   background: rgba(74,222,128,0.1);
   border-color: var(--primary);
@@ -199,7 +199,7 @@
   font-family: 'Rajdhani', sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: #a0a0b8;
+  color: #c0c0d8;
   min-width: 34px;
   letter-spacing: 0.5px;
 }
@@ -217,13 +217,13 @@
 
 /* 보스 뱃지 */
 .ta-boss-badge {
-  font-size: 11px;
+  font-size: 12px;
   padding: 3px 9px;
   border-radius: 20px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.06);
   border: 1px solid var(--border2);
-  color: #9090a8;
-  font-weight: 500;
+  color: #b0b0cc;
+  font-weight: 600;
 }
 
 /* 영상 */
@@ -244,8 +244,8 @@
   border-color: var(--primary);
 }
 
-.ta-novideo { font-size: 11px; color: #404055; }
-.ta-date    { font-size: 11px; color: #404055; white-space: nowrap; }
+.ta-novideo { font-size: 12px; color: #7878a0; }
+.ta-date    { font-size: 12px; color: #7878a0; white-space: nowrap; }
 
 /* 파티 */
 .ta-party {
@@ -254,7 +254,7 @@
   gap: 6px;
   margin-top: 10px;
 }
-.ta-record-title { margin-top: 6px; font-size: 13px; color: #a0a0b8; font-weight: 500; }
+.ta-record-title { margin-top: 6px; font-size: 13px; color: #c8c8dc; font-weight: 500; }
 
 /* ---- 캐릭터 아이콘 ---- */
 .char-icon {
@@ -307,7 +307,7 @@
   background: transparent;
   border: 1px dashed var(--border2);
   border-radius: var(--radius-sm);
-  color: #60607a;
+  color: #9090b0;
   cursor: pointer;
   font-size: 12px;
   font-family: 'Noto Sans KR', sans-serif;
@@ -357,7 +357,7 @@
 
 /* ---- 제출 폼 ---- */
 .ta-form { display: flex; flex-direction: column; gap: 6px; }
-.ta-label { font-size: 12px; color: #9090a8; font-weight: 700; margin-top: 10px; }
+.ta-label { font-size: 13px; color: #b8b8cc; font-weight: 700; margin-top: 10px; }
 .ta-req { color: var(--red); }
 .ta-input {
   width: 100%;
@@ -373,8 +373,9 @@
   outline: none;
 }
 .ta-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(74,222,128,0.1); }
-.ta-input::placeholder { color: #404055; }
-select.ta-input option { background: var(--panel2); }
+.ta-input::placeholder { color: #606080; }
+select.ta-input option { background: #1a1a22; color: var(--text); }
+select.ta-input optgroup { background: #111118; color: #9090b8; font-size: 11px; }
 
 .ta-optional-header {
   display: flex;
@@ -409,8 +410,8 @@ select.ta-input option { background: var(--panel2); }
 }
 .ta-equip-slot-labels span {
   text-align: center;
-  font-size: 11px;
-  color: #60607a;
+  font-size: 12px;
+  color: #9090b8;
   background: rgba(0,0,0,0.2);
   padding: 4px 0;
   border-radius: 4px;
@@ -418,7 +419,7 @@ select.ta-input option { background: var(--panel2); }
 .ta-equip-grid { display: flex; flex-direction: column; gap: 10px; }
 .ta-equip-row-wrap { display: flex; flex-direction: column; gap: 4px; }
 .ta-equip-row  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; align-items: start; }
-.ta-equip-member-label { grid-column: 1 / -1; font-size: 11px; color: #404055; margin: 6px 0 2px; }
+.ta-equip-member-label { grid-column: 1 / -1; font-size: 12px; color: #8080a0; margin: 6px 0 2px; }
 .ta-equip-cell { display: flex; flex-direction: column; gap: 3px; }
 .ta-equip-cell select {
   width: 100%;
@@ -452,7 +453,7 @@ select.ta-input option { background: var(--panel2); }
   border-radius: 3px;
   border: 1px solid var(--border2);
 }
-.ta-equip-preview span { font-size: 9px; color: #60607a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ta-equip-preview span { font-size: 10px; color: #8888a8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* ---- 상세 페이지 장비 ---- */
 .eq-header-row {

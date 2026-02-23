@@ -32,9 +32,31 @@ const supabase = createClient(
   'sb_publishable_A3e_7cRzFpdv9FAq0hEJCQ_ChyKV6at'
 );
 
+const CATEGORY_MAP = {
+  '보스': [
+    { label: '전체', value: '' },
+    { label: '로댄', value: '로댄' },
+    { label: '트라이겔로스', value: '트라이겔로스' },
+    { label: '마블 아겔로미레', value: '마블 아겔로미레' },
+  ],
+  '그림자 이정표': [
+    { label: '전체', value: '' },
+    // 대지에게 버림받은 존재
+    { label: '독 안개 탈출', value: '독 안개 탈출', group: '대지에게 버림받은 존재' },
+    { label: '이단의 길', value: '이단의 길', group: '대지에게 버림받은 존재' },
+    { label: '활과 도끼의 연계', value: '활과 도끼의 연계', group: '대지에게 버림받은 존재' },
+    // 무기물
+    { label: '다가오는 위협', value: '다가오는 위협', group: '무기물' },
+    { label: '돌격의 방패', value: '돌격의 방패', group: '무기물' },
+    { label: '흔들림 없는 기반', value: '흔들림 없는 기반', group: '무기물' },
+  ],
+};
+
 const PAGE_SIZE = 20;
 
 let allRuns = [];
+let currentCategory = '';
+let currentGroup = '';   // 그림자 이정표 내 그룹 (대지에게 버림받은 존재 / 무기물)
 let currentBoss = '';
 let sortMode = 'time';
 let activeTab = 'ta-verified';
@@ -115,6 +137,17 @@ function updateTabCount() {
 
 function getFilteredData() {
   let data = allRuns.slice();
+  if (currentCategory === '보스') {
+    const bossList = CATEGORY_MAP['보스'].map(b => b.value).filter(Boolean);
+    data = data.filter(r => bossList.includes(r.boss));
+  } else if (currentCategory === '그림자 이정표') {
+    const allMilestone = CATEGORY_MAP['그림자 이정표'].map(b => b.value).filter(Boolean);
+    data = data.filter(r => allMilestone.includes(r.boss));
+    if (currentGroup) {
+      const groupItems = CATEGORY_MAP['그림자 이정표'].filter(b => b.group === currentGroup).map(b => b.value);
+      data = data.filter(r => groupItems.includes(r.boss));
+    }
+  }
   if (currentBoss) data = data.filter(r => r.boss === currentBoss);
   if (searchQuery)  data = data.filter(r => matchesSearch(r));
   if (sortMode === 'time') {
@@ -244,13 +277,62 @@ function showToast(msg) {
 }
 
 // ── 이벤트 ────────────────────────────────────────────
-// 보스 탭
-document.querySelectorAll('.ta-boss-tab').forEach(btn => {
+// 카테고리 탭
+function renderDetailTabs(category, group) {
+  const wrap = document.getElementById('detail-filter-wrap');
+  const tabsEl = document.getElementById('detail-tabs');
+  if (!category || !CATEGORY_MAP[category]) {
+    wrap.style.display = 'none';
+    tabsEl.innerHTML = '';
+    return;
+  }
+  // 보스: 전체 목록 / 그림자 이정표: 해당 그룹만
+  let items = CATEGORY_MAP[category];
+  if (group) items = items.filter(item => !item.group || item.group === group);
+
+  tabsEl.innerHTML = '';
+  items.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'ta-boss-tab' + (item.value === currentBoss ? ' active' : '');
+    btn.dataset.detail = item.value;
+    btn.textContent = item.label;
+    btn.addEventListener('click', () => {
+      tabsEl.querySelectorAll('.ta-boss-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentBoss = item.value;
+      verifiedPage = 1; unverifiedPage = 1;
+      renderRuns();
+    });
+    tabsEl.appendChild(btn);
+  });
+  wrap.style.display = 'flex';
+}
+
+// 일반 카테고리 탭 (전체, 보스)
+document.querySelectorAll('#category-tabs .ta-boss-tab').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.ta-boss-tab').forEach(b => b.classList.remove('active'));
+    // 모든 탭 active 해제
+    document.querySelectorAll('#category-tabs .ta-boss-tab, #milestone-tabs .ta-boss-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentBoss = btn.dataset.boss;
+    currentCategory = btn.dataset.category;
+    currentGroup = '';
+    currentBoss = '';
     verifiedPage = 1; unverifiedPage = 1;
+    renderDetailTabs(currentCategory, '');
+    renderRuns();
+  });
+});
+
+// 그림자 이정표 그룹 탭 (대지에게 버림받은 존재, 무기물)
+document.querySelectorAll('#milestone-tabs .ta-boss-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#category-tabs .ta-boss-tab, #milestone-tabs .ta-boss-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCategory = btn.dataset.category;
+    currentGroup = btn.dataset.group;
+    currentBoss = '';
+    verifiedPage = 1; unverifiedPage = 1;
+    renderDetailTabs(currentCategory, currentGroup);
     renderRuns();
   });
 });

@@ -41,15 +41,29 @@
     <button id="search-clear" class="ta-search-clear hidden">✕</button>
   </div>
 
-  <!-- 보스 필터 + 정렬 -->
-  <div class="ta-filter-bar">
-    <div class="ta-boss-tabs">
-      <button class="ta-boss-tab active" data-boss="">전체</button>
-      <button class="ta-boss-tab" data-boss="로댄">로댄</button>
-      <button class="ta-boss-tab" data-boss="트라이겔로스">트라이겔로스</button>
-      <button class="ta-boss-tab" data-boss="마블 아겔로미레">마블 아겔로미레</button>
+  <!-- 카테고리 + 그림자 이정표 필터 -->
+  <div class="ta-filter-bar" style="margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+      <!-- 일반 카테고리 탭 -->
+      <div class="ta-boss-tabs" id="category-tabs">
+        <button class="ta-boss-tab active" data-category="">전체</button>
+        <button class="ta-boss-tab" data-category="보스">보스</button>
+      </div>
+      <!-- 그림자 이정표 라벨 + 버튼 -->
+      <div style="display:flex; align-items:center; gap:6px; padding-left:8px; border-left:1px solid var(--border2);">
+        <span style="font-size:13px; color:#b0b0cc; font-weight:700; white-space:nowrap; letter-spacing:0.3px;">그림자 이정표</span>
+        <div class="ta-boss-tabs" id="milestone-tabs">
+          <button class="ta-boss-tab" data-category="그림자 이정표" data-group="대지에게 버림받은 존재">대지에게 버림받은 존재</button>
+          <button class="ta-boss-tab" data-category="그림자 이정표" data-group="무기물">무기물</button>
+        </div>
+      </div>
     </div>
     <button id="btn-sort" class="sub-tab" data-mode="time">⏱ 기록순</button>
+  </div>
+
+  <!-- 세부 필터 (보스 또는 그림자 이정표 그룹 선택 시) -->
+  <div class="ta-filter-bar" id="detail-filter-wrap" style="margin-bottom:14px; display:none;">
+    <div class="ta-boss-tabs" id="detail-tabs"></div>
   </div>
 
   <!-- 인증 탭 -->

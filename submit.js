@@ -6,7 +6,11 @@ const supabase = createClient(
   'sb_publishable_A3e_7cRzFpdv9FAq0hEJCQ_ChyKV6at'
 );
 
-const BOSS_LIST = ["로댄", "트라이겔로스", "마블 아겔로미레"];
+const BOSS_LIST = [
+  { group: '보스', items: ["로댄", "트라이겔로스", "마블 아겔로미레"] },
+  { group: '그림자 이정표 — 대지에게 버림받은 존재', items: ["독 안개 탈출", "이단의 길", "활과 도끼의 연계"] },
+  { group: '그림자 이정표 — 무기물', items: ["다가오는 위협", "돌격의 방패", "흔들림 없는 기반"] },
+];
 
 const PARTY_LIST = [
   "레바테인","질베르타","이본","관리자(남)","관리자(여)","포그라니치니크","엠버","라스트 라이트","여풍","아델리아",
@@ -23,12 +27,17 @@ function initBossSelect() {
   if (!el) return;
   el.innerHTML = '';
   const ph = document.createElement('option');
-  ph.value = ''; ph.textContent = '보스 선택'; ph.disabled = true; ph.selected = true;
+  ph.value = ''; ph.textContent = '보스/컨텐츠 선택'; ph.disabled = true; ph.selected = true;
   el.appendChild(ph);
-  BOSS_LIST.forEach(name => {
-    const opt = document.createElement('option');
-    opt.value = name; opt.textContent = name;
-    el.appendChild(opt);
+  BOSS_LIST.forEach(({ group, items }) => {
+    const og = document.createElement('optgroup');
+    og.label = group;
+    items.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name; opt.textContent = name;
+      og.appendChild(opt);
+    });
+    el.appendChild(og);
   });
 }
 

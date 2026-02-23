@@ -23,7 +23,7 @@
 
   <div style="max-width:640px; margin:0 auto;">
   <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
-    <a href="./timeattack.html" style="color:#60607a; font-size:13px; text-decoration:none; transition:color 0.2s;"
+    <a href="./timeattack.html" style="color:#9090b0; font-size:13px; text-decoration:none; transition:color 0.2s;"
        onmouseover="this.style.color='#4ade80'" onmouseout="this.style.color='#60607a'">← 목록으로</a>
     <h2 style="font-family:'Rajdhani',sans-serif; font-size:20px; letter-spacing:1px; color:var(--primary); margin:0;">기록 제출</h2>
   </div>
@@ -34,19 +34,19 @@
     <label class="ta-label">제목 <span class="ta-req">*</span></label>
     <input class="ta-input" id="f-title" placeholder="예) 로댄 60초 컷" />
 
-    <label class="ta-label">보스 <span class="ta-req">*</span></label>
+    <label class="ta-label">보스 / 컨텐츠 <span class="ta-req">*</span></label>
     <select class="ta-input" id="f-boss" required></select>
 
     <label class="ta-label">클리어 시간 <span class="ta-req">*</span></label>
     <div style="display:flex; gap:10px; align-items:center;">
       <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
         <input class="ta-input" id="f-time-min" type="number" min="0" max="59" placeholder="0" style="text-align:center;" />
-        <span style="color:#60607a; font-size:11px;">분 (선택)</span>
+        <span style="color:#9090b8; font-size:12px;">분 (선택)</span>
       </div>
       <span style="font-size:20px; color:#404055; padding-bottom:18px;">:</span>
       <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
         <input class="ta-input" id="f-time-sec" type="number" min="0" max="59.99" step="0.01" placeholder="예) 45.32" style="text-align:center;" />
-        <span style="color:#60607a; font-size:11px;">초 (필수)</span>
+        <span style="color:#9090b8; font-size:12px;">초 (필수)</span>
       </div>
     </div>
 
@@ -64,15 +64,15 @@
 
     <!-- 선택 항목 토글 -->
     <div class="ta-optional-header" id="optional-toggle">
-      <span style="font-size:13px; color:#9090a8; font-weight:700;">선택 항목</span>
-      <span id="optional-arrow" style="color:#60607a; font-size:12px; transition:transform 0.2s;">▼</span>
+      <span style="font-size:13px; color:#b8b8cc; font-weight:700;">선택 항목</span>
+      <span id="optional-arrow" style="color:#9090b0; font-size:12px; transition:transform 0.2s;">▼</span>
     </div>
 
     <div class="ta-optional-body" id="optional-body">
 
       <label class="ta-label">영상 링크</label>
       <input class="ta-input" id="f-video" placeholder="https://..." />
-      <p style="color:#60607a; font-size:12px; margin:4px 0 0;">※ http/https 링크 입력 시 자동으로 영상 인증으로 등록됩니다.</p>
+      <p style="color:#8888aa; font-size:12px; margin:4px 0 0;">※ http/https 링크 입력 시 자동으로 영상 인증으로 등록됩니다.</p>
 
       <label class="ta-label">특이사항</label>
       <textarea class="ta-input" id="f-notes" rows="3" placeholder="예) 도핑/특이조건 등" style="resize:vertical;"></textarea>
