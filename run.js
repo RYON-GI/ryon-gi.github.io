@@ -164,7 +164,7 @@ async function loadDetail() {
         p_run_id: Number(id), p_password: pw
       });
       if (error) { alert('삭제 실패(서버 오류): ' + error.message); return; }
-      if (!ok)   { alert('비밀번호가 틀렸거나, 이미 삭제된 기록입니다.'); return; }
+      if (!ok)   { alert('비밀번호가 틀렸거나, 이미 삭제된 기록이야.'); return; }
       alert('삭제 완료!');
       location.href = './timeattack.html';
     });
@@ -215,20 +215,23 @@ async function loadDetail() {
       const newVideo = document.getElementById('e-video').value.trim();
       const newNotes = document.getElementById('e-notes').value.trim();
       if (!newTitle || !newBoss || !newTime || !newParty) {
-        alert('제목/보스/시간/파티는 필수입니다.'); return;
+        alert('제목/보스/시간/파티는 필수야.'); return;
       }
-      const pw = prompt('수정 비밀번호를 입력해 주세요.');
+      const pw = prompt('수정 비밀번호를 입력해줘');
       if (!pw) return;
+      const newVerified = /^https?:\/\//i.test(newVideo);
       const { data: ok, error } = await supabase.rpc('update_run_by_password', {
         p_run_id: Number(id), p_password: pw,
         p_title: newTitle, p_boss: newBoss, p_clear_time: newTime,
-        p_party: newParty, p_video_url: newVideo, p_notes: newNotes
+        p_party: newParty, p_video_url: newVideo, p_notes: newNotes,
+        p_verified: newVerified
       });
       if (error) { alert('수정 실패(서버 오류): ' + error.message); return; }
-      if (!ok)   { alert('비밀번호가 틀렸거나, 기록이 없습니다.'); return; }
+      if (!ok)   { alert('비밀번호가 틀렸거나, 기록이 없어.'); return; }
       current = { ...current,
         title: newTitle, boss: newBoss, clear_time: newTime,
-        party: newParty, video_url: newVideo, notes: newNotes
+        party: newParty, video_url: newVideo, notes: newNotes,
+        verified: newVerified
       };
       alert('수정 완료!');
       renderViewMode();
