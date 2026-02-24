@@ -2,8 +2,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 import { EQUIPMENT_MAP } from './equipment_db.js'
 
 const CHAR_DATA = {
-  "관리자(남)":    { s: "6성 캐릭터/관리자(남).png",    c: "#ff7100" },
-  "관리자(여)":    { s: "6성 캐릭터/관리자(여).png",    c: "#ff7100" },
+  "관리자":    { s: "6성 캐릭터/관리자.png",    c: "#ff7100" },
   "라스트 라이트": { s: "6성 캐릭터/라스트 라이트.png", c: "#ff7100" },
   "레바테인":      { s: "6성 캐릭터/레바테인.png",      c: "#ff7100" },
   "아델리아":      { s: "6성 캐릭터/아델리아.png",      c: "#ff7100" },
