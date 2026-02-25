@@ -204,7 +204,7 @@ const isWindowMode = (presetKey !== "BASE");
 const ratio = vw / vh;
 let modeKey;
 if (ratio >= 2.2) modeKey = 'WIDE';         // 21:9
-else if (ratio >= 1.6) modeKey = 'DEFAULT'; // 16:9
+else if (ratio >= 1.65) modeKey = 'DEFAULT'; // 16:9
 else modeKey = 'TALL';                      // 16:10
 
 const badge = document.getElementById('screen-mode-badge');
