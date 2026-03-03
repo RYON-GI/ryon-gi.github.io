@@ -1,0 +1,152 @@
+[
+  {
+    "name_en": "Marble Aggelomoirai (palecore)",
+    "name_ko": "마블 아겔로미레",
+    "type": "Boss",
+    "hp": {
+      "level1": 2077,
+      "level20": 14903,
+      "level40": 94303,
+      "level60": 371256,
+      "level80": 893035,
+      "level90": 1375745
+    },
+    "atk": {
+      "level1": 33,
+      "level20": 155,
+      "level40": 482,
+      "level60": 1198,
+      "level80": 1802,
+      "level90": 2065
+    },
+    "def": {
+      "level1": 100,
+      "level20": 100,
+      "level40": 100,
+      "level60": 100,
+      "level80": 100,
+      "level90": 100
+    },
+    "res": 0
+  },
+  {
+    "name_en": "Marble Aggelomoirai (palesent)",
+    "name_ko": "마블 아겔로미레",
+    "type": "Boss",
+    "hp": {
+      "level1": 4430,
+      "level20": 31794,
+      "level40": 201179,
+      "level60": 792012,
+      "level80": 1905141,
+      "level90": 2934923
+    },
+    "atk": {
+      "level1": 78,
+      "level20": 369,
+      "level40": 1148,
+      "level60": 2850,
+      "level80": 4289,
+      "level90": 4914
+    },
+    "def": {
+      "level1": 100,
+      "level20": 100,
+      "level40": 100,
+      "level60": 100,
+      "level80": 100,
+      "level90": 100
+    },
+    "res": 0
+  },
+  {
+    "name_en": "Marble Appendage",
+    "name_ko": "마블 부속체",
+    "type": "Boss",
+    "hp": {
+      "level1": 235,
+      "level20": 1689,
+      "level40": 10688,
+      "level60": 42076,
+      "level80": 101211,
+      "level90": 155918
+    },
+    "atk": {
+      "level1": 59,
+      "level20": 279,
+      "level40": 868,
+      "level60": 2156,
+      "level80": 3244,
+      "level90": 3717
+    },
+    "def": {
+      "level1": 100,
+      "level20": 100,
+      "level40": 100,
+      "level60": 100,
+      "level80": 100,
+      "level90": 100
+    },
+    "res": 0
+  },
+  {
+    "name_en": "Rhodagn the Bonekrushing Fist",
+    "name_ko": "'본 크러셔의 주먹' 로댄",
+    "type": "Boss",
+    "hp": {
+      "level1": 3461,
+      "level20": 24839,
+      "level40": 157171,
+      "level60": 618759,
+      "level80": 1488392,
+      "level90": 2292909
+    },
+    "atk": {
+      "level1": 66,
+      "level20": 310,
+      "level40": 965,
+      "level60": 2395,
+      "level80": 3604,
+      "level90": 4130
+    },
+    "def": {
+      "level1": 100,
+      "level20": 100,
+      "level40": 100,
+      "level60": 100,
+      "level80": 100,
+      "level90": 100
+    },
+    "res": 0
+  },
+  {
+    "name_en": "Triaggelos",
+    "name_ko": "트리아겔로스",
+    "type": "Boss",
+    "hp": {
+      "level1": 1385,
+      "level20": 9936,
+      "level40": 62869,
+      "level60": 247504,
+      "level80": 595357,
+      "level90": 917164
+    },
+    "atk": {
+      "level1": 66,
+      "level20": 310,
+      "level40": 965,
+      "level60": 2395,
+      "level80": 3604,
+      "level90": 4130
+    },
+    "def": {
+      "level1": 100,
+      "level20": 100,
+      "level40": 100,
+      "level60": 100,
+      "level80": 100,
+      "level90": 100
+    },
+    "res": 0
+  }
+]

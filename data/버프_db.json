@@ -1,0 +1,167 @@
+[
+  {
+    "name_en": "Ginseng Meat Stew",
+    "name_ko": "푹 삶은 갈비 미삼탕",
+    "rarity": 5,
+    "buff_effect": "Use this to grant ATK +180 and Critical Rate +11.44%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 공격력 +180 및 치명타 확률 +11.44%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Jakub's Legacy",
+    "name_ko": "제이콥의 유산",
+    "rarity": 4,
+    "buff_effect": "Use this to grant ATK +27%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 공격력 +27%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Kunst Tube",
+    "name_ko": "아츠가 부여된 금속 병",
+    "rarity": 4,
+    "buff_effect": "Use this to grant DMG Dealt +24.65% for all forms of DMG. Duration: 300s.",
+    "buff_effect_ko": "사용 시 주는 피해 +24.65% 모든 형태의 피해에 대해. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Perplexing Medication",
+    "name_ko": "혼란의 약제",
+    "rarity": 5,
+    "buff_effect": "Use this to grant Ultimate Gain Efficiency +23.76%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 궁극기 충전 효율 +23.76%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Fortifying Infusion",
+    "name_ko": "원기 회복 탕약",
+    "rarity": 4,
+    "buff_effect": "Use this to grant Critical Rate +9.1% and All Damage +18.19%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 치명타 확률 +9.1% 및 모든 피해 +18.19%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Pan-Fried Double Crisp",
+    "name_ko": "기름 폭발 볶음",
+    "rarity": 4,
+    "buff_effect": "Use this to grant DMG Reduction +29.12% against all forms of DMG. Duration: 300s.",
+    "buff_effect_ko": "사용 시 받는 피해 감소 +29.12% (모든 피해 대상). 지속 시간: 300초."
+  },
+  {
+    "name_en": "Wuling Flame-Boyance",
+    "name_ko": "무릉 볶음",
+    "rarity": 4,
+    "buff_effect": "Use this to grant DEF +42.92 and DMG Reduction +17.04% against all forms of DMG. Duration: 300s.",
+    "buff_effect_ko": "사용 시 방어력 +42.92 및 받는 피해 감소 +17.04% (모든 피해 대상). 지속 시간: 300초."
+  },
+  {
+    "name_en": "Simmered Xiranite Ball",
+    "name_ko": "삶은 식양 완자",
+    "rarity": 4,
+    "buff_effect": "Use this to grant Critical Rate +20.54%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 치명타 확률 +20.54%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Simple Pain Relief Salve",
+    "name_ko": "간편 진통 연고",
+    "rarity": 3,
+    "buff_effect": "Use this to grant DMG Reduction +12.17% against all forms of DMG. Duration: 300s.",
+    "buff_effect_ko": "사용 시 받는 피해 감소 +12.17% (모든 피해 대상). 지속 시간: 300초."
+  },
+  {
+    "name_en": "Superhot Slug Gratin",
+    "name_ko": "매운 원석충 구이",
+    "rarity": 3,
+    "buff_effect": "Use this to grant DEF +29.79%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 방어력 +29.79%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Old Man John's Burger",
+    "name_ko": "존 어르신의 햄버거",
+    "rarity": 3,
+    "buff_effect": "Use this to grant Physical DMG Dealt +20.61%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 Physical 주는 피해 +20.61%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Hazefyre Blossom",
+    "name_ko": "안갯불에 물든 꽃",
+    "rarity": 3,
+    "buff_effect": "Use this to grant DMG Reduction +16.64% against all forms of DMG. Duration: 300s.",
+    "buff_effect_ko": "사용 시 받는 피해 감소 +16.64% (모든 피해 대상). 지속 시간: 300초."
+  },
+  {
+    "name_en": "Kunst Vial",
+    "name_ko": "아츠가 부여된 병",
+    "rarity": 3,
+    "buff_effect": "Use this to grant DMG Dealt +18.08% for all forms of DMG. Duration: 300s.",
+    "buff_effect_ko": "사용 시 주는 피해 +18.08% 모든 형태의 피해에 대해. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Edible Denstack",
+    "name_ko": "식용 지옥의 용광로",
+    "rarity": 3,
+    "buff_effect": "Use this to grant ATK +6.65%, Critical Rate +3.33%, and All Damage +6.65%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 공격력 +6.65%, 치명타 확률 +3.33%, 및 모든 피해 +6.65%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Sod-Turning Meat Soup",
+    "name_ko": "개업일 고깃국",
+    "rarity": 3,
+    "buff_effect": "Use this to grant ATK +11.98%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 공격력 +11.98%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Bamboo Sprouts and Meat",
+    "name_ko": "죽순 고기볶음",
+    "rarity": 3,
+    "buff_effect": "Use this to grant Ultimate Gain Efficiency +21.1% and Treatment Received Bonus +35.45%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 궁극기 충전 효율 +21.1% 및 받는 치유량 보너스 +35.45%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Mystery Soda",
+    "name_ko": "신비한 탄산음료",
+    "rarity": 3,
+    "buff_effect": "Use this to grant DEF +18.1%, DMG Reduction +10.82% against all forms of DMG, and Treatment Bonus +12.13%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 방어력 +18.1%, 받는 피해 감소 +10.82% (모든 피해 대상), 및 치유량 보너스 +12.13%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Mini Sugar Painting",
+    "name_ko": "작은 설탕 그림",
+    "rarity": 3,
+    "buff_effect": "Use this to grant ATK +18.19% and Critical Rate +9.1%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 공격력 +18.19% 및 치명타 확률 +9.1%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Mini Honey Slugpudding",
+    "name_ko": "꿀벌레 푸딩",
+    "rarity": 2,
+    "buff_effect": "Use this for the entire team to instantly gain 8% Ultimate Energy.",
+    "tactical_effect": "Once equipped, item is automatically used if the holder's Ultimate Energy drops below 50%. Max uses per battle: 3.",
+    "buff_effect_ko": "사용 시 파티 전체가 즉시 획득: 8% 궁극기 에너지.",
+    "tactical_effect_ko": "장착 시, 보유자의 궁극기 에너지가 50% 미만으로 떨어지면 아이템이 자동으로 사용됩니다. 전투당 최대 사용 횟수: 3회."
+  },
+  {
+    "name_en": "Stew Meeting",
+    "name_ko": "고기들의 회의",
+    "rarity": 2,
+    "buff_effect": "Use this to instantly gain 20% Ultimate Energy.",
+    "tactical_effect": "Once equipped, item is automatically used if the holder's Ultimate Energy drops below 50%. Max uses per battle: 3.",
+    "buff_effect_ko": "사용 시 즉시 획득: 20% 궁극기 에너지.",
+    "tactical_effect_ko": "장착 시, 보유자의 궁극기 에너지가 50% 미만으로 떨어지면 아이템이 자동으로 사용됩니다. 전투당 최대 사용 횟수: 3회."
+  },
+  {
+    "name_en": "Seš'qa Style Fillet",
+    "name_ko": "세쉬카풍 스테이크",
+    "rarity": 2,
+    "buff_effect": "Use this to grant All Attributes +15. Duration: 300s.",
+    "buff_effect_ko": "사용 시 모든 스탯 +15. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Handmade Weirdrop",
+    "name_ko": "이상한 수제 사탕",
+    "rarity": 2,
+    "buff_effect": "Use this to grant DEF +17.88%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 방어력 +17.88%. 지속 시간: 300초."
+  },
+  {
+    "name_en": "Wuling Fried Rice",
+    "name_ko": "무릉 볶음밥",
+    "rarity": 5,
+    "buff_effect": "Use this to grant DEF +68.32%. Duration: 300s.",
+    "buff_effect_ko": "사용 시 방어력 +68.32%. 지속 시간: 300초."
+  }
+]

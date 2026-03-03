@@ -1,0 +1,1771 @@
+[
+  {
+    "id": "ENDMINISTRATOR",
+    "name": "관리자",
+    "weapon": "한손검",
+    "cycle": 3.327,
+    "sp_per_cycle": 20,
+    "stagger_per_cycle": 18,
+    "segments": [
+      {
+        "duration": 0.33,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.43,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.6,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.1,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.6,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.867,
+        "ticks": [
+          {
+            "offset": 0.6,
+            "sp": 20,
+            "stagger": 18
+          }
+        ]
+      }
+    ],
+    "skill_duration": 0.8,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 16,
+    "link_duration": 0.77,
+    "link_gauge_gain": 10,
+    "ult_duration": 1.83,
+    "ult_gauge_max": 80,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "POGRANICHNK",
+    "name": "포그라니치니크",
+    "weapon": "한손검",
+    "cycle": 3.23,
+    "sp_per_cycle": 20,
+    "stagger_per_cycle": 18,
+    "segments": [
+      {
+        "duration": 0.43,
+        "ticks": [
+          {
+            "offset": 0.27,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.67,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.47,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.67,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.5,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.1,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.37,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.5,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.83,
+        "ticks": [
+          {
+            "offset": 0.53,
+            "sp": 20,
+            "stagger": 18
+          }
+        ]
+      }
+    ],
+    "skill_duration": 1.5,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 18,
+    "link_duration": 2.2,
+    "link_gauge_gain": 10,
+    "link_sp_gain": 35,
+    "ult_sp_gain": 60,
+    "ult_duration": 3,
+    "ult_gauge_max": 90,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "ARDELIA",
+    "name": "아델리아",
+    "weapon": "아츠유닛",
+    "cycle": 4.797,
+    "sp_per_cycle": 18,
+    "stagger_per_cycle": 18,
+    "segments": [
+      {
+        "duration": 0.4,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.7,
+        "ticks": [
+          {
+            "offset": 0.267,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.53,
+        "ticks": [
+          {
+            "offset": 0.367,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 1.3,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 2.167,
+        "ticks": [
+          {
+            "offset": 2.167,
+            "sp": 18,
+            "stagger": 18
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1.57,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 18,
+    "link_duration": 0.77,
+    "link_gauge_gain": 10,
+    "ult_duration": 6.97,
+    "ult_gauge_max": 90,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "LASTRITE",
+    "name": "라스트 라이트",
+    "weapon": "양손검",
+    "cycle": 4.497,
+    "sp_per_cycle": 30,
+    "stagger_per_cycle": 25,
+    "segments": [
+      {
+        "duration": 0.7,
+        "ticks": [
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1,
+        "ticks": [
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.8,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.23,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.9,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.567,
+        "ticks": [
+          {
+            "offset": 0.7,
+            "sp": 30,
+            "stagger": 25
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 0.5,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 16,
+    "link_cooldown": 9,
+    "link_duration": 2.17,
+    "link_gauge_gain": 85,
+    "skill_sp_gain": 30,
+    "ult_duration": 4.67,
+    "ult_gauge_max": 240,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "GILBERTA",
+    "name": "질베르타",
+    "weapon": "아츠유닛",
+    "cycle": 3.564,
+    "sp_per_cycle": 16,
+    "stagger_per_cycle": 16,
+    "segments": [
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.767,
+        "ticks": [
+          {
+            "offset": 0.13,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.267,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.8,
+        "ticks": [
+          {
+            "offset": 0.233,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.333,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.467,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.367,
+        "ticks": [
+          {
+            "offset": 0.767,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.833,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.9,
+            "sp": 16,
+            "stagger": 16
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 4.1,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 20,
+    "link_duration": 1.77,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.13,
+    "ult_gauge_max": 90,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "YVONNE",
+    "name": "이본",
+    "weapon": "권총",
+    "cycle": 3.594,
+    "sp_per_cycle": 17,
+    "stagger_per_cycle": 17,
+    "segments": [
+      {
+        "duration": 0.567,
+        "ticks": [
+          {
+            "offset": 0.367,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.5,
+        "ticks": [
+          {
+            "offset": 0.467,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.53,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.83,
+        "ticks": [
+          {
+            "offset": 0.367,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.167,
+        "ticks": [
+          {
+            "offset": 0.7,
+            "sp": 17,
+            "stagger": 17
+          }
+        ]
+      }
+    ],
+    "skill_duration": 1.13,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 22,
+    "link_duration": 0.63,
+    "link_gauge_gain": 20,
+    "ult_duration": 2.13,
+    "ult_gauge_max": 200,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "LAEVATAIN",
+    "name": "레바테인",
+    "weapon": "한손검",
+    "cycle": 3.291,
+    "sp_per_cycle": 20,
+    "stagger_per_cycle": 18,
+    "segments": [
+      {
+        "duration": 0.367,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.567,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.43,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.76,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.167,
+        "ticks": [
+          {
+            "offset": 0.77,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.87,
+            "sp": 20,
+            "stagger": 18
+          }
+        ]
+      }
+    ],
+    "skill_duration": 2.2,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 10,
+    "link_duration": 1.37,
+    "link_gauge_gain": 30,
+    "ult_duration": 2.37,
+    "ult_gauge_max": 300,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "LIFENG",
+    "name": "여풍",
+    "weapon": "장병기",
+    "cycle": 3.16,
+    "sp_per_cycle": 21,
+    "stagger_per_cycle": 19,
+    "segments": [
+      {
+        "duration": 0.83,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.57,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.13,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.5,
+        "ticks": [
+          {
+            "offset": 0.37,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.2,
+        "ticks": [
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.8,
+            "sp": 21,
+            "stagger": 19
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 2.23,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 16,
+    "link_duration": 1.67,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.2,
+    "ult_gauge_max": 90,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "EMBER",
+    "name": "엠버",
+    "weapon": "양손검",
+    "cycle": 4.427,
+    "sp_per_cycle": 28,
+    "stagger_per_cycle": 25,
+    "segments": [
+      {
+        "duration": 0.83,
+        "ticks": [
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.2,
+        "ticks": [
+          {
+            "offset": 0.6,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.767,
+        "ticks": [
+          {
+            "offset": 0.87,
+            "sp": 28,
+            "stagger": 25
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1.7,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 19,
+    "link_duration": 1.27,
+    "link_gauge_gain": 10,
+    "ult_duration": 1.67,
+    "ult_gauge_max": 100,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "XAIHI",
+    "name": "자이히",
+    "weapon": "아츠유닛",
+    "cycle": 3.427,
+    "sp_per_cycle": 15,
+    "stagger_per_cycle": 15,
+    "segments": [
+      {
+        "duration": 0.467,
+        "ticks": [
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.6,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.5,
+        "ticks": [
+          {
+            "offset": 0.267,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.73,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.13,
+        "ticks": [
+          {
+            "offset": 0.63,
+            "sp": 15,
+            "stagger": 15
+          }
+        ]
+      }
+    ],
+    "skill_duration": 1,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 8,
+    "link_duration": 0.83,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.23,
+    "ult_gauge_max": 72,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "SNOWSHINE",
+    "name": "스노우샤인",
+    "weapon": "양손검",
+    "cycle": 4.134,
+    "sp_per_cycle": 25,
+    "stagger_per_cycle": 23,
+    "segments": [
+      {
+        "duration": 1.1,
+        "ticks": [
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.967,
+        "ticks": [
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 2.067,
+        "ticks": [
+          {
+            "offset": 0.7,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 1.3,
+            "sp": 25,
+            "stagger": 23
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 4.5,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 25,
+    "link_duration": 0.5,
+    "link_gauge_gain": 10,
+    "skill_sp_gain": 30,
+    "ult_duration": 2.37,
+    "ult_gauge_max": 80,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "ARCLIGHT",
+    "name": "아크라이트",
+    "weapon": "한손검",
+    "cycle": 3.327,
+    "sp_per_cycle": 17,
+    "stagger_per_cycle": 16,
+    "segments": [
+      {
+        "duration": 0.33,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.367,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.7,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.93,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1,
+        "ticks": [
+          {
+            "offset": 0.4,
+            "sp": 17,
+            "stagger": 16
+          }
+        ]
+      }
+    ],
+    "skill_duration": 1.2,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 3,
+    "link_duration": 0.9,
+    "link_gauge_gain": 5,
+    "link_sp_gain": 8,
+    "ult_duration": 2.57,
+    "ult_gauge_max": 76.5,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "AVYWENNA",
+    "name": "아비웨나",
+    "weapon": "장병기",
+    "cycle": 3.464,
+    "sp_per_cycle": 19,
+    "stagger_per_cycle": 17,
+    "segments": [
+      {
+        "duration": 0.3,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.5,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.367,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.767,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.6,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.53,
+        "ticks": [
+          {
+            "offset": 0.8,
+            "sp": 19,
+            "stagger": 17
+          }
+        ]
+      }
+    ],
+    "skill_duration": 1.13,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 13,
+    "link_duration": 0.7,
+    "link_gauge_gain": 10,
+    "ult_duration": 1.9,
+    "ult_gauge_max": 85,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "DAPAN",
+    "name": "판",
+    "weapon": "양손검",
+    "cycle": 3.627,
+    "sp_per_cycle": 21,
+    "stagger_per_cycle": 20,
+    "segments": [
+      {
+        "duration": 0.53,
+        "ticks": [
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.7,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.867,
+        "ticks": [
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.77,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.53,
+        "ticks": [
+          {
+            "offset": 1.07,
+            "sp": 21,
+            "stagger": 20
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 2.17,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 20,
+    "link_duration": 0.8,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.87,
+    "ult_gauge_max": 76.5,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "WULFGARD",
+    "name": "울프가드",
+    "weapon": "권총",
+    "cycle": 4.497,
+    "sp_per_cycle": 18,
+    "stagger_per_cycle": 18,
+    "segments": [
+      {
+        "duration": 0.83,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.467,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.8,
+        "ticks": [
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.53,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.1,
+        "ticks": [
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.6,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.8,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.767,
+        "ticks": [
+          {
+            "offset": 0.767,
+            "sp": 18,
+            "stagger": 18
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1.07,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 20,
+    "link_duration": 1,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.5,
+    "ult_gauge_max": 76.5,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "PERLICA",
+    "name": "펠리카",
+    "weapon": "아츠유닛",
+    "cycle": 3.527,
+    "sp_per_cycle": 15,
+    "stagger_per_cycle": 15,
+    "segments": [
+      {
+        "duration": 0.53,
+        "ticks": [
+          {
+            "offset": 0.267,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.9,
+        "ticks": [
+          {
+            "offset": 0.53,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.73,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.467,
+        "ticks": [
+          {
+            "offset": 0.9,
+            "sp": 15,
+            "stagger": 15
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 0.93,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 20,
+    "link_duration": 0.83,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.1,
+    "ult_gauge_max": 68,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "CHENQIANYU",
+    "name": "진천우",
+    "weapon": "한손검",
+    "cycle": 3.327,
+    "sp_per_cycle": 18,
+    "stagger_per_cycle": 16,
+    "segments": [
+      {
+        "duration": 0.5,
+        "ticks": [
+          {
+            "offset": 0.27,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.37,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.367,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.73,
+        "ticks": [
+          {
+            "offset": 0.13,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.1,
+        "ticks": [
+          {
+            "offset": 0.53,
+            "sp": 18,
+            "stagger": 16
+          }
+        ]
+      }
+    ],
+    "skill_duration": 0.83,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 16,
+    "link_duration": 0.77,
+    "link_gauge_gain": 10,
+    "ult_duration": 3.73,
+    "ult_gauge_max": 59.5,
+    "ult_gauge_reply": 0,
+    "execution_duration": 2.5
+  },
+  {
+    "id": "ALESH",
+    "name": "알레쉬",
+    "weapon": "한손검",
+    "cycle": 3.198,
+    "sp_per_cycle": 19,
+    "stagger_per_cycle": 17,
+    "segments": [
+      {
+        "duration": 0.43,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.367,
+        "ticks": [
+          {
+            "offset": 0.17,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.567,
+        "ticks": [
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.767,
+        "ticks": [
+          {
+            "offset": 0.5,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.067,
+        "ticks": [
+          {
+            "offset": 0.6,
+            "sp": 19,
+            "stagger": 17
+          },
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      }
+    ],
+    "skill_duration": 1.67,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 17,
+    "link_cooldown": 9,
+    "link_duration": 1.3,
+    "link_gauge_gain": 10,
+    "link_sp_gain": 10,
+    "ult_sp_gain": 20,
+    "ult_duration": 3.2,
+    "ult_gauge_max": 85,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "CATCHER",
+    "name": "카치르",
+    "weapon": "양손검",
+    "cycle": 3.957,
+    "sp_per_cycle": 25,
+    "stagger_per_cycle": 22,
+    "segments": [
+      {
+        "duration": 0.73,
+        "ticks": [
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.73,
+        "ticks": [
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.967,
+        "ticks": [
+          {
+            "offset": 0.53,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.53,
+        "ticks": [
+          {
+            "offset": 0.77,
+            "sp": 25,
+            "stagger": 22
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 3.17,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 15,
+    "link_duration": 0.8,
+    "link_gauge_gain": 10,
+    "skill_sp_gain": 30,
+    "ult_duration": 3.43,
+    "ult_gauge_max": 72,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "FLUORITE",
+    "name": "플루라이트",
+    "weapon": "권총",
+    "cycle": 3.694,
+    "sp_per_cycle": 15,
+    "stagger_per_cycle": 15,
+    "segments": [
+      {
+        "duration": 0.767,
+        "ticks": [
+          {
+            "offset": 0.43,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.53,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.63,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.767,
+        "ticks": [
+          {
+            "offset": 0.967,
+            "sp": 15,
+            "stagger": 15
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1.13,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 25,
+    "link_duration": 0.57,
+    "link_gauge_gain": 10,
+    "ult_duration": 2.57,
+    "ult_gauge_max": 72,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "ANTAL",
+    "name": "안탈",
+    "weapon": "아츠유닛",
+    "cycle": 3.297,
+    "sp_per_cycle": 15,
+    "stagger_per_cycle": 15,
+    "segments": [
+      {
+        "duration": 0.53,
+        "ticks": [
+          {
+            "offset": 0.267,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.7,
+        "ticks": [
+          {
+            "offset": 0.4,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.767,
+        "ticks": [
+          {
+            "offset": 0.467,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.6,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.3,
+        "ticks": [
+          {
+            "offset": 0.9,
+            "sp": 15,
+            "stagger": 15
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 15,
+    "link_duration": 0.8,
+    "link_gauge_gain": 10,
+    "ult_duration": 1.87,
+    "ult_gauge_max": 90,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "ESTELLA",
+    "name": "에스텔라",
+    "weapon": "장병기",
+    "cycle": 3.568,
+    "sp_per_cycle": 19,
+    "stagger_per_cycle": 17,
+    "segments": [
+      {
+        "duration": 0.467,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.567,
+        "ticks": [
+          {
+            "offset": 0.2,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.967,
+        "ticks": [
+          {
+            "offset": 0.23,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.6,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.567,
+        "ticks": [
+          {
+            "offset": 0.7,
+            "sp": 19,
+            "stagger": 17
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1.5,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 15,
+    "link_duration": 0.67,
+    "link_gauge_gain": 10,
+    "ult_duration": 2,
+    "ult_gauge_max": 63,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  },
+  {
+    "id": "AKEKURI",
+    "name": "아케쿠리",
+    "weapon": "한손검",
+    "cycle": 3.2,
+    "sp_per_cycle": 19,
+    "stagger_per_cycle": 17,
+    "segments": [
+      {
+        "duration": 0.5,
+        "ticks": [
+          {
+            "offset": 0.3,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.767,
+        "ticks": [
+          {
+            "offset": 0.27,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.53,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 0.733,
+        "ticks": [
+          {
+            "offset": 0.33,
+            "sp": 0,
+            "stagger": 0
+          }
+        ]
+      },
+      {
+        "duration": 1.2,
+        "ticks": [
+          {
+            "offset": 0.63,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.67,
+            "sp": 0,
+            "stagger": 0
+          },
+          {
+            "offset": 0.7,
+            "sp": 19,
+            "stagger": 17
+          }
+        ]
+      },
+      {
+        "duration": 0,
+        "ticks": []
+      }
+    ],
+    "skill_duration": 1.33,
+    "skill_sp_cost": 100,
+    "skill_gauge_gain": 6.5,
+    "link_cooldown": 15,
+    "link_duration": 1.27,
+    "link_gauge_gain": 10,
+    "link_sp_gain": 15,
+    "ult_duration": 4.3,
+    "ult_gauge_max": 108,
+    "ult_gauge_reply": 0,
+    "execution_duration": 1.5
+  }
+]

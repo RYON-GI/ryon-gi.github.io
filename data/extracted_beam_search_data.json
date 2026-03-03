@@ -1,0 +1,3155 @@
+[
+  {
+    "id": "ENDMINISTRATOR",
+    "name": "관리자",
+    "element": "physical",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 0.8,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.37,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "zqa9wpe"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "stagger",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "stagger",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.37,
+            "_id": "zqa9wpe"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.5
+      ]
+    },
+    "link": {
+      "duration": 0.77,
+      "cooldown": 16,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.77,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "4b1lhjx"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "endmin_debuff"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "endmin_debuff",
+            "stacks": 1,
+            "duration": 4,
+            "offset": 0.77,
+            "_id": "4b1lhjx"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.8
+      ]
+    },
+    "ultimate": {
+      "duration": 1.83,
+      "gaugeMax": 80,
+      "gaugeReply": 0,
+      "animationTime": 1.467,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.67,
+          "sp": 0,
+          "stagger": 25,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "default"
+      ],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "blaze_burst",
+        "burning",
+        "blaze_attach",
+        "knockup",
+        "break",
+        "ice_shatter",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "knockdown",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "stagger",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "POGRANICHNK",
+    "name": "포그라니치니크",
+    "element": "physical",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.5,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.93,
+          "sp": 0,
+          "stagger": 5,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.27,
+          "stagger": 5,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "armor_break",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [],
+      "anomaly_delays": [
+        1.5
+      ]
+    },
+    "link": {
+      "duration": 2.2,
+      "cooldown": 18,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.77,
+          "sp": 5,
+          "stagger": 3,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.23,
+          "stagger": 3,
+          "sp": 7,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.03,
+          "stagger": 9,
+          "sp": 23,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": [],
+      "anomaly_delays": [
+        0.7
+      ]
+    },
+    "ultimate": {
+      "duration": 3,
+      "gaugeMax": 90,
+      "gaugeReply": 0,
+      "animationTime": 2.47,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2.47,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.53,
+          "stagger": 0,
+          "sp": 7.5,
+          "boundEffects": [
+            "m9q4vrs"
+          ]
+        },
+        {
+          "offset": 2.53,
+          "stagger": 0,
+          "sp": 7.5,
+          "boundEffects": [
+            "dy0miki"
+          ]
+        },
+        {
+          "offset": 2.53,
+          "stagger": 0,
+          "sp": 7.5,
+          "boundEffects": [
+            "jnrk1xi"
+          ]
+        },
+        {
+          "offset": 2.53,
+          "stagger": 0,
+          "sp": 7.5,
+          "boundEffects": [
+            "vv7yqfc"
+          ]
+        },
+        {
+          "offset": 2.53,
+          "stagger": 15,
+          "sp": 30,
+          "boundEffects": [
+            "vkah20e"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "pograni_buff"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "pograni_buff",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.53,
+            "_id": "m9q4vrs"
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 2,
+            "duration": 0,
+            "offset": 2.53,
+            "_id": "dy0miki"
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 3,
+            "duration": 0,
+            "offset": 2.53,
+            "_id": "jnrk1xi"
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 4,
+            "duration": 0,
+            "offset": 2.53,
+            "_id": "vv7yqfc"
+          },
+          {
+            "type": "pograni_buff",
+            "stacks": 5,
+            "duration": 0,
+            "offset": 2.53,
+            "_id": "vkah20e"
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "knockup",
+        "break",
+        "ice_shatter",
+        "knockdown",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "stagger",
+        "armor_break",
+        "emag_attach",
+        "conductive",
+        "emag_burst"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "ARDELIA",
+    "name": "아델리아",
+    "element": "nature",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.57,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 1.07,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "spell_vulnerable",
+        "physical_vulnerable"
+      ],
+      "anomalies": [],
+      "anomaly_delays": [
+        1
+      ]
+    },
+    "link": {
+      "duration": 0.77,
+      "cooldown": 18,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.67,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.4,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": [
+            "gfmw370"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "corrosion",
+        "nature_attach",
+        "nature_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "corrosion",
+            "stacks": 1,
+            "duration": 10,
+            "offset": 2.4,
+            "_id": "gfmw370"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        2.6
+      ]
+    },
+    "ultimate": {
+      "duration": 6.97,
+      "gaugeMax": 90,
+      "gaugeReply": 0,
+      "animationTime": 2.5,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2.7,
+          "sp": 0,
+          "stagger": 2,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.8,
+          "stagger": 2,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 6.7,
+          "stagger": 2,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "corrosion",
+        "nature_attach",
+        "nature_burst",
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "knockup",
+        "break",
+        "ice_shatter",
+        "knockdown",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "stagger",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "LASTRITE",
+    "name": "라스트 라이트",
+    "element": "cold",
+    "accept_team_gauge": false,
+    "skill": {
+      "duration": 0.5,
+      "spCost": 100,
+      "gaugeGain": 16,
+      "teamGaugeGain": 0,
+      "damage_ticks": [
+        {
+          "offset": 0.2,
+          "stagger": 0,
+          "sp": 30,
+          "boundEffects": [
+            "wi0g4uk"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "lastrite_buff"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "lastrite_buff",
+            "stacks": 1,
+            "duration": 15,
+            "offset": 0,
+            "_id": "wi0g4uk"
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 2.17,
+      "cooldown": 9,
+      "gaugeGain": 85,
+      "damage_ticks": [
+        {
+          "offset": 0.43,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.1,
+          "stagger": 15,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "ultimate": {
+      "duration": 4.67,
+      "gaugeMax": 240,
+      "gaugeReply": 0,
+      "animationTime": 2.867,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2.87,
+          "sp": 0,
+          "stagger": 5,
+          "boundEffects": []
+        },
+        {
+          "offset": 3.5,
+          "stagger": 5,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 4.47,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "knockdown",
+        "break",
+        "ice_shatter",
+        "knockup",
+        "stagger",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "GILBERTA",
+    "name": "질베르타",
+    "element": "nature",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 4.1,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.97,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.53,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.067,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.6,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 3.6,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": [
+            "4epihyj"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "corrosion",
+        "nature_attach",
+        "nature_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "4epihyj",
+            "offset": 3.6
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        3.6
+      ]
+    },
+    "link": {
+      "duration": 1.77,
+      "cooldown": 20,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 1.6,
+          "sp": 0,
+          "stagger": 5,
+          "boundEffects": [
+            "rf28nuz"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockup",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "rf28nuz",
+            "offset": 1.6
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1.6
+      ]
+    },
+    "ultimate": {
+      "duration": 2.13,
+      "gaugeMax": 90,
+      "gaugeReply": 0,
+      "animationTime": 2,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2,
+          "sp": 0,
+          "stagger": 20,
+          "boundEffects": [
+            "i0pv4fq",
+            "lybx0u9",
+            "qse77jj"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "affix_slow",
+        "spell_vulnerable"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "affix_slow",
+            "stacks": 1,
+            "duration": 5,
+            "offset": 2,
+            "_id": "i0pv4fq"
+          }
+        ],
+        [
+          {
+            "type": "spell_vulnerable",
+            "stacks": 1,
+            "duration": 5,
+            "offset": 2,
+            "_id": "lybx0u9"
+          }
+        ],
+        [
+          {
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2,
+            "_id": "qse77jj"
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "blaze_burst",
+        "burning",
+        "blaze_attach",
+        "knockup",
+        "break",
+        "ice_shatter",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "knockdown",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "stagger",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "YVONNE",
+    "name": "이본",
+    "element": "cold",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.13,
+      "spCost": 100,
+      "gaugeGain": 16.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.17,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "gee3uz8"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "frozen",
+        "cold_attach",
+        "cold_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "frozen",
+            "stacks": 1,
+            "duration": 5,
+            "_id": "gee3uz8",
+            "offset": 0.17
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1
+      ]
+    },
+    "link": {
+      "duration": 0.63,
+      "cooldown": 22,
+      "gaugeGain": 20,
+      "damage_ticks": [
+        {
+          "offset": 0.63,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "k8ha3dm"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "cold_burst",
+        "frozen",
+        "cold_attach"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "frozen",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "k8ha3dm",
+            "offset": 0.63
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        4.2
+      ]
+    },
+    "ultimate": {
+      "duration": 2.13,
+      "gaugeMax": 200,
+      "gaugeReply": 0,
+      "animationTime": 2.03,
+      "enhancementTime": 7,
+      "damage_ticks": [],
+      "allowed_types": [
+        "frozen",
+        "cold_attach",
+        "cold_burst"
+      ],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "knockup",
+        "break",
+        "ice_shatter",
+        "knockdown",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "stagger",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "LAEVATAIN",
+    "name": "레바테인",
+    "element": "blaze",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 2.2,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.73,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": [
+            "devsn6j"
+          ]
+        },
+        {
+          "offset": 0.967,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.1,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.23,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.367,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.5,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.63,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.8,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.93,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.067,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "magma_1",
+        "magma_2",
+        "magma_3",
+        "magma_4",
+        "magma_0"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "devsn6j",
+            "type": "magma_1",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.73
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.7
+      ]
+    },
+    "link": {
+      "duration": 1.37,
+      "cooldown": 10,
+      "gaugeGain": 30,
+      "damage_ticks": [
+        {
+          "offset": 0.67,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "magma_1",
+        "magma_2",
+        "magma_3",
+        "magma_4",
+        "magma_0"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "magma_1",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.67,
+            "_id": "jdyz6ci"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1.3
+      ]
+    },
+    "ultimate": {
+      "duration": 2.37,
+      "gaugeMax": 300,
+      "gaugeReply": 0,
+      "animationTime": 2.07,
+      "enhancementTime": 15,
+      "damage_ticks": [],
+      "allowed_types": [
+        "magma_1",
+        "magma_2",
+        "magma_3",
+        "magma_4",
+        "blaze_attach",
+        "burning",
+        "blaze_burst",
+        "magma_0"
+      ],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "magma_1",
+        "magma_2",
+        "magma_3",
+        "magma_4",
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "blaze_burst",
+        "burning",
+        "blaze_attach",
+        "knockdown",
+        "break",
+        "ice_shatter",
+        "knockup",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "stagger",
+        "armor_break",
+        "magma_0"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "LIFENG",
+    "name": "여풍",
+    "element": "physical",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 2.23,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.23,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 0.67,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.8,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "knockdown",
+        "break",
+        "ice_shatter",
+        "physical_vulnerable"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.8,
+            "_id": "khsni9o"
+          }
+        ],
+        [
+          {
+            "type": "physical_vulnerable",
+            "stacks": 1,
+            "duration": 10,
+            "offset": 1.8,
+            "_id": "nx0mh4g"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1.9
+      ]
+    },
+    "link": {
+      "duration": 1.67,
+      "cooldown": 16,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.63,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.6,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "combo"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "combo",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 0.63,
+            "_id": "rk5enby"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.7
+      ]
+    },
+    "ultimate": {
+      "duration": 2.2,
+      "gaugeMax": 90,
+      "gaugeReply": 0,
+      "animationTime": 1.867,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2.13,
+          "sp": 0,
+          "stagger": 5,
+          "boundEffects": [
+            "dftx2lj"
+          ]
+        },
+        {
+          "offset": 4.13,
+          "stagger": 5,
+          "sp": 0,
+          "boundEffects": [
+            "glkyop9"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockdown",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 2,
+            "hideDuration": true,
+            "_id": "dftx2lj",
+            "offset": 2.13
+          },
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 1.9,
+            "hideDuration": true,
+            "_id": "glkyop9",
+            "offset": 4.13
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "EMBER",
+    "name": "엠버",
+    "element": "blaze",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.7,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.33,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.27,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": [
+            "48p1bap"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockdown",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "48p1bap",
+            "offset": 1.27
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1.6
+      ]
+    },
+    "link": {
+      "duration": 1.27,
+      "cooldown": 19,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.87,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "4vguv4b"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockdown",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "4vguv4b",
+            "offset": 0.87
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.9
+      ]
+    },
+    "ultimate": {
+      "duration": 1.67,
+      "gaugeMax": 100,
+      "gaugeReply": 0,
+      "animationTime": 1.63,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.67,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "XAIHI",
+    "name": "자이히",
+    "element": "cold",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "skill_seraph",
+        "spell_enhance"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "9cp6yf7",
+            "type": "skill_seraph",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 0.23
+          }
+        ],
+        [
+          {
+            "_id": "h2jfk92",
+            "type": "spell_enhance",
+            "stacks": 1,
+            "duration": 25,
+            "offset": 0.23
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 0.83,
+      "cooldown": 8,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.8,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "uacfsvo"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "cold_attach",
+        "frozen",
+        "cold_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "uacfsvo",
+            "offset": 0.8
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1
+      ]
+    },
+    "ultimate": {
+      "duration": 2.23,
+      "gaugeMax": 72,
+      "gaugeReply": 0,
+      "animationTime": 1.467,
+      "enhancementTime": 0,
+      "damage_ticks": [],
+      "allowed_types": [
+        "cryst_enhance",
+        "natural_enhance"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "b7krnwu",
+            "type": "cryst_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.93
+          }
+        ],
+        [
+          {
+            "_id": "ccqi41j",
+            "type": "natural_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.93
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "SNOWSHINE",
+    "name": "스노우샤인",
+    "element": "cold",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 4.5,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 3.57,
+          "sp": 30,
+          "stagger": 20,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "shelter"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "1mk3j18",
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3.57
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 0.5,
+      "cooldown": 25,
+      "gaugeGain": 10,
+      "damage_ticks": [],
+      "allowed_types": [
+        "combo_skill_aurora"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "hfzh79w",
+            "type": "combo_skill_aurora",
+            "stacks": 1,
+            "duration": 3,
+            "offset": 0.4
+          }
+        ]
+      ]
+    },
+    "ultimate": {
+      "duration": 2.37,
+      "gaugeMax": 80,
+      "gaugeReply": 0,
+      "animationTime": 1.983,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2.07,
+          "sp": 0,
+          "stagger": 15,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "frozen",
+        "cold_attach",
+        "cold_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "frozen",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "4ou6yn9",
+            "offset": 2.07
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "ARCLIGHT",
+    "name": "아크라이트",
+    "element": "emag",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.2,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.63,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 0.8,
+          "stagger": 5,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "link": {
+      "duration": 0.9,
+      "cooldown": 3,
+      "gaugeGain": 5,
+      "damage_ticks": [
+        {
+          "offset": 0.57,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 0.7,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 0.83,
+          "stagger": 5,
+          "sp": 8,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "ultimate": {
+      "duration": 2.57,
+      "gaugeMax": 76.5,
+      "gaugeReply": 0,
+      "animationTime": 1.9,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 2.03,
+          "sp": 0,
+          "stagger": 7,
+          "boundEffects": []
+        },
+        {
+          "offset": 3.9,
+          "stagger": 7,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "emag_attach",
+        "conductive",
+        "emag_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "emag_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.03,
+            "_id": "pjo8rk5"
+          },
+          {
+            "type": "conductive",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3.9,
+            "_id": "a9j5izi"
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "AVYWENNA",
+    "name": "아비웨나",
+    "element": "emag",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.13,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.6,
+          "sp": 0,
+          "stagger": 5,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "emag_burst",
+        "conductive",
+        "emag_attach"
+      ],
+      "anomalies": []
+    },
+    "link": {
+      "duration": 0.7,
+      "cooldown": 13,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.47,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "u4et5cu"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "Thunderlances"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "Thunderlances",
+            "stacks": 3,
+            "duration": 0,
+            "offset": 0.47,
+            "_id": "u4et5cu"
+          }
+        ]
+      ]
+    },
+    "ultimate": {
+      "duration": 1.9,
+      "gaugeMax": 85,
+      "gaugeReply": 0,
+      "animationTime": 1.53,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.7,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": [
+            "0e8kj85"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "Thunderlances EX"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "Thunderlances EX",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.7,
+            "_id": "0e8kj85"
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "DAPAN",
+    "name": "판",
+    "element": "physical",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 2.17,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 1.43,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "u1eh47y"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockup",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.43,
+            "_id": "u1eh47y"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        1.5
+      ]
+    },
+    "link": {
+      "duration": 0.8,
+      "cooldown": 20,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 1.76,
+          "sp": 0,
+          "stagger": 15,
+          "boundEffects": [
+            "r58y37u"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "stagger",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "stagger",
+            "stacks": 4,
+            "duration": 0,
+            "offset": 0.77,
+            "_id": "r58y37u"
+          }
+        ]
+      ]
+    },
+    "ultimate": {
+      "duration": 2.87,
+      "gaugeMax": 76.5,
+      "gaugeReply": 0,
+      "animationTime": 1.4,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.4,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": [
+            "vyen6bq"
+          ]
+        },
+        {
+          "offset": 2.67,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": [
+            "lzwjaou"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockdown",
+        "break",
+        "ice_shatter",
+        "knockup",
+        "dapan_buff"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.4,
+            "_id": "vyen6bq"
+          },
+          {
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.67,
+            "_id": "lzwjaou"
+          }
+        ],
+        [
+          {
+            "type": "dapan_buff",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 2.67,
+            "_id": "zpdszes"
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "WULFGARD",
+    "name": "울프가드",
+    "element": "blaze",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.07,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.2,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 0.53,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 0.767,
+          "stagger": 5,
+          "sp": 0,
+          "boundEffects": [
+            "ukuwp86"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "blaze_attach",
+        "burning",
+        "blaze_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "ukuwp86",
+            "offset": 0.767
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.9
+      ]
+    },
+    "link": {
+      "duration": 1,
+      "cooldown": 20,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.9,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "1944zas"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "blaze_attach",
+        "burning",
+        "blaze_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "1944zas",
+            "offset": 0.9
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.9
+      ]
+    },
+    "ultimate": {
+      "duration": 2.5,
+      "gaugeMax": 76.5,
+      "gaugeReply": 0,
+      "animationTime": 1.53,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.53,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.73,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.967,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.13,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.3,
+          "stagger": 15,
+          "sp": 0,
+          "boundEffects": [
+            "mvoxwl3"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "burning",
+        "blaze_attach",
+        "blaze_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "burning",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "mvoxwl3",
+            "offset": 2.3
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "PERLICA",
+    "name": "펠리카",
+    "element": "emag",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 0.93,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.43,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "ein5itj"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "emag_attach",
+        "conductive",
+        "emag_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "emag_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "ein5itj",
+            "offset": 0.43
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.5
+      ]
+    },
+    "link": {
+      "duration": 0.83,
+      "cooldown": 20,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.8,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "ufb12al"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "conductive",
+        "emag_attach",
+        "emag_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "conductive",
+            "stacks": 1,
+            "duration": 8.75,
+            "_id": "ufb12al",
+            "offset": 0.8
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.9
+      ]
+    },
+    "ultimate": {
+      "duration": 2.1,
+      "gaugeMax": 68,
+      "gaugeReply": 0,
+      "animationTime": 1.583,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.93,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "CHENQIANYU",
+    "name": "진천우",
+    "element": "physical",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 0.83,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.43,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "ovn2n9y"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockup",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.43,
+            "_id": "ovn2n9y"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.5
+      ]
+    },
+    "link": {
+      "duration": 0.77,
+      "cooldown": 16,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.57,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "0eap175"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockup",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.57,
+            "_id": "0eap175"
+          }
+        ]
+      ],
+      "anomaly_delays": [
+        0.6
+      ]
+    },
+    "ultimate": {
+      "duration": 3.73,
+      "gaugeMax": 59.5,
+      "gaugeReply": 0,
+      "animationTime": 1.63,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.93,
+          "sp": 0,
+          "stagger": 15,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.1,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.267,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.4,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.53,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.67,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 3.43,
+          "stagger": 20,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "execution": {
+      "duration": 2.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "blaze_attach",
+        "burning",
+        "blaze_burst",
+        "emag_burst",
+        "conductive",
+        "emag_attach",
+        "frozen",
+        "cold_attach",
+        "cold_burst",
+        "ice_shatter",
+        "corrosion",
+        "nature_attach",
+        "nature_burst",
+        "knockdown",
+        "knockup",
+        "stagger",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "ALESH",
+    "name": "알레쉬",
+    "element": "cold",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.67,
+      "spCost": 100,
+      "gaugeGain": 17,
+      "teamGaugeGain": 8.5,
+      "damage_ticks": [
+        {
+          "offset": 0.9,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "frozen",
+        "cold_attach",
+        "cold_burst"
+      ],
+      "anomalies": [],
+      "anomaly_delays": [
+        1
+      ]
+    },
+    "link": {
+      "duration": 1.3,
+      "cooldown": 9,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 1.27,
+          "stagger": 10,
+          "sp": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "ultimate": {
+      "duration": 3.2,
+      "gaugeMax": 85,
+      "gaugeReply": 0,
+      "animationTime": 2.583,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 3,
+          "sp": 20,
+          "stagger": 20,
+          "boundEffects": [
+            "9tboxfr"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "cold_burst",
+        "frozen",
+        "cold_attach"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "9tboxfr",
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 3
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "frozen",
+        "cold_attach",
+        "cold_burst",
+        "emag_burst",
+        "conductive",
+        "emag_attach",
+        "blaze_attach",
+        "burning",
+        "blaze_burst",
+        "break",
+        "armor_break",
+        "ice_shatter",
+        "knockdown",
+        "knockup",
+        "stagger",
+        "corrosion",
+        "nature_attach",
+        "nature_burst"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "CATCHER",
+    "name": "카치르",
+    "element": "physical",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 3.17,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 2.77,
+          "sp": 30,
+          "stagger": 20,
+          "boundEffects": [
+            "6rva6qe"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "break"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "6rva6qe",
+            "type": "break",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.77
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 0.8,
+      "cooldown": 15,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.57,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "ultimate": {
+      "duration": 3.43,
+      "gaugeMax": 72,
+      "gaugeReply": 0,
+      "animationTime": 1.3,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.53,
+          "sp": 0,
+          "stagger": 5,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.13,
+          "stagger": 5,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.83,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": [
+            "tkbxsng",
+            "o2u8r8e"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockdown",
+        "break",
+        "ice_shatter",
+        "weak"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "tkbxsng",
+            "type": "knockdown",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.83
+          }
+        ],
+        [
+          {
+            "_id": "o2u8r8e",
+            "type": "weak",
+            "stacks": 1,
+            "duration": 8,
+            "offset": 2.83
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "FLUORITE",
+    "name": "플루라이트",
+    "element": "nature",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.13,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.33,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.97,
+          "stagger": 10,
+          "sp": 0,
+          "boundEffects": [
+            "4ykrgr4"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "nature_attach",
+        "corrosion",
+        "nature_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "4ykrgr4",
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.97
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 0.57,
+      "cooldown": 25,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.5,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "cold_attach",
+        "cold_burst",
+        "nature_attach",
+        "nature_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "1v480nz",
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.5
+          }
+        ],
+        [
+          {
+            "_id": "e1ckuiy",
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.5
+          }
+        ]
+      ]
+    },
+    "ultimate": {
+      "duration": 2.57,
+      "gaugeMax": 72,
+      "gaugeReply": 0,
+      "animationTime": 1.867,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.97,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.1,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.23,
+          "stagger": 0,
+          "sp": 0,
+          "boundEffects": []
+        },
+        {
+          "offset": 2.4,
+          "stagger": 20,
+          "sp": 0,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "nature_attach",
+        "cold_attach"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "lg8aavo",
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.4
+          }
+        ],
+        [
+          {
+            "_id": "29zji6s",
+            "type": "nature_attach",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 2.4
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "ANTAL",
+    "name": "안탈",
+    "element": "emag",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.67,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": [
+            "wfb8wtw"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "antal_buff"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "antal_buff",
+            "stacks": 1,
+            "duration": 60,
+            "offset": 0.67,
+            "_id": "wfb8wtw"
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 0.8,
+      "cooldown": 15,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.7,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [
+        "emag_attach",
+        "conductive",
+        "emag_burst",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "nature_burst",
+        "corrosion",
+        "nature_attach"
+      ],
+      "anomalies": []
+    },
+    "ultimate": {
+      "duration": 1.87,
+      "gaugeMax": 90,
+      "gaugeReply": 0,
+      "animationTime": 1.4,
+      "enhancementTime": 0,
+      "damage_ticks": [],
+      "allowed_types": [
+        "pulse_enhance",
+        "fire_enhance"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "pulse_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.63,
+            "_id": "o2x1k9o"
+          }
+        ],
+        [
+          {
+            "type": "fire_enhance",
+            "stacks": 1,
+            "duration": 12,
+            "offset": 1.63,
+            "_id": "4gd5h35"
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "break",
+        "armor_break",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_attach",
+        "emag_attach",
+        "cold_attach",
+        "nature_attach",
+        "blaze_burst",
+        "emag_burst",
+        "cold_burst",
+        "nature_burst",
+        "burning",
+        "conductive",
+        "frozen",
+        "ice_shatter",
+        "corrosion"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "ESTELLA",
+    "name": "에스텔라",
+    "element": "cold",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.5,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.7,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "crb1yuu"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "cold_burst",
+        "frozen",
+        "cold_attach"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "cold_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "crb1yuu",
+            "offset": 0.7
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 0.67,
+      "cooldown": 15,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.63,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "dblcris",
+            "om9bwx4",
+            "x64qg8i"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockup",
+        "break",
+        "ice_shatter",
+        "physical_vulnerable"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "ice_shatter",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "dblcris",
+            "offset": 0.63
+          }
+        ],
+        [
+          {
+            "_id": "om9bwx4",
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 0.63
+          }
+        ],
+        [
+          {
+            "_id": "x64qg8i",
+            "type": "physical_vulnerable",
+            "stacks": 1,
+            "duration": 6,
+            "offset": 0.63
+          }
+        ]
+      ]
+    },
+    "ultimate": {
+      "duration": 2,
+      "gaugeMax": 63,
+      "gaugeReply": 0,
+      "animationTime": 1.8,
+      "enhancementTime": 0,
+      "damage_ticks": [
+        {
+          "offset": 1.8,
+          "sp": 0,
+          "stagger": 0,
+          "boundEffects": [
+            "g4j5v8z"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "knockup",
+        "break",
+        "ice_shatter"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "g4j5v8z",
+            "type": "knockup",
+            "stacks": 1,
+            "duration": 0,
+            "offset": 1.8
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "armor_break",
+        "break",
+        "ice_shatter",
+        "stagger",
+        "knockdown",
+        "knockup",
+        "blaze_burst",
+        "burning",
+        "blaze_attach",
+        "nature_attach",
+        "corrosion",
+        "nature_burst",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "emag_attach",
+        "conductive",
+        "emag_burst"
+      ],
+      "anomalies": []
+    }
+  },
+  {
+    "id": "AKEKURI",
+    "name": "아케쿠리",
+    "element": "blaze",
+    "accept_team_gauge": true,
+    "skill": {
+      "duration": 1.33,
+      "spCost": 100,
+      "gaugeGain": 6.5,
+      "teamGaugeGain": 6.5,
+      "damage_ticks": [
+        {
+          "offset": 0.67,
+          "sp": 0,
+          "stagger": 10,
+          "boundEffects": [
+            "s5610of"
+          ]
+        }
+      ],
+      "allowed_types": [
+        "blaze_attach",
+        "burning",
+        "blaze_burst"
+      ],
+      "anomalies": [
+        [
+          {
+            "type": "blaze_attach",
+            "stacks": 1,
+            "duration": 0,
+            "_id": "s5610of",
+            "offset": 0.67
+          }
+        ]
+      ]
+    },
+    "link": {
+      "duration": 1.27,
+      "cooldown": 15,
+      "gaugeGain": 10,
+      "damage_ticks": [
+        {
+          "offset": 0.73,
+          "sp": 7.5,
+          "stagger": 5,
+          "boundEffects": []
+        },
+        {
+          "offset": 1.03,
+          "stagger": 5,
+          "sp": 7.5,
+          "boundEffects": []
+        }
+      ],
+      "allowed_types": [],
+      "anomalies": []
+    },
+    "ultimate": {
+      "duration": 4.3,
+      "gaugeMax": 108,
+      "gaugeReply": 0,
+      "animationTime": 1.683,
+      "enhancementTime": 0,
+      "damage_ticks": [],
+      "allowed_types": [
+        "combo"
+      ],
+      "anomalies": [
+        [
+          {
+            "_id": "f0j5w4p",
+            "type": "combo",
+            "stacks": 1,
+            "duration": 20,
+            "offset": 0.03
+          }
+        ]
+      ]
+    },
+    "execution": {
+      "duration": 1.5,
+      "damage_ticks": [],
+      "allowed_types": [
+        "ice_shatter",
+        "corrosion",
+        "nature_attach",
+        "nature_burst",
+        "burning",
+        "blaze_attach",
+        "blaze_burst",
+        "conductive",
+        "emag_attach",
+        "emag_burst",
+        "cold_attach",
+        "frozen",
+        "cold_burst",
+        "knockdown",
+        "break",
+        "knockup",
+        "stagger",
+        "armor_break"
+      ],
+      "anomalies": []
+    }
+  }
+]
