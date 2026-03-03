@@ -68,7 +68,7 @@ const RULES = [
   { value: "골절", regex: /골[절졀]/ },
   { value: "분쇄", regex: /분[쇄쉐]/ },
   { value: "사기", regex: /사[기귀]/ },
-  { value: "의료", regex: /의[료로]/ },
+  { value: "의료", regex: /의[료로]|^그$/ },
   { value: "효율", regex: /[효요][율률]|푸/ }
 ];
 
