@@ -523,15 +523,32 @@ function renderRegionSummary({ place, PRIMARY_STATS, WEAPONS_6, WEAPONS_5, STATE
   const countMap = {};
   unfinished.forEach(w => w.opts.forEach(opt => { countMap[opt] = (countMap[opt] || 0) + 1; }));
 
-  const baseRecs = Object.entries(countMap)
-    .filter(([opt]) => PRIMARY_STATS.includes(opt))
-    .sort((a,b) => b[1] - a[1])
-    .slice(0,3)
-    .map(v => v[0]);
-
   const extraRec = Object.entries(countMap)
     .filter(([opt]) => !PRIMARY_STATS.includes(opt))
     .sort((a,b) => b[1] - a[1])[0];
+
+  // 기초 속성은 "심화 추천 속성과 함께 등장하는 횟수"를 우선 기준으로 정렬
+  // → 고통 같은 심화 속성을 함께 파밍할 수 있는 무기가 많은 기초 속성이 먼저 추천됨
+  const topExtra = extraRec ? extraRec[0] : null;
+  const baseWithExtraCount = {};
+  unfinished.forEach(w => {
+    const hasExtra = topExtra && w.opts.includes(topExtra);
+    w.opts.filter(o => PRIMARY_STATS.includes(o)).forEach(o => {
+      if (!baseWithExtraCount[o]) baseWithExtraCount[o] = 0;
+      if (hasExtra) baseWithExtraCount[o]++;
+    });
+  });
+
+  const baseRecs = Object.entries(countMap)
+    .filter(([opt]) => PRIMARY_STATS.includes(opt))
+    .sort((a, b) => {
+      const aWith = baseWithExtraCount[a[0]] || 0;
+      const bWith = baseWithExtraCount[b[0]] || 0;
+      if (bWith !== aWith) return bWith - aWith;
+      return b[1] - a[1];
+    })
+    .slice(0, 3)
+    .map(v => v[0]);
 
   // ---- "추천 속성 종결 기질 N개" = (추천 속성: 기본3+심화1) 기준으로 2개 이상 일치하는 '미종결' 무기 개수 ----
   const recFilter = [...baseRecs];
