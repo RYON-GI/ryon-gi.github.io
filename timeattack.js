@@ -38,6 +38,7 @@ const CATEGORY_MAP = {
     { label: '로댄', value: '로댄' },
     { label: '트리아겔로스', value: '트리아겔로스' },
     { label: '마블 아겔로미레', value: '마블 아겔로미레' },
+    { label: '원일', value: '원일' },
   ],
   '그림자 이정표': [
     { label: '전체', value: '' },
