@@ -4,7 +4,7 @@
 let _borderCache = { top: 0, left: 0, right: 0 };
 let _borderFrameCount = 0;
 
-function detectGameBorder(video, threshold = 45) {
+function detectGameBorder(video) {
   const vw = video.videoWidth;
   const vh = video.videoHeight;
 
@@ -15,34 +15,40 @@ function detectGameBorder(video, threshold = 45) {
   tmpCtx.drawImage(video, 0, 0);
   const imgData = tmpCtx.getImageData(0, 0, vw, vh).data;
 
-  // 상단: 25%, 50%, 75% 세 지점에서 타이틀바 높이 감지
-  const scanX = [
-    Math.floor(vw * 0.25),
-    Math.floor(vw * 0.5),
-    Math.floor(vw * 0.75)
-  ];
-  const detectedTops = [];
+  // ── 타이틀바 하단 경계 감지 ──────────────────────────────
+  // 원리: 타이틀바는 행 전체가 균일한 색(분산↓), 게임 화면은 복잡(분산↑).
+  // "행 평균 밝기의 절댓값 변화"가 가장 큰 행 = 타이틀바→게임 경계.
+  //
+  // 장점: 밝은 테마/어두운 테마 모두 동작, 게임 자체가 어두워도 무관.
+  // ────────────────────────────────────────────────────────
+  const MAX_SCAN    = Math.floor(vh * 0.12); // 상단 12%만 스캔 (타이틀바는 항상 여기 안에 있음)
+  const SAMPLE_STEP = Math.max(1, Math.floor(vw / 200)); // 가로 샘플링 간격 (성능 절충)
 
-  for (const x of scanX) {
-    for (let y = 0; y < vh / 3; y++) {
+  // 각 행의 평균 밝기 계산
+  const rowAvg = new Float32Array(MAX_SCAN);
+  for (let y = 0; y < MAX_SCAN; y++) {
+    let sum = 0, count = 0;
+    for (let x = 0; x < vw; x += SAMPLE_STEP) {
       const i = (y * vw + x) * 4;
-      const brightness = (imgData[i] + imgData[i+1] + imgData[i+2]) / 3;
-      if (brightness < threshold) {
-        // 연속성 체크: 아래로 5픽셀도 어두워야 진짜 게임 화면
-        let consistent = true;
-        for (let dy = 1; dy <= 5; dy++) {
-          const ni = ((y + dy) * vw + x) * 4;
-          if ((imgData[ni] + imgData[ni+1] + imgData[ni+2]) / 3 > threshold + 10) {
-            consistent = false;
-            break;
-          }
-        }
-        if (consistent) { detectedTops.push(y); break; }
-      }
+      sum += (imgData[i] + imgData[i+1] + imgData[i+2]) / 3;
+      count++;
+    }
+    rowAvg[y] = sum / count;
+  }
+
+  // 창 그림자(상단 5px)를 스킵하고, 밝기가 "떨어지는" 지점을 탐색
+  // 타이틀바(밝음) → 게임(어두움) 방향의 DROP이 가장 큰 행 = 경계
+  let maxDrop = 0, top = 0;
+  for (let y = 6; y < MAX_SCAN; y++) {
+    const drop = rowAvg[y - 1] - rowAvg[y]; // 양수 = 밝기 감소
+    if (drop > maxDrop) {
+      maxDrop = drop;
+      top = y;
     }
   }
 
-  const top = detectedTops.length > 0 ? Math.min(...detectedTops) : 0;
+  // drop이 너무 작으면(≤8) 타이틀바 없음으로 판단
+  if (maxDrop <= 8) top = 0;
 
   // 좌측 테두리 감지
   let left = 0;
@@ -233,7 +239,7 @@ if (!config) config = CONFIGS?.[modeKey]?.[STATE.currentSubTabs.search];
     // =============================================
     if (isWindowMode) {
       if (_borderFrameCount++ % 20 === 0) {
-        _borderCache = detectGameBorder(video, 45);
+        _borderCache = detectGameBorder(video);
       }
     } else {
       // 전체화면은 테두리 없음
