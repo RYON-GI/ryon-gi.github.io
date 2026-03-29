@@ -51,6 +51,10 @@ const CATEGORY_MAP = {
     { label: '다가오는 위협', value: '다가오는 위협', group: '무기물' },
     { label: '돌격의 방패', value: '돌격의 방패', group: '무기물' },
     { label: '흔들림 없는 기반', value: '흔들림 없는 기반', group: '무기물' },
+    // 작열의 흉터
+    { label: '원한의 장막', value: '원한의 장막', group: '작열의 흉터' },
+    { label: '혈육의 융해점', value: '혈육의 융해점', group: '작열의 흉터' },
+    { label: '포효의 화염', value: '포효의 화염', group: '작열의 흉터' },
   ],
 };
 
