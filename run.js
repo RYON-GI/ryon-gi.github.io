@@ -11,6 +11,8 @@ const CHAR_DATA = {
   "이본":          { s: "6성 캐릭터/이본.png",          c: "#ff7100" },
   "엠버":          { s: "6성 캐릭터/엠버.png",          c: "#ff7100" },
   "질베르타":      { s: "6성 캐릭터/질베르타.png",      c: "#ff7100" },
+  "탕탕":          { s: "6성 캐릭터/탕탕.png",          c: "#ff7100" },
+  "로시":          { s: "6성 캐릭터/로시.png",          c: "#ff7100" },
   "스노우샤인":    { s: "5성 캐릭터/스노우샤인.png",    c: "#ffd200" },
   "아비웨나":      { s: "5성 캐릭터/아비웨나.png",      c: "#ffd200" },
   "아크라이트":    { s: "5성 캐릭터/아크라이트.png",    c: "#ffd200" },
@@ -163,7 +165,7 @@ async function loadDetail() {
         p_run_id: Number(id), p_password: pw
       });
       if (error) { alert('삭제 실패(서버 오류): ' + error.message); return; }
-      if (!ok)   { alert('비밀번호가 틀렸거나, 이미 삭제된 기록이야.'); return; }
+      if (!ok)   { alert('비밀번호가 틀렸거나, 이미 삭제된 기록입니다.'); return; }
       alert('삭제 완료!');
       location.href = './timeattack.html';
     });
@@ -214,7 +216,7 @@ async function loadDetail() {
       const newVideo = document.getElementById('e-video').value.trim();
       const newNotes = document.getElementById('e-notes').value.trim();
       if (!newTitle || !newBoss || !newTime || !newParty) {
-        alert('제목/보스/시간/파티는 필수야.'); return;
+        alert('제목/보스/시간/파티는 필수 입니다.'); return;
       }
       const pw = prompt('수정 비밀번호를 입력해줘');
       if (!pw) return;
@@ -226,7 +228,7 @@ async function loadDetail() {
         p_verified: newVerified
       });
       if (error) { alert('수정 실패(서버 오류): ' + error.message); return; }
-      if (!ok)   { alert('비밀번호가 틀렸거나, 기록이 없어.'); return; }
+      if (!ok)   { alert('비밀번호가 틀렸거나, 기록이 없습니다.'); return; }
       current = { ...current,
         title: newTitle, boss: newBoss, clear_time: newTime,
         party: newParty, video_url: newVideo, notes: newNotes,
