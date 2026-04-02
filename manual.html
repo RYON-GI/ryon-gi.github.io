@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="아크나이츠 엔드필드 수동 기질 검색 - 기질 옵션을 직접 선택하여 매칭되는 무기를 찾아보세요">
+  <title>수동 기질 검색 - 엔드필드 통합 스캐너</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8RJ6G5RLWV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8RJ6G5RLWV');
+</script>
+<!-- Google adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9995021727949908"
+   crossorigin="anonymous"></script>
+<body>
+
+<div class="tab-container">
+  <a class="tab" href="./index.html">가이드</a>
+  <a class="tab" href="./collection.html">종결 보유 현황</a>
+  <a class="tab" href="./regionfarming.html">추천 파밍지</a>
+  <a class="tab active" href="./warehouse.html">기질 검색</a>
+  <a id="tab-timeattack" class="tab" href="./timeattack.html">⚔ 보스 타임어택</a>
+</div>
+
+<div class="main-wrapper">
+  <div id="area-search" class="content-area active">
+
+    <div class="sub-tab-bar">
+      <a id="sub-tab-warehouse" class="sub-tab" href="./warehouse.html">귀중품 창고</a>
+      <a id="sub-tab-etching" class="sub-tab" href="./etching.html">기질 식각</a>
+      <a id="sub-tab-manual" class="sub-tab active" href="./manual.html">수동 검색</a>
+    </div>
+
+    <div class="info-banner" style="margin-bottom:16px;">
+      <p style="margin:0;">보유한 귀중품의 기질 옵션을 직접 선택하면 매칭되는 무기를 확인할 수 있습니다. 최대 <strong>3개</strong>까지 선택 가능합니다.</p>
+    </div>
+
+    <!-- 선택된 옵션 슬롯 -->
+    <div id="selected-slots" style="
+      display:flex; gap:10px; align-items:center; margin-bottom:20px;
+      background:rgba(0,0,0,0.25); padding:16px 18px;
+      border-radius:var(--radius); border:1px solid var(--border);
+      flex-wrap:wrap;
+    ">
+      <span style="font-size:0.85em; color:var(--text-muted); font-weight:700; margin-right:4px;">선택된 옵션</span>
+      <div id="slot-1" class="opt-slot">옵션 1</div>
+      <div id="slot-2" class="opt-slot">옵션 2</div>
+      <div id="slot-3" class="opt-slot">옵션 3</div>
+      <button id="btn-clear" onclick="clearAll()" style="
+        margin-left:auto; background:var(--red); color:#fff;
+        padding:7px 16px; font-size:0.85em;
+      ">초기화</button>
+    </div>
+
+    <!-- 좌우 2단 레이아웃 -->
+    <div class="manual-main-layout">
+
+      <!-- 왼쪽: 옵션 선택 -->
+      <div class="manual-left">
+
+        <div class="option-filter-group">
+          <div class="section-label">주요 능력치</div>
+          <div class="opt-btn-grid" id="group-primary"></div>
+        </div>
+
+        <div class="option-filter-group">
+          <div class="section-label">추가 능력치</div>
+          <div class="opt-btn-grid" id="group-extra"></div>
+        </div>
+
+        <div class="option-filter-group">
+          <div class="section-label">특수 능력치</div>
+          <div class="opt-btn-grid" id="group-special"></div>
+        </div>
+
+      </div>
+
+      <!-- 오른쪽: 결과 -->
+      <div class="manual-right">
+        <div id="section-6star-manual" class="section-box" style="margin-bottom:12px;">
+          <div class="section-title" style="color:var(--gold);">6성 무기 매칭</div>
+          <div id="list-6star-manual" class="scanner-result-grid">
+            <div style="color:var(--text-muted); font-size:0.9em; padding:12px 0;">옵션을 선택하면 매칭 결과가 표시됩니다.</div>
+          </div>
+        </div>
+        <div id="section-5star-manual" class="section-box">
+          <div class="section-title" style="color:var(--purple);">5성 무기 매칭</div>
+          <div id="list-5star-manual" class="scanner-result-grid">
+            <div style="color:var(--text-muted); font-size:0.9em; padding:12px 0;">옵션을 선택하면 매칭 결과가 표시됩니다.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="side-ad left-ad">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-9995021727949908"
+       data-ad-slot="1278258037"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="side-ad right-ad">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-9995021727949908"
+       data-ad-slot="1278258037"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<script src="./db.js"></script>
+<script>
+(function () {
+  const PRIMARY  = ["민첩", "힘", "의지", "지능", "주요능력치"];
+  const EXTRA    = ["공격력", "생명력", "물리피해", "열기피해", "전기피해", "냉기피해", "자연피해", "치명타확률", "아츠강도", "궁극기획득효율", "아츠피해", "치유효율"];
+  const SPECIAL  = ["효율", "의료", "흐름", "어둠", "억제", "고통", "분쇄", "추격", "골절", "기예", "잔혹", "방출", "사기"];
+
+  let selected = [];
+
+  // ---- 보유 현황 불러오기 ----
+  let ownedWeapons = new Set();
+  try {
+    const saved = localStorage.getItem('endfield_owned_weapons');
+    if (saved) ownedWeapons = new Set(JSON.parse(saved));
+  } catch {}
+
+  // ---- 옵션 버튼 생성 ----
+  function buildGroup(groupId, opts) {
+    const container = document.getElementById(groupId);
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-select-btn';
+      btn.textContent = opt;
+      btn.dataset.opt = opt;
+      btn.onclick = () => toggleOpt(opt);
+      container.appendChild(btn);
+    });
+  }
+
+  buildGroup('group-primary', PRIMARY);
+  buildGroup('group-extra',   EXTRA);
+  buildGroup('group-special', SPECIAL);
+
+  // ---- 옵션 토글 ----
+  window.toggleOpt = function(opt) {
+    const idx = selected.indexOf(opt);
+    if (idx !== -1) {
+      selected.splice(idx, 1);
+    } else {
+      if (selected.length >= 3) return;
+      selected.push(opt);
+    }
+    updateSlots();
+    updateButtons();
+    updateResults();
+  };
+
+  window.clearAll = function() {
+    selected = [];
+    updateSlots();
+    updateButtons();
+    updateResults();
+  };
+
+  // ---- 슬롯 표시 업데이트 ----
+  function updateSlots() {
+    for (let i = 1; i <= 3; i++) {
+      const el = document.getElementById('slot-' + i);
+      const val = selected[i - 1];
+      el.textContent = val || ('옵션 ' + i);
+      el.classList.toggle('filled', !!val);
+    }
+  }
+
+  // ---- 버튼 하이라이트 ----
+  function updateButtons() {
+    document.querySelectorAll('.opt-select-btn').forEach(btn => {
+      const isSelected = selected.includes(btn.dataset.opt);
+      btn.classList.toggle('active', isSelected);
+      btn.disabled = !isSelected && selected.length >= 3;
+      btn.style.opacity = (!isSelected && selected.length >= 3) ? '0.4' : '';
+    });
+  }
+
+  // ---- 결과 업데이트 ----
+  function updateResults() {
+    const list6 = document.getElementById('list-6star-manual');
+    const list5 = document.getElementById('list-5star-manual');
+
+    if (selected.length === 0) {
+      const placeholder = '<div style="color:var(--text-muted); font-size:0.9em; padding:12px 0;">옵션을 선택하면 매칭 결과가 표시됩니다.</div>';
+      list6.innerHTML = placeholder;
+      list5.innerHTML = placeholder;
+      return;
+    }
+
+    const render = (weapons, starPath, starPrefix, container) => {
+      const matched = [];
+      weapons.forEach(w => {
+        const count = selected.filter(s => w.opts.includes(s)).length;
+        if (count >= 2) matched.push({ w, count });
+      });
+      matched.sort((a, b) => b.count - a.count);
+
+      if (matched.length === 0) {
+        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.9em; padding:12px 0;">매칭되는 무기가 없습니다.</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      matched.forEach(({ w, count }) => {
+        const card = document.createElement('div');
+        card.className = 'weapon-card' + (ownedWeapons.has(w.name) ? ' owned' : '');
+        if (count === 3) card.style.borderColor = 'var(--gold)';
+
+        const safeName = w.name.replace(/:/g, '');
+        card.innerHTML = `
+          <div class="weapon-img-container">
+            <img src="배경.png" class="layer bg-layer">
+            <img src="${starPath}/${safeName}.png" class="layer weapon-layer" onerror="this.style.display='none'">
+            <img src="${starPath}/${starPrefix} 하단.png" class="layer bottom-layer" onerror="this.style.display='none'">
+          </div>
+          <div>${w.name}</div>
+          <div style="margin-top:4px;">
+            <span class="match-badge" style="${count === 3 ? 'color:var(--gold);border-color:var(--gold);' : ''}">${count}개 일치</span>
+          </div>
+          <div style="margin-top:6px; font-size:0.75em; color:#666; line-height:1.5;">
+            ${w.opts.map(o => `<span style="${selected.includes(o) ? 'color:var(--gold);font-weight:700;' : 'color:#555;'}">${o}</span>`).join(' · ')}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    };
+
+    render(WEAPONS_6, '6성 무기', '6성', list6);
+    render(WEAPONS_5, '5성 무기', '5성', list5);
+  }
+
+  // 초기 실행
+  updateSlots();
+  updateButtons();
+  updateResults();
+})();
+</script>
+
+<style>
+  .section-label {
+    font-size: 0.82em;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .opt-slot {
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.88em;
+    font-weight: 700;
+    background: var(--panel2);
+    border: 1px solid var(--border2);
+    color: #555;
+    min-width: 80px;
+    text-align: center;
+    transition: var(--transition);
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .opt-slot.filled {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+  }
+
+  .opt-select-btn:disabled {
+    cursor: not-allowed;
+  }
+
+  .manual-main-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .manual-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .manual-right {
+    overflow-y: auto;
+    max-height: 800px;
+  }
+
+  .manual-right::-webkit-scrollbar { width: 4px; }
+  .manual-right::-webkit-scrollbar-track { background: var(--panel2); border-radius: 4px; }
+  .manual-right::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+  @media (max-width: 700px) {
+    .manual-main-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<footer>
+  © 2026 Endfield Tool |
+  <a href="./privacy.html">개인정보처리방침</a> |
+  <a href="https://open.kakao.com/o/sgkYrigi">문의하기</a>
+</footer>
+
+</body>
+</html>
