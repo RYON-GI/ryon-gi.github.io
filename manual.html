@@ -54,8 +54,12 @@
       <div id="slot-1" class="opt-slot">옵션 1</div>
       <div id="slot-2" class="opt-slot">옵션 2</div>
       <div id="slot-3" class="opt-slot">옵션 3</div>
-      <button id="btn-clear" onclick="clearAll()" style="
+      <button id="btn-one-opt" onclick="toggleOneOpt()" style="
         margin-left:auto; background:var(--red); color:#fff;
+        padding:7px 16px; font-size:0.85em;
+      ">1옵션</button>
+      <button id="btn-clear" onclick="clearAll()" style="
+        background:var(--panel2); color:var(--text); border:1px solid var(--border2);
         padding:7px 16px; font-size:0.85em;
       ">초기화</button>
     </div>
@@ -135,13 +139,28 @@
   const SPECIAL  = ["효율", "의료", "흐름", "어둠", "억제", "고통", "분쇄", "추격", "골절", "기예", "잔혹", "방출", "사기"];
 
   let selected = [];
+  let oneOptMode = false;
 
-  // ---- 보유 현황 불러오기 ----
+  // ---- 보유 현황 불러오기/저장 ----
   let ownedWeapons = new Set();
   try {
     const saved = localStorage.getItem('endfield_owned_weapons');
     if (saved) ownedWeapons = new Set(JSON.parse(saved));
   } catch {}
+
+  function saveOwned() {
+    localStorage.setItem('endfield_owned_weapons', JSON.stringify([...ownedWeapons]));
+  }
+
+  function toggleOwned(name) {
+    if (ownedWeapons.has(name)) {
+      ownedWeapons.delete(name);
+    } else {
+      ownedWeapons.add(name);
+    }
+    saveOwned();
+    updateResults();
+  }
 
   // ---- 옵션 버튼 생성 ----
   function buildGroup(groupId, opts) {
@@ -181,6 +200,20 @@
     updateResults();
   };
 
+  // ---- 1옵션 모드 토글 ----
+  window.toggleOneOpt = function() {
+    oneOptMode = !oneOptMode;
+    const btn = document.getElementById('btn-one-opt');
+    if (oneOptMode) {
+      btn.style.background = 'var(--primary)';
+      btn.style.color = '#000';
+    } else {
+      btn.style.background = 'var(--red)';
+      btn.style.color = '#fff';
+    }
+    updateResults();
+  };
+
   // ---- 슬롯 표시 업데이트 ----
   function updateSlots() {
     for (let i = 1; i <= 3; i++) {
@@ -213,11 +246,14 @@
       return;
     }
 
+    // 1옵션 모드: 추가/특수 능력치 중 1개만 선택해도 매칭
+    const minMatch = (oneOptMode && selected.length === 1 && !PRIMARY.includes(selected[0])) ? 1 : 2;
+
     const render = (weapons, starPath, starPrefix, container) => {
       const matched = [];
       weapons.forEach(w => {
         const count = selected.filter(s => w.opts.includes(s)).length;
-        if (count >= 2) matched.push({ w, count });
+        if (count >= minMatch) matched.push({ w, count });
       });
       matched.sort((a, b) => b.count - a.count);
 
@@ -231,6 +267,8 @@
         const card = document.createElement('div');
         card.className = 'weapon-card' + (ownedWeapons.has(w.name) ? ' owned' : '');
         if (count === 3) card.style.borderColor = 'var(--gold)';
+        card.style.cursor = 'pointer';
+        card.onclick = () => toggleOwned(w.name);
 
         const safeName = w.name.replace(/:/g, '');
         card.innerHTML = `
