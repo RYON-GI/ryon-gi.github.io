@@ -265,8 +265,8 @@ if (!config) config = CONFIGS?.[modeKey]?.[STATE.currentSubTabs.search];
     STATE.viewCtx.drawImage(video, sx, sy, sw, sh, 0, 0, sw, sh);
 
     //true false
-    if (false) {
-    // ===== ROI DEBUG (반투명 박스) =====
+    if (STATE.currentSubTabs?.search === 'etching' || STATE.currentSubTabs?.search === 'warehouse') {
+    // ===== ROI 시각화 (옵션 영역 색상 표시) =====
     const colors = [
       'rgba(0,255,0,0.25)',
       'rgba(255,0,0,0.25)',

@@ -28,7 +28,7 @@
   <a class="tab" href="./collection.html">종결 보유 현황</a>
   <a class="tab" href="./regionfarming.html">추천 파밍지</a>
   <a class="tab active" href="./warehouse.html">기질 검색</a>
-  <a id="tab-timeattack" class="tab" href="./timeattack.html">⚔ 보스 타임어택</a>
+
 </div>
 
 <div class="main-wrapper">
@@ -56,25 +56,42 @@
       </div>
     </div>
 
-    <div class="scanner-main-layout">
+    <div class="scanner-main-layout" id="etching-scan-layout">
+
+      <!-- 왼쪽: 캔버스 + 인식 옵션 + ROI 슬라이더 -->
       <div class="video-panel">
         <div class="section-title">실시간 인식 화면</div>
         <canvas id="view-canvas"></canvas>
-        <div id="detected-options">
-          <div class="opt-box">
-            <div style="font-size:0.78em; color:var(--text-muted);">옵션 1</div>
-            <div id="opt-1" class="opt-name">-</div>
+        <!-- 인식 옵션 한 줄 -->
+        <div id="detected-options" style="display:flex; gap:6px; margin:10px 0;">
+          <div class="opt-box" style="flex:1; border-left-color:#4ade80; padding:8px 10px;">
+            <div style="font-size:0.72em; color:var(--text-muted);">옵션 1</div>
+            <div id="opt-1" class="opt-name" style="font-size:0.95em;">-</div>
           </div>
-          <div class="opt-box">
-            <div style="font-size:0.78em; color:var(--text-muted);">옵션 2</div>
-            <div id="opt-2" class="opt-name">-</div>
+          <div class="opt-box" style="flex:1; border-left-color:#f87171; padding:8px 10px;">
+            <div style="font-size:0.72em; color:var(--text-muted);">옵션 2</div>
+            <div id="opt-2" class="opt-name" style="font-size:0.95em;">-</div>
           </div>
-          <div class="opt-box">
-            <div style="font-size:0.78em; color:var(--text-muted);">옵션 3</div>
-            <div id="opt-3" class="opt-name">-</div>
+          <div class="opt-box" style="flex:1; border-left-color:#22d3ee; padding:8px 10px;">
+            <div style="font-size:0.72em; color:var(--text-muted);">옵션 3</div>
+            <div id="opt-3" class="opt-name" style="font-size:0.95em;">-</div>
+          </div>
+        </div>
+        <div id="roi-controls">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span style="font-size:0.82em; font-weight:700; color:var(--text-muted);">ROI 조절</span>
+            <button onclick="resetEtchingROI()" style="padding:4px 12px; font-size:0.78em; background:var(--panel2); color:var(--text); border:1px solid var(--border2);">기본값 초기화</button>
+          </div>
+          <div id="roi-group-screen" class="roi-group">
+            <div class="roi-group-title" style="color:#aaaaaa;">화면 위치</div>
+          </div>
+          <div id="roi-group-opts" class="roi-group">
+            <div class="roi-group-title" style="color:#aaaaaa;">옵션 위치</div>
           </div>
         </div>
       </div>
+
+      <!-- 오른쪽: 무기 매칭 결과 -->
       <div class="result-panel">
         <div class="section-box">
           <div class="section-title" style="color:var(--gold);">6성 무기 매칭 <span style="font-weight:normal; font-size:0.85em;">(클릭 시 보유 현황 등록)</span></div>
@@ -85,6 +102,7 @@
           <div id="list-5star" class="scanner-result-grid"></div>
         </div>
       </div>
+
     </div>
 
   </div>
@@ -123,6 +141,158 @@
   window.__INITIAL_SEARCH_SUBTAB = "etching";
 </script>
 <script src="./app.js"></script>
+
+<style>
+  #etching-scan-layout { grid-template-columns: 450px 1fr; }
+  #etching-scan-layout .result-panel { padding-top: 34px; }
+  #roi-controls { margin-top:10px; }
+  .roi-group { background:rgba(0,0,0,0.22); border-radius:var(--radius-sm); border:1px solid var(--border); padding:8px 10px; margin-bottom:6px; }
+  .roi-group-title { font-size:0.8em; font-weight:700; margin-bottom:6px; }
+  .roi-2col { display:grid; grid-template-columns:1fr 1fr; gap:3px 10px; }
+  .roi-row { display:grid; grid-template-columns:18px 1fr 70px; gap:4px; align-items:center; }
+  .roi-row-opt { display:grid; grid-template-columns:36px 12px 1fr 70px 12px 1fr 70px; gap:3px; align-items:center; margin-bottom:5px; }
+  .roi-xy-lbl { font-size:0.7em; color:var(--text-muted); font-weight:700; font-family:monospace; }
+  .roi-label { font-size:0.75em; color:var(--text-muted); font-weight:700; font-family:monospace; }
+  .roi-slider { width:100%; cursor:pointer; height:4px; }
+  .roi-val-cell { display:inline-flex; align-items:center; gap:1px; }
+  .roi-val { font-size:0.72em; font-family:monospace; color:var(--text); text-align:right; flex:1; }
+  .roi-adj-btn { width:13px; height:14px; font-size:8px; padding:0; background:var(--panel2); border:1px solid var(--border2); color:var(--text-muted); cursor:pointer; border-radius:2px; text-align:center; line-height:14px; user-select:none; flex-shrink:0; }
+  .roi-adj-btn:hover { color:var(--text); background:var(--border2); }
+  .roi-io-row { display:flex; gap:6px; margin-top:8px; }
+  .roi-io-row button { flex:1; font-size:0.8em; padding:5px 0; }
+</style>
+
+<script>
+(function initEtchingROI() {
+  const DEFAULT_ROI = {
+    roi:   { x:0.096, y:0.5,  w:0.14, h:0.1  },
+    boxes: [
+      { x:0.02, y:0.0,  w:0.71, h:0.25 },
+      { x:0.02, y:0.37, w:0.71, h:0.25 },
+      { x:0.02, y:0.72, w:0.71, h:0.25 }
+    ]
+  };
+  const STORAGE_KEY = 'endfield_etching_roi';
+  const currentROI = JSON.parse(JSON.stringify(DEFAULT_ROI));
+
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (s) { const p=JSON.parse(s); Object.assign(currentROI.roi,p.roi); p.boxes.forEach((b,i)=>Object.assign(currentROI.boxes[i],b)); }
+  } catch {}
+
+  function applyToConfigs() {
+    for (const mk of Object.keys(window.CONFIGS||{})) {
+      if (window.CONFIGS[mk]?.BASE?.etching) {
+        window.CONFIGS[mk].BASE.etching.roi   = {...currentROI.roi};
+        window.CONFIGS[mk].BASE.etching.boxes = currentROI.boxes.map(b=>({...b}));
+      }
+    }
+  }
+  function saveAndApply() { localStorage.setItem(STORAGE_KEY, JSON.stringify(currentROI)); applyToConfigs(); }
+
+  // 미세 조절 버튼 (꾹 누르면 연속 변동)
+  function makeValCell(sld, obj, key, initVal) {
+    const cell = document.createElement('div'); cell.className='roi-val-cell';
+    const val = document.createElement('span'); val.className='roi-val'; val.textContent=initVal.toFixed(3);
+    const bUp = document.createElement('button'); bUp.className='roi-adj-btn'; bUp.textContent='▲';
+    const bDn = document.createElement('button'); bDn.className='roi-adj-btn'; bDn.textContent='▼';
+    let _timer, _intv;
+    function fire(d) {
+      const v = Math.min(1, Math.max(0, parseFloat(sld.value) + d * 0.001));
+      sld.value = v; obj[key] = v; val.textContent = v.toFixed(3); saveAndApply();
+    }
+    function startHold(d) { fire(d); _timer = setTimeout(() => { _intv = setInterval(() => fire(d), 60); }, 350); }
+    function stopHold() { clearTimeout(_timer); clearInterval(_intv); }
+    bUp.addEventListener('mousedown', e => { e.preventDefault(); startHold(+1); });
+    bDn.addEventListener('mousedown', e => { e.preventDefault(); startHold(-1); });
+    ['mouseup','mouseleave'].forEach(ev => { bUp.addEventListener(ev, stopHold); bDn.addEventListener(ev, stopHold); });
+    bUp.addEventListener('touchstart', e => { e.preventDefault(); startHold(+1); }, {passive:false});
+    bDn.addEventListener('touchstart', e => { e.preventDefault(); startHold(-1); }, {passive:false});
+    bUp.addEventListener('touchend', stopHold); bDn.addEventListener('touchend', stopHold);
+    cell.appendChild(val); cell.appendChild(bUp); cell.appendChild(bDn);
+    return { cell, val };
+  }
+
+  function buildScreenSliders() {
+    const c = document.getElementById('roi-group-screen');
+    c.querySelectorAll('.roi-2col').forEach(e=>e.remove());
+    const grid = document.createElement('div'); grid.className='roi-2col';
+    ['x','y','w','h'].forEach(k => {
+      const row=document.createElement('div'); row.className='roi-row';
+      const lbl=document.createElement('span'); lbl.className='roi-label'; lbl.textContent=({x:'↔',y:'↕',w:'W',h:'H'})[k];
+      const sld=document.createElement('input'); sld.type='range'; sld.className='roi-slider';
+      sld.min='0'; sld.max='1'; sld.step='0.001'; sld.value=currentROI.roi[k]; sld.style.accentColor='#aaa';
+      const {cell, val} = makeValCell(sld, currentROI.roi, k, currentROI.roi[k]);
+      sld.oninput=()=>{ currentROI.roi[k]=parseFloat(sld.value); val.textContent=currentROI.roi[k].toFixed(3); saveAndApply(); };
+      row.appendChild(lbl); row.appendChild(sld); row.appendChild(cell); grid.appendChild(row);
+    });
+    c.appendChild(grid);
+  }
+
+  const OPT_COLORS = ['#4ade80','#f87171','#22d3ee'];
+  const OPT_LABELS = ['옵션1','옵션2','옵션3'];
+  function buildOptSliders() {
+    const c = document.getElementById('roi-group-opts');
+    c.querySelectorAll('.roi-row-opt').forEach(e=>e.remove());
+    currentROI.boxes.forEach((box,i) => {
+      const row=document.createElement('div'); row.className='roi-row-opt';
+
+      const lbl=document.createElement('span'); lbl.style.cssText=`font-size:0.72em;font-weight:700;color:${OPT_COLORS[i]};`; lbl.textContent=OPT_LABELS[i];
+
+      const xlbl=document.createElement('span'); xlbl.className='roi-xy-lbl'; xlbl.textContent='↔';
+      const xsld=document.createElement('input'); xsld.type='range'; xsld.className='roi-slider';
+      xsld.min='0'; xsld.max='1'; xsld.step='0.001'; xsld.value=box.x; xsld.style.accentColor=OPT_COLORS[i];
+      const {cell: xcell, val: xval} = makeValCell(xsld, box, 'x', box.x);
+      xsld.oninput=()=>{ box.x=parseFloat(xsld.value); xval.textContent=box.x.toFixed(3); saveAndApply(); };
+
+      const ylbl=document.createElement('span'); ylbl.className='roi-xy-lbl'; ylbl.textContent='↕';
+      const ysld=document.createElement('input'); ysld.type='range'; ysld.className='roi-slider';
+      ysld.min='0'; ysld.max='1'; ysld.step='0.001'; ysld.value=box.y; ysld.style.accentColor=OPT_COLORS[i];
+      const {cell: ycell, val: yval} = makeValCell(ysld, box, 'y', box.y);
+      ysld.oninput=()=>{ box.y=parseFloat(ysld.value); yval.textContent=box.y.toFixed(3); saveAndApply(); };
+
+      row.appendChild(lbl); row.appendChild(xlbl); row.appendChild(xsld); row.appendChild(xcell);
+      row.appendChild(ylbl); row.appendChild(ysld); row.appendChild(ycell);
+      c.appendChild(row);
+    });
+  }
+
+  buildScreenSliders();
+  buildOptSliders();
+
+  function buildIOPanel() {
+    const panel = document.createElement('div'); panel.style.cssText='margin-top:6px;';
+    const row = document.createElement('div'); row.className='roi-io-row';
+
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent='위치 저장'; saveBtn.style.background='var(--primary)'; saveBtn.style.color='#000';
+    saveBtn.onclick=()=>{ saveAndApply(); saveBtn.textContent='저장 완료!'; setTimeout(()=>saveBtn.textContent='위치 저장',1500); };
+
+    const loadBtn = document.createElement('button');
+    loadBtn.textContent='위치 불러오기'; loadBtn.style.background='var(--panel2)'; loadBtn.style.color='var(--text)'; loadBtn.style.border='1px solid var(--border2)';
+    loadBtn.onclick=()=>{
+      const s=localStorage.getItem(STORAGE_KEY); if(!s){alert('저장된 ROI가 없습니다.');return;}
+      const p=JSON.parse(s); Object.assign(currentROI.roi,p.roi); p.boxes.forEach((b,i)=>Object.assign(currentROI.boxes[i],b));
+      buildScreenSliders(); buildOptSliders(); applyToConfigs();
+      loadBtn.textContent='불러오기 완료!'; setTimeout(()=>loadBtn.textContent='위치 불러오기',1500);
+    };
+
+    row.appendChild(saveBtn); row.appendChild(loadBtn);
+    panel.appendChild(row);
+    document.getElementById('roi-controls').appendChild(panel);
+  }
+  buildIOPanel();
+
+  window.resetEtchingROI = function() {
+    Object.assign(currentROI.roi, DEFAULT_ROI.roi);
+    DEFAULT_ROI.boxes.forEach((b,i)=>Object.assign(currentROI.boxes[i],b));
+    buildScreenSliders(); buildOptSliders();
+    localStorage.removeItem(STORAGE_KEY); applyToConfigs();
+  };
+
+  applyToConfigs();
+})();
+</script>
 
 <footer>
   © 2026 Endfield Tool |
