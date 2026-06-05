@@ -491,16 +491,46 @@ function resetWeaponSelection({ STATE }, updateFarmingResultsFn) {
 
 // -------- 지역별 파밍지 --------
 
-function initRegionUI({ PLACES, selectRegion }) {
+function initRegionUI({ PLACES, PLACE_GROUPS, selectRegion }) {
   const btnBox = document.getElementById('region-btns');
   if (!btnBox) return;
   btnBox.innerHTML = '';
-  PLACES.forEach(p => {
-    const btn = document.createElement('div');
-    btn.className = 'region-btn';
-    btn.textContent = p.name;
-    btn.onclick = () => selectRegion(p);
-    btnBox.appendChild(btn);
+
+  if (!PLACE_GROUPS || !PLACE_GROUPS.length) {
+    PLACES.forEach(p => {
+      const btn = document.createElement('div');
+      btn.className = 'region-btn';
+      btn.textContent = p.name;
+      btn.onclick = () => selectRegion(p);
+      btnBox.appendChild(btn);
+    });
+    return;
+  }
+
+  PLACE_GROUPS.forEach(group => {
+    const groupBtn = document.createElement('div');
+    groupBtn.className = 'region-group-btn';
+    groupBtn.textContent = group.name;
+    btnBox.appendChild(groupBtn);
+
+    const subWrap = document.createElement('div');
+    subWrap.className = 'region-sub-wrap';
+    btnBox.appendChild(subWrap);
+
+    const subPlaces = group.places.map(name => PLACES.find(p => p.name === name)).filter(Boolean);
+    subPlaces.forEach(p => {
+      const btn = document.createElement('div');
+      btn.className = 'region-btn';
+      btn.textContent = p.name;
+      btn.onclick = () => selectRegion(p);
+      subWrap.appendChild(btn);
+    });
+
+    groupBtn.onclick = () => {
+      const isOpen = groupBtn.classList.contains('open');
+      document.querySelectorAll('.region-group-btn').forEach(b => b.classList.remove('open'));
+      if (!isOpen) groupBtn.classList.add('open');
+    };
   });
 }
 
@@ -595,6 +625,16 @@ function selectRegionFactory(deps) {
     STATE.regionExtra = null;
 
     document.querySelectorAll('.region-btn').forEach(b => b.classList.toggle('active', b.textContent === place.name));
+
+    // Open the group containing this region
+    if (window.PLACE_GROUPS) {
+      const group = window.PLACE_GROUPS.find(g => g.places.includes(place.name));
+      if (group) {
+        document.querySelectorAll('.region-group-btn').forEach(b => {
+          b.classList.toggle('open', b.textContent === group.name);
+        });
+      }
+    }
 
     const btnBox = document.getElementById('region-btns');
     const optionArea = document.getElementById('region-option-area');
@@ -726,9 +766,27 @@ function selectRegionFactory(deps) {
 function updateRegionResultsFactory(deps) {
   const { STATE, WEAPONS_6, WEAPONS_5, PRIMARY_STATS } = deps;
 
+  let clickListenerInstalled = false;
+
   return function updateRegionResults() {
     const resDiv = document.getElementById('region-results');
     if (!resDiv || !STATE.selectedRegion) return;
+
+    if (!clickListenerInstalled) {
+      clickListenerInstalled = true;
+      resDiv.addEventListener('click', (e) => {
+        const thumb = e.target.closest('.region-weapon-thumb');
+        if (!thumb) return;
+        const card = thumb.closest('[data-weapon-name]');
+        if (!card) return;
+        const name = card.dataset.weaponName;
+        if (!name) return;
+        if (STATE.ownedWeapons.has(name)) STATE.ownedWeapons.delete(name);
+        else STATE.ownedWeapons.add(name);
+        try { localStorage.setItem('endfield_owned_weapons', JSON.stringify([...STATE.ownedWeapons])); } catch(err) {}
+        updateRegionResults();
+      });
+    }
 
     const selectedRegion = STATE.selectedRegion;
     const filter = [...STATE.regionBases];
@@ -761,9 +819,8 @@ function updateRegionResultsFactory(deps) {
     resDiv.innerHTML = matches.map(m => {
       const starPrefix = m.path.includes('6성') ? '6성' : '5성';
       return `
-        <div class="result-region-card ${m.matchCount === 3 ? 'best' : ''}" style="position:relative;">
-          ${m.isOwned ? `<div class="owned-overlay"></div>` : ''}
-          <div class="weapon-img-container region-weapon-thumb">
+        <div class="result-region-card ${m.matchCount === 3 ? 'best' : ''}${m.isOwned ? ' owned' : ''}" style="position:relative;" data-weapon-name="${m.name}">
+          <div class="weapon-img-container region-weapon-thumb" style="cursor:pointer;" title="클릭하여 종결 보유 토글">
             <img src="배경.png" class="layer bg-layer">
             <img src="${m.path}/${m.name.replace(/:/g,'')}.png" class="layer weapon-layer">
             <img src="${m.path}/${starPrefix} 하단.png" class="layer bottom-layer">

@@ -165,7 +165,7 @@ currentSubTabs: {
 
     selectRegionFn = selectRegion;
 
-    Endfield.initRegionUI({ PLACES: window.PLACES, selectRegion });
+    Endfield.initRegionUI({ PLACES: window.PLACES, PLACE_GROUPS: window.PLACE_GROUPS, selectRegion });
 
     // 초기 진입 시 첫 번째 지역(거점 지역) 자동 선택
     if (window.PLACES && window.PLACES.length > 0) {
