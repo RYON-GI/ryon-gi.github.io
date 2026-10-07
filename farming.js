@@ -2,10 +2,10 @@
 const WEAPON_CATEGORY = {
   "한손검": new Set([
     "강철의 여운","불사의 성주","린수를 찾아서 3.0","십이문","O.B.J. 엣지 오브 라이트","숭배의 시선",
-    "장대한 염원","끝없는 방랑","용조의 불꽃","암흑의 횃불","부요","테르밋 커터","위대한 이름","백야의 별","찬란했던 기억","조망"
+    "장대한 염원","끝없는 방랑","용조의 불꽃","암흑의 횃불","부요","테르밋 커터","위대한 이름","백야의 별","찬란했던 기억","조망","환월"
   ]),
   "양손검": new Set([
-    "검은 추적자","고대의 강줄기","최후의 메아리","O.B.J. 헤비 버든","천둥의 흔적","헤라펜거","모범","과거의 일품","분쇄의 군주","환상통","적영"
+    "검은 추적자","고대의 강줄기","최후의 메아리","O.B.J. 헤비 버든","천둥의 흔적","헤라펜거","모범","과거의 일품","분쇄의 군주","환상통","적영","옥에 깃든 형체"
   ]),
   "장병기": new Set([
     "키메라의 정의","O.B.J. 스파이크","중심력","산의 지배자","용사","J.E.T.","붉게 물든 가호","등불의 사명","전성기","찬란한 밤의 데뷔","간식 시간"
@@ -199,7 +199,7 @@ function initFarmingUI({ WEAPONS_6, WEAPONS_5, STATE, updateFarmingResults }) {
     div.innerHTML = `
       <div class="weapon-img-container">
         <img src="배경.png" class="layer bg-layer">
-        <img src="${path}/${w.name.replace(/:/g,'')}.png" class="layer weapon-layer" onerror="this.src='https://via.placeholder.com/240?text=No+Img'">
+        <img src="${weaponImgSrc(w, path)}" class="layer weapon-layer" onerror="this.src='https://via.placeholder.com/240?text=No+Img'">
         <img src="${path}/${starPrefix} 하단.png" class="layer bottom-layer">
       </div>
       <div>${w.name}</div>
@@ -822,7 +822,7 @@ function updateRegionResultsFactory(deps) {
         <div class="result-region-card ${m.matchCount === 3 ? 'best' : ''}${m.isOwned ? ' owned' : ''}" style="position:relative;" data-weapon-name="${m.name}">
           <div class="weapon-img-container region-weapon-thumb" style="cursor:pointer;" title="클릭하여 종결 보유 토글">
             <img src="배경.png" class="layer bg-layer">
-            <img src="${m.path}/${m.name.replace(/:/g,'')}.png" class="layer weapon-layer">
+            <img src="${weaponImgSrc(m, m.path)}" class="layer weapon-layer">
             <img src="${m.path}/${starPrefix} 하단.png" class="layer bottom-layer">
           </div>
           <div class="region-card-info">

@@ -130,7 +130,9 @@ const WEAPONS_6 = [ { name: "과거의 일품", opts: ["의지", "생명력", "�
                    { name: "42식 척결", opts: ["지능", "궁극기충전효율", "방출"] },
                    { name: "찬란한 밤의 데뷔", opts: ["의지", "치유효율", "의료"] },
                    { name: "추운 밤의 그림자", opts: ["민첩", "공격력", "방출"] },
-                   { name: "고난의 끝", opts: ["민첩", "자연피해", "방출"] }];
+                   { name: "고난의 끝", opts: ["민첩", "자연피해", "방출"] },
+                   { name: "옥에 깃든 형체", opts: ["지능", "냉기피해", "효율"], img: "임시.png" }, // 미출시: 이미지 생기면 img 삭제
+                   { name: "환월", opts: ["의지", "공격력", "고통"], img: "임시.png" }]; // 미출시: 이미지 생기면 img 삭제
 
 const WEAPONS_5 = [ { name: "강철의 여운", opts: ["민첩", "물리피해", "기예"] }, 
                    { name: "검은 추적자", opts: ["힘", "궁극기충전효율", "방출"] }, 
@@ -160,4 +162,9 @@ const PLACE_GROUPS = [
   { name: "무릉", places: ["무릉성", "청파채", "수돈", "실험 구역", "장검 골짜기", "응룡관문", "북쪽 금지 구역", "눈 덮인 소나무 숲"] }
 ];
 
-window.CONFIGS=CONFIGS;window.PLACES=PLACES;window.PLACE_GROUPS=PLACE_GROUPS;window.PRIMARY_STATS=PRIMARY_STATS;window.EXTRA_STATS=EXTRA_STATS;window.WEAPONS_6=WEAPONS_6;window.WEAPONS_5=WEAPONS_5;
+// 무기 이미지 경로 (img가 지정된 무기는 그 이미지 사용)
+function weaponImgSrc(w, path) {
+  return w.img || `${path}/${w.name.replace(/:/g,'')}.png`;
+}
+
+window.weaponImgSrc=weaponImgSrc;window.CONFIGS=CONFIGS;window.PLACES=PLACES;window.PLACE_GROUPS=PLACE_GROUPS;window.PRIMARY_STATS=PRIMARY_STATS;window.EXTRA_STATS=EXTRA_STATS;window.WEAPONS_6=WEAPONS_6;window.WEAPONS_5=WEAPONS_5;

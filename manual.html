@@ -271,11 +271,10 @@
         card.style.cursor = 'pointer';
         card.onclick = () => toggleOwned(w.name);
 
-        const safeName = w.name.replace(/:/g, '');
         card.innerHTML = `
           <div class="weapon-img-container">
             <img src="배경.png" class="layer bg-layer">
-            <img src="${starPath}/${safeName}.png" class="layer weapon-layer" onerror="this.style.display='none'">
+            <img src="${weaponImgSrc(w, starPath)}" class="layer weapon-layer" onerror="this.style.display='none'">
             <img src="${starPath}/${starPrefix} 하단.png" class="layer bottom-layer" onerror="this.style.display='none'">
           </div>
           <div>${w.name}</div>

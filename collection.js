@@ -26,7 +26,7 @@ function initCollectionUI({ WEAPONS_6, WEAPONS_5, STATE, toggleWeaponStatus }) {
     div.innerHTML = `
       <div class="weapon-img-container">
         <img src="배경.png" class="layer bg-layer">
-        <img src="${path}/${w.name.replace(/:/g,'')}.png" class="layer weapon-layer" onerror="this.src='https://via.placeholder.com/240?text=No+Img'">
+        <img src="${weaponImgSrc(w, path)}" class="layer weapon-layer" onerror="this.src='https://via.placeholder.com/240?text=No+Img'">
         <img src="${path}/${starPrefix} 하단.png" class="layer bottom-layer" onerror="this.src='https://via.placeholder.com/240x80?text=No+Bottom'">
       </div>
       <div>${w.name}</div>

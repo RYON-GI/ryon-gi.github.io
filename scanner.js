@@ -369,7 +369,7 @@ function updateScannerMatchFactory(deps) {
           <div class="weapon-card ${m.isOwned ? 'owned' : ''}" data-name="${m.name}" onclick="toggleWeaponStatus('${m.name}')" style="padding:5px;">
             <div class="weapon-img-container">
               <img src="배경.png" class="layer bg-layer">
-              <img src="${imgPath}/${m.name.replace(/:/g,'')}.png" class="layer weapon-layer">
+              <img src="${weaponImgSrc(m, imgPath)}" class="layer weapon-layer">
               <img src="${imgPath}/${starPrefix} 하단.png" class="layer bottom-layer">
             </div>
             <div style="font-weight:bold; font-size:0.85em;">${m.name}</div>
